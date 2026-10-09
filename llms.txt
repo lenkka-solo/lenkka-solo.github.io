@@ -1,0 +1,46 @@
+# Elena Soloveva — Product Designer (Design by Elena)
+
+> Product designer for data-heavy platforms and websites, seven years in digital. I also design and build my own AI products, from Figma to a working service. Based in Bali, working worldwide.
+
+- Site: https://lenkka-solo.github.io/ (English), https://lenkka-solo.github.io/ru/ (Russian)
+- Contact: Telegram https://t.me/lenkka_solo, email elena2209sol@gmail.com
+- CV: https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_EN.pdf, https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_RU.pdf
+
+## Services and prices
+- Dashboard and interface design: Data platforms, admin panels, registries and analytics. From $3,000.
+- Web and product design: Landing page $350–700, multi-page website $1,500–1,800, online store from $1,500.
+- Brand and visual identity: Logos, visual systems, banners and presentations. From $1,000.
+- Prototype and MVP in code: I design it and build a working version with AI tools. Pilot terms for the first projects.
+
+## Projects
+- [SaveFlow](https://lenkka-solo.github.io/#case-saveflow): Own product, AI screenshot library
+- [Klaris](https://www.behance.net/gallery/255685027/Klaris-Pharmaceutical-Operations-Platform-UXUI): Concept, vibe-coded with AI
+- [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): Web and mobile app
+- [Travel Insurance](https://lenkka-solo.github.io/#case-insurance): Website redesign and policy calculator (NDA)
+- [Profreza24](https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company): Manufacturing company website
+- [Aura AI](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design): AI SaaS landing page
+- [LAN](https://www.behance.net/gallery/205053605/LAN-E-Commerce-Website): E-commerce website
+- [East Coast Real Estate](https://www.behance.net/gallery/246833765/East-Coast-Real-Estate-Web-Design-Concept): Real estate web design concept
+- [Agropromcifra](https://www.behance.net/gallery/232709235/agropromcifra-Visual-Identity): Visual identity
+- [NAMI FLOW](https://www.behance.net/gallery/249779243/NAMI-FLOW-Botanical-Drink-Identity): Botanical drink identity
+- [KERN](https://www.behance.net/gallery/255811049/KERN-Brand-Identity): Brand identity
+- [Unite](https://lenkka-solo.github.io/#case-couples): Couples app, my own product
+
+## Profiles
+- Behance: https://www.behance.net/lenkka_solo
+- LinkedIn: https://www.linkedin.com/in/lenkka-solo/
+- Dprofile: https://dprofile.ru/lenkka_solo
+- Dribbble: https://dribbble.com/lenkka_solo
+- Instagram: https://www.instagram.com/design_by_lenkka/
+- Threads: https://www.threads.com/@design_by_lenkka
+- Pinterest: https://www.pinterest.com/lenkka_solo/
+- Telegram: https://t.me/lenkka_solo
+
+## На русском
+Продуктовый дизайнер: платформы с данными и сайты, семь лет в digital. А ещё проектирую и сама собираю AI-продукты: от Figma до работающего сервиса. Живу на Бали, работаю по всему миру.
+
+Услуги и цены:
+- Дашборды и интерфейсы: Платформы с данными, админки, реестры и аналитика. От 250 000 ₽.
+- Веб и продуктовый дизайн: Лендинг 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽.
+- Айдентика и визуальный стиль: Логотипы, визуальные системы, баннеры и презентации. От 85 000 ₽.
+- Прототип и MVP в коде: Проектирую и собираю работающую версию с помощью AI-инструментов. Пилотные условия для первых проектов.

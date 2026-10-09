@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>404 · Design by Elena</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Onest:wght@400;500;700&display=swap">
@@ -94,6 +97,7 @@ h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 (() => {
 /* Where the main page lives. For a project page (username.github.io/repo/) set it to '/repo/'. */
 const HOME = '/';
+const home = () => HOME + (lang === 'ru' ? 'ru/' : '');
 const TG = 'https://t.me/lenkka_solo', EMAIL = 'elena2209sol@gmail.com';
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = s => document.querySelector(s);
@@ -128,9 +132,9 @@ const STR = {
    foot:`Или напишите мне: <a href="${TG}" target="_blank" rel="noopener">Telegram @lenkka_solo</a> · <a href="mailto:${EMAIL}">${EMAIL}</a>`,
    miss:p => `Страницы «/${p}» у меня нет, возможно, ссылка устарела. Вот что можно посмотреть вместо неё:`,
    hit:q => `По запросу «${q}» нашла вот это:`, none:q => `Точного совпадения по «${q}» нет. Вот мои главные проекты:`,
-   price:`Лендинг стоит 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽. Все цены в разделе <a href="${HOME}#services">«Услуги и цены»</a>. Несколько моих сайтов:`,
+   price:`Лендинг стоит 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽. Все цены в разделе <a href="${HOME}ru/#services">«Услуги и цены»</a>. Несколько моих сайтов:`,
    contact:`Быстрее всего в <a href="${TG}" target="_blank" rel="noopener">Telegram @lenkka_solo</a> или на почту <a href="mailto:${EMAIL}">${EMAIL}</a>. Отвечаю в течение дня, я на Бали, GMT+8.`,
-   about:`Я Елена, продуктовый дизайнер, 7 лет в диджитале: дашборды, сайты, айдентика и свои AI-продукты. Подробнее на <a href="${HOME}">главной</a>. Несколько проектов:`}
+   about:`Я Елена, продуктовый дизайнер, 7 лет в диджитале: дашборды, сайты, айдентика и свои AI-продукты. Подробнее на <a href="${HOME}ru/">главной</a>. Несколько проектов:`}
 };
 let lang = 'en';
 try{ const s = localStorage.getItem('lang'); if(s === 'ru' || s === 'en') lang = s; else if((navigator.language || '').startsWith('ru')) lang = 'ru'; }catch(e){ if((navigator.language || '').startsWith('ru')) lang = 'ru'; }
@@ -147,13 +151,13 @@ const inp = $('#q'), orb = $('#orb'), ans = $('#ans');
 function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-t]').forEach(e => e.innerHTML = L()[e.dataset.t]);
-  document.querySelectorAll('[data-home]').forEach(a => a.href = HOME);
+  document.querySelectorAll('[data-home]').forEach(a => a.href = home());
   document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
   inp.placeholder = L().ph; inp.setAttribute('aria-label', L().ph); $('#go').setAttribute('aria-label', L().go);
   document.title = lang === 'ru' ? '404 · Страница не найдена · Elena' : '404 · Page not found · Elena';
 }
 const MINI = '<span style="left:9%;top:14%;width:42%;height:9%"></span><span style="left:9%;top:30%;width:26%;height:7%;opacity:.7"></span><span style="left:9%;top:50%;width:82%;height:36%;border-radius:6px;opacity:.45"></span>';
-const card = w => `<a class="cc" href="${HOME}#case-${w.id}" aria-label="${L().open}: ${esc(T(w.t))}"><div class="cv"${IMG[w.id] ? '' : ` style="background:${w.g}"`}>${IMG[w.id] ? `<img src="${IMG[w.id]}" alt="" loading="lazy" decoding="async">` : MINI}</div><div><b>${esc(T(w.t))}</b><small>${esc(T(w.d))}</small></div></a>`;
+const card = w => `<a class="cc" href="${home()}#case-${w.id}" aria-label="${L().open}: ${esc(T(w.t))}"><div class="cv"${IMG[w.id] ? '' : ` style="background:${w.g}"`}>${IMG[w.id] ? `<img src="${IMG[w.id]}" alt="" loading="lazy" decoding="async">` : MINI}</div><div><b>${esc(T(w.t))}</b><small>${esc(T(w.d))}</small></div></a>`;
 function find(q){
   const words = q.toLowerCase().split(/[^a-zа-яё0-9]+/i).filter(x => x.length > 2);
   return W.filter(vis).map(w => ({w, s:words.reduce((n, x) => n + (w.k.includes(x) || w.id.includes(x) ? 1 : 0), 0)})).filter(x => x.s).sort((a, b) => b.s - a.s).map(x => x.w);
