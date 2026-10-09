@@ -176,6 +176,34 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .fx-pick .strip{display:flex;height:24px;border-radius:7px;overflow:hidden}.fx-pick .strip i{width:24px}
 .fx-hi .fx-in{padding:9px 14px;border-radius:16px 16px 16px 4px;background:var(--sel);color:#fff;font:500 14px/1 var(--sans)}
 @media(max-width:1180px){.fx-card,.fx-tag,.fx-tool,.fx-pick,.fx-hi{display:none}}
+/* tall tablets: four cards in the corners around the centred content */
+@media(min-width:761px) and (max-width:1180px) and (min-height:900px){
+  #collage .fx-card{display:block}
+  #collage .fx-card:nth-child(1){left:4%!important;top:110px!important}
+  #collage .fx-card:nth-child(1) .fx-in{--fw:220px!important;--r:-6deg!important}
+  #collage .fx-card:nth-child(2){left:5%!important;top:auto!important;bottom:120px}
+  #collage .fx-card:nth-child(2) .fx-in{--fw:190px!important;--r:4deg!important}
+  #collage .fx-card:nth-child(3){right:5%!important;top:96px!important}
+  #collage .fx-card:nth-child(3) .fx-in{--fw:120px!important;--r:7deg!important}
+  #collage .fx-card:nth-child(4){right:6%!important;top:auto!important;bottom:110px}
+  #collage .fx-card:nth-child(4) .fx-in{--fw:150px!important;--r:-4deg!important}
+}
+/* phones: a small fan of three project cards above the headline */
+@media(max-width:760px){
+  .hero{justify-content:flex-start;padding-top:340px}
+  #collage .fx-card{display:block}
+  #collage .fx-card:nth-child(4){display:none}
+  #collage .fx-card:nth-child(1){left:4%!important;top:96px!important;right:auto!important}
+  #collage .fx-card:nth-child(1) .fx-in{--fw:clamp(150px,22vw,230px)!important;--r:-7deg!important}
+  #collage .fx-card:nth-child(2){left:33%!important;top:150px!important;right:auto!important}
+  #collage .fx-card:nth-child(2) .fx-in{--fw:clamp(124px,18vw,190px)!important;--r:3deg!important}
+  #collage .fx-card:nth-child(3){right:4%!important;top:88px!important;left:auto!important}
+  #collage .fx-card:nth-child(3) .fx-in{--fw:clamp(88px,12vw,130px)!important;--r:7deg!important}
+  #collage .fx-card .fx-in{padding:6px;border-radius:18px}
+  #collage .fx-card .scr{border-radius:12px}
+  #collage .fx-card b{font-size:15px;margin:8px 4px 1px}
+  #collage .fx-card small{font-size:11px;margin:0 4px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 
 /* search */
 .sx{position:relative;width:min(700px,100%);margin:36px auto 0;text-align:left;z-index:30}
