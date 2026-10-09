@@ -1451,7 +1451,7 @@ function items(){
 
 /* ================= ask Elena (AI answers in search) ================= */
 // For self-hosting: put the URL of your own serverless function here (POST {question, lang, history} -> {answer}).
-const AI_ENDPOINT = '';
+const AI_ENDPOINT = /github\.io$/.test(location.hostname) ? 'https://ask-elena.elena2209sol.workers.dev/ask' : '';
 let SAMPLE = null;
 (async () => { try { if (window.claude && window.claude.use) SAMPLE = await window.claude.use('sample'); } catch(e) { SAMPLE = null; } })();
 const looksLikeQ = q => q.length >= 6 && (/[?？]/.test(q) || q.split(/\s+/).length >= 3 || /^(как|что|чем|где|когда|сколько|можно|можете|есть|а |вы |ты |кто|почему|зачем|какой|какая|какие|делаете|берёте|берете|работаете|how|what|when|where|why|who|can|could|do|does|are|is|will|would|which)\b/i.test(q));
@@ -1535,7 +1535,7 @@ async function askElena(q, onText, signal){
   const hist = ASK_HIST.slice(-4);
   if(AI_ENDPOINT){
     try{
-      const r = await fetch(AI_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, lang, history:hist, prompt:askPrompt(q, hist)}), signal});
+      const r = await fetch(AI_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({question:q, lang, history:hist}), signal});
       const d = await r.json(); if(d && d.answer){ onText(d.answer); return {text:d.answer, ai:true}; }
     }catch(e){ if(signal && signal.aborted) throw e; }
   }
