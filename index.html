@@ -977,8 +977,8 @@ html[lang=ru] :is(.case-hero h1,.peek .info h3,.sf-name){line-height:.88}
 <li><a href="https://lenkka-solo.github.io/#case-couples">Unite</a> — Couples app, my own product</li></ul>
 <h2>Client work</h2><ul><li><a href="https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system">Brainiacs</a> — Web and mobile app</li>
 <li><a href="https://lenkka-solo.github.io/#case-insurance">Travel Insurance</a> — Website redesign and policy calculator, NDA</li>
-<li><a href="https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company">Profreza24</a> — Manufacturing company website</li>
 <li><a href="https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design">Aura AI</a> — AI SaaS landing page</li>
+<li><a href="https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company">Profreza24</a> — Manufacturing company website</li>
 <li><a href="https://www.behance.net/gallery/205053605/LAN-E-Commerce-Website">LAN</a> — E-commerce website</li>
 <li><a href="https://www.behance.net/gallery/246833765/East-Coast-Real-Estate-Web-Design-Concept">East Coast Real Estate</a> — Real estate web design concept</li>
 <li><a href="https://www.behance.net/gallery/232709235/agropromcifra-Visual-Identity">Agropromcifra</a> — Visual identity</li>
@@ -1044,8 +1044,8 @@ html[lang=ru] :is(.case-hero h1,.peek .info h3,.sf-name){line-height:.88}
     <div class="sec-h">
       <div><h2 class="h2 rv" data-t="work.title"></h2><p class="lead rv" data-t="work.lead"></p></div>
       <div class="tabs" role="tablist" id="tabs">
-                <button class="tab" role="tab" data-cat="product" aria-selected="true"><span data-t="tab.product"></span> <b></b></button>
-        <button class="tab" role="tab" data-cat="web" aria-selected="false"><span data-t="tab.web"></span> <b></b></button>
+        <button class="tab" role="tab" data-cat="web" aria-selected="true"><span data-t="tab.web"></span> <b></b></button>
+        <button class="tab" role="tab" data-cat="product" aria-selected="false"><span data-t="tab.product"></span> <b></b></button>
         <button class="tab" role="tab" data-cat="brand" aria-selected="false"><span data-t="tab.brand"></span> <b></b></button>
       </div>
     </div>
@@ -1207,7 +1207,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const EMAIL = 'elena2209sol@gmail.com';
-const TG = 'https://t.me/lenkka_solo', WA = 'https://wa.me/79373792432', BEH = 'https://www.behance.net/lenkka_solo';
+const TG = 'https://t.me/lenkka_solo', BEH = 'https://www.behance.net/lenkka_solo';
 const ext = 'target="_blank" rel="noopener"';
 let lang = 'en';
 try { const s = localStorage.getItem('lang'); if(s==='ru'||s==='en') lang = s; else if((navigator.language||'').startsWith('ru')) lang = 'ru'; } catch(e){}
@@ -1289,14 +1289,14 @@ const WORK = [
   sum:{en:'A website redesign for a travel insurer and a new four-step policy calculator, from the quote to payment.',ru:'Редизайн сайта страховой компании и новый калькулятор полиса в четыре шага: от расчёта до оплаты.'},
   role:{en:'Product and UX/UI designer',ru:'Продуктовый и UX/UI-дизайнер'},
   tags:'insurance travel flow cjm research usability testing wireframes calculator checkout redesign страхование исследования юзабилити калькулятор полис редизайн оформление'},
- {id:'profreza',dp:'https://dprofile.ru/case/191915/profreza24-website-redesign-for-manufacturing-company',cat:'web',title:'Profreza24',kind:'site',year:'2026',c:['#2A2F3A','#FF6A3D','#5C6475'],be:'https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company',
-  type:{en:'Manufacturing company website',ru:'Сайт производственной компании'},
-  sum:{en:'Website for a Moscow CNC, laser and UV printing company.',ru:'Сайт московского производства: ЧПУ, лазер, УФ-печать.'},
-  role:{en:'Web designer',ru:'Веб-дизайнер'}, tags:'profreza cnc laser website manufacturing профреза сайт производство'},
  {id:'aura',dp:'https://dprofile.ru/case/181743/aura-ai-saas-landing-page-design',cat:'web',title:'Aura AI',kind:'portal',year:'2026',c:['#6F5BEF','#B9AEFF','#3B82F6'],be:'https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design',
   type:{en:'AI SaaS landing page',ru:'Лендинг AI SaaS'},
   sum:{en:'Landing page for an AI SaaS product.',ru:'Лендинг для AI SaaS-продукта.'},
   role:{en:'Web designer',ru:'Веб-дизайнер'}, tags:'aura ai saas landing лендинг сайт'},
+ {id:'profreza',dp:'https://dprofile.ru/case/191915/profreza24-website-redesign-for-manufacturing-company',cat:'web',title:'Profreza24',kind:'site',year:'2026',c:['#2A2F3A','#FF6A3D','#5C6475'],be:'https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company',
+  type:{en:'Manufacturing company website',ru:'Сайт производственной компании'},
+  sum:{en:'Website for a Moscow CNC, laser and UV printing company.',ru:'Сайт московского производства: ЧПУ, лазер, УФ-печать.'},
+  role:{en:'Web designer',ru:'Веб-дизайнер'}, tags:'profreza cnc laser website manufacturing профреза сайт производство'},
  {id:'lan',cat:'web',title:'LAN',kind:'site',year:'2024',c:['#E07A3F','#FFC08A','#1F59BC'],be:'https://www.behance.net/gallery/205053605/LAN-E-Commerce-Website',
   type:{en:'E-commerce website',ru:'Интернет-магазин'},
   sum:{en:'An online store for La Naissance, a skincare brand for pregnancy: catalogue with filters, product pages, checkout with bonuses, a personal account and a blog.',ru:'Интернет-магазин La Naissance, бренда ухода для беременных: каталог с фильтрами, карточки товаров, оформление заказа с бонусами, личный кабинет и блог.'},
@@ -1394,7 +1394,7 @@ const SOC = {
  en:[['Behance',BEH],['LinkedIn','https://www.linkedin.com/in/lenkka-solo/'],['Instagram','https://www.instagram.com/design_by_lenkka/'],['Threads','https://www.threads.com/@design_by_lenkka'],['Pinterest','https://www.pinterest.com/lenkka_solo/'],['Dprofile','https://dprofile.ru/lenkka_solo']],
  ru:[['Behance',BEH],['LinkedIn','https://www.linkedin.com/in/lenkka-solo/'],['Dribbble','https://dribbble.com/lenkka_solo'],['Dprofile','https://dprofile.ru/lenkka_solo'],['Pinterest','https://ru.pinterest.com/lenkka_solo/'],['Threads','https://www.threads.com/@lenkka_solo']]};
 const socRow = () => SOC[lang].map(([n,u])=>`<a class="pill" href="${u}" ${ext}>${n}</a>`).join('') + `<button class="pill" data-toastk="toast.cv">CV</button>`;
-const contactRow = () => `<button class="pill" data-copy>Email</button><a class="pill" href="${WA}" ${ext}>WhatsApp</a><a class="pill" href="${TG}" ${ext}>Telegram</a>`;
+const contactRow = () => `<button class="pill" data-copy>Email</button><a class="pill" href="${TG}" ${ext}>Telegram</a>`;
 
 /* ================= static text ================= */
 function splitWords(el){
@@ -1443,7 +1443,7 @@ function items(){
    {g:lang==='ru'?'Разделы':'Pages', title:t('nav.more'), sub:lang==='ru'?'Баннеры, айдентика, презентации':'Banners, branding, presentations', tags:'more work visual banners brand behance баннеры айдентика визуал', icn:'p', text:lang==='ru'?'Визуальный архив.':'The visual archive.', run:()=>openPop('more')},
    {g:lang==='ru'?'Действия':'Actions', title:t('ft.copy'), sub:EMAIL, tags:'email mail contact почта связаться контакты', icn:'a', text:lang==='ru'?'Скопирует адрес в буфер обмена.':'Copies my email to the clipboard.', run:copyMail},
    {g:lang==='ru'?'Разделы':'Pages', title:lang==='ru'?'Прототип и MVP в коде':'Prototype & MVP in code', sub:lang==='ru'?'Новая услуга, пилотные условия':'New service, pilot terms', tags:'mvp prototype code build service прототип код собрать услуга', icn:'p', text:lang==='ru'?'Прототип за 1–2 недели или MVP одного сценария за 2–4 недели.':'A coded prototype in 1–2 weeks or a single-flow MVP in 2–4 weeks.', run:()=>openPop('price')},
-   {g:lang==='ru'?'Действия':'Actions', title:t('ft.brief'), sub:'Telegram, WhatsApp, email', tags:'brief contact start project telegram whatsapp бриф начать проект контакты связаться', icn:'a', text:lang==='ru'?'Все способы связаться со мной.':'All the ways to reach me.', run:()=>openPop('contact')},
+   {g:lang==='ru'?'Действия':'Actions', title:t('ft.brief'), sub:'Telegram, email', tags:'brief contact start project telegram whatsapp бриф начать проект контакты связаться', icn:'a', text:lang==='ru'?'Все способы связаться со мной.':'All the ways to reach me.', run:()=>openPop('contact')},
    {g:lang==='ru'?'Действия':'Actions', title:t('dl'), sub:'PDF', tags:'cv resume download pdf резюме скачать', icn:'a', text:'PDF', run:()=>downloadCV()}
   ];
 }
@@ -1474,7 +1474,7 @@ EXPERIENCE:
 ${xp}
 EDUCATION:
 ${edu}
-CONTACTS: Telegram @lenkka_solo, WhatsApp and email ${EMAIL} (buttons on the site). There is no contact form on the site.`;
+CONTACTS: Telegram @lenkka_solo and email ${EMAIL} (buttons on the site). There is no contact form on the site.`;
 }
 function askPrompt(q, hist){
   const ru = lang==='ru';
@@ -1640,7 +1640,7 @@ function makeSearch(root, opts={}){
 }
 
 /* ================= work ================= */
-let cat = 'product', cur = null;
+let cat = 'web', cur = null;
 const listFor = c => WORK.filter(w => w.cat===c && vis(w));
 function renderWork(){
   const L = listFor(cat);
@@ -1732,7 +1732,7 @@ const POP = {
   return bar(t('nav.more')) + `<div class="pk pbody" style="--i:1"><p class="big" style="margin-bottom:22px">${lang==='ru'?'Другие <em>творческие работы</em>':'Other <em>creative affairs</em>'}</p><div class="mw-grid">${MORE_IMG.map((src,i)=>`<button class="mw" data-zoom="${i}" data-cur="view" style="--d:${(i%3)*60+Math.floor(i/3)*40}ms"><img src="${src}" alt="${lang==='ru'?'Визуальная работа':'Visual work'} ${i+1}" loading="lazy" decoding="async"></button>`).join('')}</div></div>` + foot(2); },
  contact(){ const ru = lang==='ru';
   return bar(t('nav.begin')) + `<div class="pk pbody" style="--i:1"><div class="ct-wrap"><div><p class="big">${ru?'Давайте <em>обсудим проект</em>':'Let’s <em>talk about your project</em>'}</p><p class="ct-t">${ru?'Напишите в Telegram или на почту: что за продукт, для кого и к какому сроку. Отвечаю в течение дня, сейчас на Бали, GMT+8.':'Message me on Telegram or by email: what the product is, who it’s for and the deadline. I reply within a day, currently in Bali, GMT+8.'}</p></div>
-   <div class="ct-acts"><a class="btn btn-p" href="${TG}" ${ext}>Telegram @lenkka_solo ${ic.arr}</a><a class="btn btn-g" href="${WA}" ${ext}>WhatsApp ${ic.arr}</a><button class="btn btn-g" data-copy>${EMAIL} ${ic.arr}</button><button class="btn btn-g" data-toastk="toast.cv">${t('dl')} ${ic.dl}</button></div></div></div>` + foot(2); },
+   <div class="ct-acts"><a class="btn btn-p" href="${TG}" ${ext}>Telegram @lenkka_solo ${ic.arr}</a><button class="btn btn-g" data-copy>${EMAIL} ${ic.arr}</button><button class="btn btn-g" data-toastk="toast.cv">${t('dl')} ${ic.dl}</button></div></div></div>` + foot(2); },
  menu(){
   return bar('Elena') + `<div class="pk pbody" style="--i:1;display:flex;flex-direction:column;gap:6px">${['about','exp','price','more','contact'].map(k=>`<button data-pop="${k}" style="text-align:left;font:300 40px/1.15 var(--serif);color:var(--navy)">${t(k==='about'?'nav.about':k==='exp'?'nav.exp':k==='price'?'nav.price':k==='more'?'nav.more':'nav.begin')}</button>`).join('')}<div style="display:flex;gap:10px;margin-top:18px;align-items:center"><div class="lang"><button data-lang="en" aria-pressed="${lang==='en'}">EN</button><button data-lang="ru" aria-pressed="${lang==='ru'}">RU</button></div><button class="kbtn" data-openpal>⌘K</button></div></div>` + foot(2); },
  peek(id){
