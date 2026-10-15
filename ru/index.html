@@ -176,6 +176,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .fx-pick .strip{display:flex;height:24px;border-radius:7px;overflow:hidden}.fx-pick .strip i{width:24px}
 .fx-hi .fx-in{padding:9px 14px;border-radius:16px 16px 16px 4px;background:var(--sel);color:#fff;font:500 14px/1 var(--sans)}
 @media(max-width:1180px){.fx-card,.fx-tag,.fx-tool,.fx-pick,.fx-hi{display:none}}
+/* mid-size desktops: keep the headline clear of the floating project cards */
+@media(min-width:1181px) and (max-width:1760px){.h-title{font-size:clamp(38px,4.3vw,80px)}#collage .fx-card:nth-child(1){top:42%!important}}
+@media(min-width:1181px) and (max-width:1300px){.h-title{font-size:3.9vw}#collage .fx-card:nth-child(1){top:45%!important}}
 /* tall tablets: four cards in the corners around the centred content */
 @media(min-width:761px) and (max-width:1180px) and (min-height:900px){
   #collage .fx-card{display:block}
