@@ -1408,6 +1408,8 @@ const CHIPS = {en:[['SaveFlow','saveflow'],['Dashboards','dashboards'],['Website
 const PH = {en:['dashboards','can you build an MVP?','SaveFlow','are you available?','how much does a website cost?'],
             ru:['дашборды','соберёте MVP?','SaveFlow','вы свободны?','сколько стоит сайт?']};
 const MQ = {en:['Product design','Dashboards','Design systems','Websites','AI products','MVP in code','Mobile apps','Branding'],ru:['Продуктовый дизайн','Дашборды','Дизайн-системы','Сайты','AI-продукты','MVP в коде','Мобильные приложения','Айдентика']};
+/* main (hiring) page: no prices in instant answers */
+const noPrice = a => (!CL && a && /[₽$€]|\d\s?тыс/.test(a)) ? (lang==='ru' ? 'Стоимость зависит от задачи и объёма. Напишите мне в Telegram или на почту, обсудим.' : 'The cost depends on the task and scope. Message me on Telegram or by email and we’ll discuss it.') : a;
 const INTENTS = [
  [/avail|hire|freelanc|job|role|open to|свобод|ваканс|нанять|работаешь/, {en:'Yes. I’m open to product design roles and freelance projects, working remotely from Bali.',ru:'Да. Открыта к вакансиям продуктового дизайнера и фриланс-проектам, работаю удалённо с Бали.'}],
  [/price|cost|rate|budget|much|цен|стоим|бюджет|сколько/, {en:'Landing page $350–700, multi-page website $1,500–1,800, online store from $1,500, dashboards from $3,000, brand identity from $1,000. The exact estimate comes after we discuss the task.',ru:'Лендинг 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽, дашборды от 250 000 ₽, айдентика от 85 000 ₽. Точная оценка после обсуждения задачи.'}],
@@ -1479,7 +1481,7 @@ function renderHero(){
 
 /* ================= search ================= */
 function items(){
-  const cat = w => w.cat==='own' ? {en:'My products',ru:'Мои продукты'} : {en:'Client work',ru:'Для клиентов'};
+  const cat = w => w.cat==='own' ? {en:'My products',ru:'Мои продукты'} : (CL ? {en:'Client work',ru:'Для клиентов'} : {en:'Work',ru:'Проекты'});
   return [
    ...WORK.filter(vis).map(w => ({g:T(cat(w)), w, title:T(w.title), sub:T(w.type)+(w.nda?', NDA':''), tags:w.tags+' '+w.cat, run:()=>openPeek(w.id)})),
    {g:lang==='ru'?'Разделы':'Pages', title:t('nav.about'), sub:lang==='ru'?'Кто я и как работаю':'Who I am and how I work', tags:'about who bio обо мне кто', icn:'p', text:lang==='ru'?'Продуктовый дизайнер, семь лет в digital. Живу на Бали.':'Product designer, seven years in digital. Based in Bali.', run:()=>openPop('about')},
@@ -1560,7 +1562,7 @@ function localAnswer(q){
     [new RegExp(`(сайт|website|site)[\\s\\S]*${P}|${P}[\\s\\S]*(сайт|website|site)`), {en:'Landing page $350–700, multi-page website $1,500–1,800, online store from $1,500. I’ll give the exact price after a short look at the task.',ru:'Лендинг 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽. Точную цену назову после короткого обсуждения задачи.'}]
   ];
   const wh = WEB.find(([re]) => re.test(ql));
-  const hits = wh ? [T(wh[1])] : [...EXTRA, ...INTENTS].filter(([re]) => re.test(ql)).slice(0,2).map(([,a]) => T(a));
+  const hits = (wh ? [T(wh[1])] : [...EXTRA, ...INTENTS].filter(([re]) => re.test(ql)).slice(0,2).map(([,a]) => T(a))).map(noPrice);
   const contact = /договор|оплат|предоплат|invoice|contract|payment|скидк|discount|созвон|call|обсудить|начать|start|заказ|order|тз|бриф|brief|смет|estimate|оцен/.test(ql);
   if(!hits.length) return {text: ru ? 'Хороший вопрос, и на него лучше ответить лично, чтобы ничего не напутать. Напишите мне в Telegram или на почту: отвечаю в течение дня.' : 'Good question, and it’s best answered personally so I get it right. Message me on Telegram or by email: I reply within a day.', contact:true};
   return {text: hits.join(' ') + (contact ? (ru ? ' Чтобы обсудить детали, напишите в Telegram или на почту.' : ' To discuss the details, message me on Telegram or by email.') : ''), contact};
@@ -1605,13 +1607,13 @@ function makeSearch(root, opts={}){
     if(chat) return;
     pop.classList.remove('chat'); if(input.dataset.ta && /уточняющий|follow-up/.test(input.placeholder)) input.placeholder = t(input.dataset.ta);
     const q = input.value.trim().toLowerCase(), words = q.replace(/[?!.,]/g,'').split(/\s+/).filter(Boolean);
-    const hit = q ? INTENTS.find(([re]) => re.test(q)) : null, ans = hit ? T(hit[1]) : null;
+    const hit = q ? INTENTS.find(([re]) => re.test(q)) : null, ans = hit ? noPrice(T(hit[1])) : null;
     const all = items();
     shown = all.filter(it => { const hay = (it.title+' '+it.sub+' '+it.tags+' '+it.g).toLowerCase(); return !words.length || words.some(w => w.length>2 && hay.includes(w)); });
     if(q && !shown.length && ans) shown = all.filter(it => it.icn);
     if(q && (looksLikeQ(q) || !shown.length)){
       const raw = input.value.trim();
-      const askIt = {g: lang==='ru'?'Вопрос мне':'Ask me', title: lang==='ru'?'Спросить Елену':'Ask Elena', sub: '«'+raw+'»', tags:'', icn:'q', ask:true, text: lang==='ru'?'Отвечу от своего имени с помощью AI: по моему опыту, услугам и ценам. Если вопрос сложный, подскажу, как связаться со мной напрямую.':'I’ll answer in my own words with the help of AI, based on my experience, services and prices. If it’s a tricky one, I’ll tell you how to reach me directly.', run:()=>startChat(raw)};
+      const askIt = {g: lang==='ru'?'Вопрос мне':'Ask me', title: lang==='ru'?'Спросить Елену':'Ask Elena', sub: '«'+raw+'»', tags:'', icn:'q', ask:true, text: CL ? (lang==='ru'?'Отвечу от своего имени с помощью AI: по моему опыту, услугам и ценам. Если вопрос сложный, подскажу, как связаться со мной напрямую.':'I’ll answer in my own words with the help of AI, based on my experience, services and prices. If it’s a tricky one, I’ll tell you how to reach me directly.') : (lang==='ru'?'Отвечу от своего имени с помощью AI: по моему опыту и проектам. Если вопрос сложный, подскажу, как связаться со мной напрямую.':'I’ll answer in my own words with the help of AI, based on my experience and projects. If it’s a tricky one, I’ll tell you how to reach me directly.'), run:()=>startChat(raw)};
       shown = shown.filter(x=>!x.ask); if(looksLikeQ(q)) shown.unshift(askIt); else shown.push(askIt);
     }
     const score = it => words.reduce((s,w)=>s+(it.title.toLowerCase().includes(w)?3:0)+(it.tags.includes(w)?1:0),0);
