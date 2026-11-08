@@ -10,6 +10,7 @@
 Services and starting prices for clients: https://lenkka-solo.github.io/clients/
 
 ## Projects
+- [Makefolk](https://www.behance.net/gallery/258198927/Makefolk-Design-Workspace-UXUI-Branding): Own product, a live workspace for UX/UI designers (https://makefolk.app)
 - [SaveFlow](https://lenkka-solo.github.io/#case-saveflow): Own product, AI screenshot library
 - [Klaris](https://www.behance.net/gallery/255685027/Klaris-Pharmaceutical-Operations-Platform-UXUI): Concept, vibe-coded with AI
 - [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): Web and mobile app
