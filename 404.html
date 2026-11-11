@@ -127,14 +127,14 @@ const STR = {
    hit:q => `For “${q}” I found this:`, none:q => `Nothing matches “${q}” exactly. Here are my main projects:`,
    price:`A landing page is $350–700, a multi-page website $1,500–1,800, an online store from $1,500. All prices are in <a href="${HOME}#services">Services and prices</a>. Some websites I’ve made:`,
    contact:`The fastest way is <a href="${TG}" target="_blank" rel="noopener">Telegram @lenkka_solo</a>, or email <a href="mailto:${EMAIL}">${EMAIL}</a>. I reply within a day, I’m in Bali, GMT+8.`,
-   about:`I’m Elena, a product designer with 7 years in digital: dashboards, websites, brand identity and my own AI products. More on the <a href="${HOME}">main page</a>. A few projects:`},
+   about:`I’m Elena, a UX/UI designer with 7 years in digital: dashboards, websites, brand identity and my own AI products. More on the <a href="${HOME}">main page</a>. A few projects:`},
  ru:{home:'На главную', h1:'Страница не найдена', sub:'Такой страницы нет. Спросите поиск, он подскажет, где что лежит.', ph:'Спросите что-нибудь', go:'Искать', cur:'Elena · спросите меня', who:'отвечаю сама', open:'Открыть кейс',
    foot:`Или напишите мне: <a href="${TG}" target="_blank" rel="noopener">Telegram @lenkka_solo</a> · <a href="mailto:${EMAIL}">${EMAIL}</a>`,
    miss:p => `Страницы «/${p}» у меня нет, возможно, ссылка устарела. Вот что можно посмотреть вместо неё:`,
    hit:q => `По запросу «${q}» нашла вот это:`, none:q => `Точного совпадения по «${q}» нет. Вот мои главные проекты:`,
    price:`Лендинг стоит 30–60 тыс. ₽, многостраничный сайт 130–160 тыс. ₽, интернет-магазин от 130 тыс. ₽. Все цены в разделе <a href="${HOME}ru/#services">«Услуги и цены»</a>. Несколько моих сайтов:`,
    contact:`Быстрее всего в <a href="${TG}" target="_blank" rel="noopener">Telegram @lenkka_solo</a> или на почту <a href="mailto:${EMAIL}">${EMAIL}</a>. Отвечаю в течение дня, я на Бали, GMT+8.`,
-   about:`Я Елена, продуктовый дизайнер, 7 лет в диджитале: дашборды, сайты, айдентика и свои AI-продукты. Подробнее на <a href="${HOME}ru/">главной</a>. Несколько проектов:`}
+   about:`Я Елена, UX/UI-дизайнер, 7 лет в диджитале: дашборды, сайты, айдентика и свои AI-продукты. Подробнее на <a href="${HOME}ru/">главной</a>. Несколько проектов:`}
 };
 let lang = 'en';
 try{ const s = localStorage.getItem('lang'); if(s === 'ru' || s === 'en') lang = s; else if((navigator.language || '').startsWith('ru')) lang = 'ru'; }catch(e){ if((navigator.language || '').startsWith('ru')) lang = 'ru'; }

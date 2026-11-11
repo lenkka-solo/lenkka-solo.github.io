@@ -1,6 +1,6 @@
-# Elena Soloveva — Product Designer (Design by Elena)
+# Elena Soloveva — UX/UI Designer (Design by Elena)
 
-> Product designer, 7 years in digital. I design government and B2B platforms: multi-role workflows, registries, dashboards and design systems. I prototype in code with AI to test flows before development. Based in Bali, working worldwide.
+> UX/UI designer, 7 years in digital. I design government and B2B platforms: multi-role workflows, registries, dashboards and design systems. I prototype in code with AI to test flows before development. Based in Bali, working worldwide.
 
 - Site: https://lenkka-solo.github.io/ (English), https://lenkka-solo.github.io/ru/ (Russian)
 - Contact: Telegram https://t.me/lenkka_solo, email lenkka.solo@gmail.com
@@ -35,6 +35,6 @@ Services and starting prices for clients: https://lenkka-solo.github.io/clients/
 - Telegram: https://t.me/lenkka_solo
 
 ## На русском
-Продуктовый дизайнер, 7 лет в digital. Проектирую государственные и B2B-платформы: сценарии для нескольких ролей, реестры, дашборды и дизайн-системы. Собираю прототипы в коде с AI, чтобы проверить сценарии до разработки. Живу на Бали, работаю по всему миру.
+UX/UI-дизайнер, 7 лет в digital. Проектирую государственные и B2B-платформы: сценарии для нескольких ролей, реестры, дашборды и дизайн-системы. Собираю прототипы в коде с AI, чтобы проверить сценарии до разработки. Живу на Бали, работаю по всему миру.
 
 Услуги и цены для заказчиков: https://lenkka-solo.github.io/ru/clients/
