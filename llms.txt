@@ -1,40 +1,27 @@
-# Elena Soloveva — UX/UI Designer (Design by Elena)
+# Elena Soloveva — Product Designer
 
-> UX/UI designer, 7 years in digital. I design government and B2B platforms: multi-role workflows, registries, dashboards and design systems. I prototype in code with AI to test flows before development. Based in Bali, working worldwide.
+> Product designer, seven years in digital design. I design data-heavy platforms, mobile apps and my own AI products, from the user's flow to a working prototype. Based in Bali (GMT+8), working remotely.
 
 - Site: https://lenkka-solo.github.io/ (English), https://lenkka-solo.github.io/ru/ (Russian)
 - Contact: Telegram https://t.me/lenkka_solo, email lenkka.solo@gmail.com
 - CV: https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_EN.pdf, https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_RU.pdf
 
-## Freelance
-Services and starting prices for clients: https://lenkka-solo.github.io/clients/
+## Experience
+- AgroPromCifra, UX/UI designer, Apr 2025 to now: government digital platforms with dashboards and solutions for agriculture (NDA)
+- Makefolk, own product, 2026 to now: a workspace for designers, live at https://makefolk.app
+- Travel insurance (NDA), UX/UI designer, Jan 2024 to Feb 2025
+- Project Wave, web designer, Sep 2021 to Mar 2025
 
 ## Projects
-- [Makefolk](https://www.behance.net/gallery/258198927/Makefolk-Design-Workspace-UXUI-Branding): Own product, a live workspace for UX/UI designers (https://makefolk.app)
-- [SaveFlow](https://lenkka-solo.github.io/#case-saveflow): Own product, AI screenshot library
-- [Klaris](https://www.behance.net/gallery/255685027/Klaris-Pharmaceutical-Operations-Platform-UXUI): Concept, vibe-coded with AI
-- [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): Web and mobile app
-- [Travel Insurance](https://lenkka-solo.github.io/#case-insurance): Website redesign and policy calculator (NDA)
+Detailed case studies are being prepared for the site. Published work:
+- [Makefolk](https://www.behance.net/gallery/258198927/Makefolk-Design-Workspace-UXUI-Branding): own product, a live workspace for designers
+- [Klaris](https://www.behance.net/gallery/255685027/Klaris-Pharmaceutical-Operations-Platform-UXUI): concept, pharmaceutical operations platform with a coded prototype
 - [Aura AI](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design): AI SaaS landing page
-- [Profreza24](https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company): Manufacturing company website
-- [LAN](https://www.behance.net/gallery/205053605/LAN-E-Commerce-Website): E-commerce website
-- [East Coast Real Estate](https://www.behance.net/gallery/246833765/East-Coast-Real-Estate-Web-Design-Concept): Real estate web design concept
-- [Agropromcifra](https://www.behance.net/gallery/232709235/agropromcifra-Visual-Identity): Visual identity
-- [NAMI FLOW](https://www.behance.net/gallery/249779243/NAMI-FLOW-Botanical-Drink-Identity): Botanical drink identity
-- [KERN](https://www.behance.net/gallery/255811049/KERN-Brand-Identity): Brand identity
-- [Unite](https://lenkka-solo.github.io/#case-couples): Couples app, my own product
+- [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): CRM and app
+- [Profreza24](https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company): manufacturing company website
+- SaveFlow: own product, an AI library for screenshots, images and links (in beta)
 
 ## Profiles
 - Behance: https://www.behance.net/lenkka_solo
 - LinkedIn: https://www.linkedin.com/in/lenkka-solo/
 - Dprofile: https://dprofile.ru/lenkka_solo
-- Dribbble: https://dribbble.com/lenkka_solo
-- Instagram: https://www.instagram.com/design_by_lenkka/
-- Threads: https://www.threads.com/@design_by_lenkka
-- Pinterest: https://www.pinterest.com/lenkka_solo/
-- Telegram: https://t.me/lenkka_solo
-
-## На русском
-UX/UI-дизайнер, 7 лет в digital. Проектирую государственные и B2B-платформы: сценарии для нескольких ролей, реестры, дашборды и дизайн-системы. Собираю прототипы в коде с AI, чтобы проверить сценарии до разработки. Живу на Бали, работаю по всему миру.
-
-Услуги и цены для заказчиков: https://lenkka-solo.github.io/ru/clients/
