@@ -13,9 +13,12 @@
 - Project Wave, web designer, Sep 2021 to Mar 2025
 
 ## Projects
-Detailed case studies are being prepared for the site. Published work:
-- [Makefolk](https://www.behance.net/gallery/258198927/Makefolk-Design-Workspace-UXUI-Branding): own product, a live workspace for designers
-- [Klaris](https://www.behance.net/gallery/255685027/Klaris-Pharmaceutical-Operations-Platform-UXUI): concept, pharmaceutical operations platform with a coded prototype
+Case studies on the site:
+- [Makefolk](https://lenkka-solo.github.io/#makefolk): own product, a live workspace for designers, designed and built with AI
+- [Klaris](https://lenkka-solo.github.io/#klaris): concept, pharmaceutical operations platform with a coded prototype
+- [WatchTogether](https://lenkka-solo.github.io/#watchtogether): concept, a mobile app for watching films together
+
+More work:
 - [Aura AI](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design): AI SaaS landing page
 - [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): CRM and app
 - [Profreza24](https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company): manufacturing company website
