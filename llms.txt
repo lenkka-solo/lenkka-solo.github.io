@@ -7,8 +7,8 @@
 - CV: https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_EN.pdf, https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_RU.pdf
 
 ## Experience
-- AgroPromCifra, UX/UI designer, Apr 2025 to now: government digital platforms with dashboards and solutions for agriculture (NDA)
 - Makefolk, own product, 2026 to now: a workspace for designers, live at https://makefolk.app
+- AgroPromCifra, UX/UI designer, Apr 2025 to 2026: government digital platforms with dashboards and solutions for agriculture (NDA)
 - Travel insurance (NDA), UX/UI designer, Jan 2024 to Feb 2025
 - Project Wave, web designer, Sep 2021 to Mar 2025
 
