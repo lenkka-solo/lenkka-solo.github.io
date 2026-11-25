@@ -17,10 +17,10 @@ Case studies on the site:
 - [Makefolk](https://lenkka-solo.github.io/#makefolk): own product, a live workspace for designers, designed and built with AI
 - [Klaris](https://lenkka-solo.github.io/#klaris): concept, pharmaceutical operations platform with a coded prototype
 - [WatchTogether](https://lenkka-solo.github.io/#watchtogether): concept, a mobile app for watching films together
+- [Brain Trainers](https://lenkka-solo.github.io/#trainers) ([Behance](https://www.behance.net/gallery/259006155/Brain-Trainers-EdTech-Platform-Redesign-UXUI)): personal concept, online brain trainers for school students: audit, user journey, design system and 55 screens
 
 More work:
 - [Aura AI](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design): AI SaaS landing page
-- [Brainiacs](https://www.behance.net/gallery/226555541/Exercise-equipment-for-children-CRM-system): CRM and app
 - [Profreza24](https://www.behance.net/gallery/254563699/Profreza24-Website-for-Manufacturing-Company): manufacturing company website
 - SaveFlow: own product, an AI library for screenshots, images and links (in beta)
 
