@@ -18,6 +18,7 @@ Case studies on the site:
 - [Klaris](https://lenkka-solo.github.io/#klaris): concept, pharmaceutical operations platform with a coded prototype
 - [WatchTogether](https://lenkka-solo.github.io/#watchtogether): concept, a mobile app for watching films together
 - [Brain Trainers](https://lenkka-solo.github.io/#trainers) ([Behance](https://www.behance.net/gallery/259006155/Brain-Trainers-EdTech-Platform-Redesign-UXUI)): personal concept, online brain trainers for school students: audit, user journey, design system and 55 screens
+- [Aura AI](https://lenkka-solo.github.io/#aura) ([Behance](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design)): concept, landing page for an AI workspace assistant; the case page embeds the full landing that scrolls with the page
 
 More work:
 - [Aura AI](https://www.behance.net/gallery/250208511/Aura-AI-SaaS-Landing-Page-Design): AI SaaS landing page

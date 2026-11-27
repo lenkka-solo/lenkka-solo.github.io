@@ -1,0 +1,590 @@
+<style>
+:host{
+--bg:#0d0f14;
+--t1:#f5f7ff; --t2:#bfc2ca; --t3:#8b95b0; --t4:#525b75;
+--c1:#f0f2ff; --c2:#8891b4; --c3:#5b6388;
+--accent:#3d7eff; --link:#6c8eff; --orange:#ff8f6c; --teal:#38e5c4; --check:#4fbeff; --btn:#176ca5;
+--card:#141720;
+--ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.lp{background:var(--bg);color:var(--t1);font-family:"AuraInter",system-ui,sans-serif;font-size:14px;line-height:20px;letter-spacing:-.015em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter-spacing:inherit}
+svg{display:block;flex:none}
+.mono{font-family:"AuraMono",ui-monospace,monospace;letter-spacing:0}
+.serif{font-family:"AuraSerif",Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.01em}
+/* ---------- page canvas (design is 1440 wide; scaled to fit the window) ---------- */
+.page{position:relative;width:1440px;height:5688px;background:var(--bg);overflow:hidden}
+.page .abs{position:absolute}
+.glow{position:absolute;left:0;width:1440px;pointer-events:none;user-select:none}
+.glow img{display:block;width:100%;height:100%}
+/* gradient headline text */
+.gt{display:inline-block;background:linear-gradient(90deg,#fff 0%,#8fb9fd 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.h2{font-size:42px;font-weight:500;letter-spacing:0;word-spacing:-.09em;line-height:46px}
+.h2 .serif{font-size:46px;line-height:0;font-weight:530}
+.eyebrow{font-size:12px;line-height:16px;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.012em}
+/* glass / gradient borders */
+.gb{position:relative;isolation:isolate}
+.gb::before{content:"";position:absolute;inset:var(--gbi,0px);border-radius:inherit;padding:1px;pointer-events:none;z-index:3;
+background:linear-gradient(var(--gba,160deg),rgba(255,255,255,var(--gb1,.22)) 0%,rgba(255,255,255,var(--gb2,.06)) 35%,rgba(255,255,255,var(--gb2,.06)) 65%,rgba(255,255,255,var(--gb3,.14)) 100%);
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.glass{-webkit-backdrop-filter:blur(40px);backdrop-filter:blur(40px)}
+/* ---------- NAV ---------- */
+.nav{top:40px;left:120px;width:1200px;height:42px;display:flex;align-items:center}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;letter-spacing:-.005em;color:var(--t1)}
+.dot{width:24px;height:24px;border-radius:50%;position:relative;background:radial-gradient(circle at 38% 32%,#5a93ff 0%,#3d7eff 62%,#3a78f5 100%)}
+.dot::after{content:"";position:absolute;inset:-18px;background:url({{B}}aura-dot.webp) center/60px 60px no-repeat;z-index:-1}
+.nav-links{position:absolute;left:415px;display:flex;gap:24px;color:var(--t2)}
+.nav-links a,.login{position:relative;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover,.login:hover{color:var(--t1)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.login{position:absolute;left:1013px;color:var(--t2)}
+.btn-w{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 24px;border-radius:8px;background:#fff;color:var(--btn);font-weight:500;letter-spacing:.002em;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.btn-w::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(61,126,255,.18),transparent);transform:skewX(-20deg);transition:left .7s var(--ease)}
+.btn-w:hover{transform:translateY(-1px);box-shadow:0 8px 24px -8px rgba(61,126,255,.55)}
+.btn-w:hover::after{left:130%}
+.btn-w:active{transform:translateY(0) scale(.98)}
+.nav .btn-w{position:absolute;left:1077px;width:123px;padding:0}
+/* ---------- HERO ---------- */
+.hero-l{top:142px;left:120px;width:620px}
+.pill{display:inline-flex;align-items:center;height:32px;width:151px;border-radius:16px;padding-left:16px;gap:8px;background:rgba(3,4,6,.85);font-size:12px;line-height:16px;color:var(--t3);letter-spacing:-.01em;--gb1:.2;--gb2:.12;--gb3:.13;--gba:180deg}
+.pill .pd{width:8px;height:8px;border-radius:50%;background:var(--accent);position:relative}
+.pill .pd::before{content:"";position:absolute;inset:-8px;background:url({{B}}aura-pd.webp) center/24px no-repeat}
+.pill .pd::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:ping 2.4s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.6);opacity:0}}
+.h1{display:block;margin-top:32.5px;font-size:64px;font-weight:500;letter-spacing:0;word-spacing:-.09em;line-height:64px;width:420px}
+.h1 .ln{display:block;height:79.75px;white-space:nowrap;padding-bottom:16px;margin-bottom:-16px;background:linear-gradient(90deg,#fff 0%,#8fb9fd 100%) 0 0/420px 100% no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.h1 .serif{font-size:61px;font-weight:530;letter-spacing:-.01em;margin-left:11px}
+.hero-p{margin-top:30.5px;width:485px;font-size:18px;line-height:28.75px;color:var(--t2);letter-spacing:-.011em}
+.hero-cta{margin-top:26.5px;display:flex;align-items:center;gap:15px;height:44px}
+.btn-o{display:inline-flex;align-items:center;gap:10.2px;height:44px;width:154px;padding-left:24px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(4,6,10,.6);color:var(--t1);font-weight:500;letter-spacing:-.005em;transition:border-color .3s,background .3s,transform .3s var(--ease)}
+.btn-o:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.04);transform:translateY(-1px)}
+.btn-o svg{transition:transform .35s var(--ease)}
+.btn-o:hover svg{transform:translateX(3px) scale(1.1)}
+.trust{margin-top:28.5px;display:flex;align-items:center;height:32px;color:var(--t2)}
+.avs{display:flex;margin-left:-2px}
+.av{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg);margin-right:-12px;display:flex;align-items:center;justify-content:center;font-size:10px;line-height:12px;font-weight:500;color:var(--t3);letter-spacing:-.01em;padding-bottom:3.6px;transition:transform .3s var(--ease)}
+.avs:hover .av{transform:translateX(calc(var(--i)*3px))}
+.trust .t{margin-left:26.5px;letter-spacing:-.016em}
+.trust .sep{width:4px;height:4px;border-radius:50%;background:var(--t4);margin:0 16px 0 17px}
+.trust .st{display:flex;align-items:center;gap:4px}
+/* palette */
+.pal{top:141px;left:765px;width:556px;height:504px;border-radius:17px;background:rgba(0,0,0,.2);--gb1:.19;--gb2:.15;--gb3:.15}
+.pal-in{position:absolute;inset:1px;border-radius:16px;overflow:hidden}
+.pal-search{height:46px;display:flex;align-items:center;padding:0 19px 0 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.pal-search .ph{margin-left:12px;color:var(--t3);letter-spacing:-.03em;display:flex;align-items:center}
+.caret{display:inline-block;width:1px;height:16px;background:var(--accent);margin-left:2px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.kbd{margin-left:auto;height:23px;min-width:32px;padding:0 7px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:#0f1218;display:flex;align-items:center;justify-content:center;font-size:10px;line-height:12px;color:var(--t2)}
+.pal-tabs{height:50px;display:flex;align-items:center;padding:4px 0 0 19px;gap:16.5px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--t3)}
+.pal-tabs span{cursor:pointer;transition:color .2s;letter-spacing:-.006em}
+.pal-tabs span:hover{color:var(--t1)}
+.pal-tabs .on{height:28px;display:flex;align-items:center;padding:0 8px;border-radius:6px;background:rgba(61,126,255,.1);border:1px solid rgba(61,126,255,.22);color:var(--accent)}
+.pal-body{padding:27px 19px 0 19px;position:relative}
+.sug{font-size:12px;line-height:16px;color:var(--t2);letter-spacing:-.025em;margin-bottom:10px}
+.rows{position:relative}
+.hl{position:absolute;left:-9px;right:-9px;height:50px;border-radius:10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05);transition:transform .55s var(--ease),opacity .4s;pointer-events:none;opacity:0}
+.row{height:57.75px;display:flex;align-items:center;position:relative;cursor:pointer}
+.row .ic{width:30px;height:30px;border-radius:7px;border:1px solid rgba(255,255,255,.06);background:#0e1117;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--t1);letter-spacing:0;transition:border-color .3s,transform .3s var(--ease)}
+.row .tx{margin-left:15px;display:flex;flex-direction:column;gap:2.5px}
+.row .tx b{font-weight:400;color:var(--t1);letter-spacing:-.015em}
+.row .tx i{font-style:normal;font-size:12px;line-height:16px;color:var(--t3);letter-spacing:-.015em}
+.row .src{margin-left:auto;font-size:12px;line-height:16px;color:var(--t2)}
+.row.act .ic{border-color:rgba(61,126,255,.35);transform:scale(1.04)}
+.pal-foot{position:absolute;left:0;right:0;bottom:0;height:46px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:0 19px 0 20px;font-size:12px;line-height:16px;color:var(--t2);letter-spacing:-.02em}
+.pal-foot .va{display:flex;align-items:center;gap:3px;cursor:pointer}
+.pal-foot .va svg{transition:transform .3s var(--ease)}
+.pal-foot .va:hover svg{transform:translateX(3px)}
+.pal-foot .kbd{width:36px;font-size:10px}
+/* logos strip */
+.logos{top:703px;left:120px;width:1200px;height:82px;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center}
+.logos .lab{position:absolute;left:40px;font-size:11px;line-height:14px;font-weight:500;color:var(--accent);letter-spacing:.092em}
+.mq{position:absolute;left:160px;right:0;top:0;bottom:0;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent 0,#000 70px,#000 calc(100% - 150px),transparent 100%);mask:linear-gradient(90deg,transparent 0,#000 70px,#000 calc(100% - 150px),transparent 100%)}
+.mq-track{position:absolute;left:13px;padding-bottom:3.6px;top:0;bottom:0;display:flex;align-items:center;animation:mq 38s linear infinite;will-change:transform}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-1 * var(--w,1106px)))}}
+.lg{display:flex;align-items:center;gap:12px;margin-right:62.5px;font-size:18px;line-height:22px;font-weight:500;color:var(--t2);letter-spacing:-.008em;white-space:nowrap;transition:color .3s}
+.lg:hover{color:var(--t1)}
+.lg svg{transition:transform .4s var(--ease)}
+.lg:hover svg{transform:rotate(-8deg) scale(1.12)}
+/* ---------- HOW IT WORKS ---------- */
+.how{top:903.75px;left:120px;width:1200px}
+.how .h2{margin-top:23.15px}
+.lead{font-size:18px;line-height:28.75px;color:var(--t3);letter-spacing:-.011em}
+.ftxt .lead{letter-spacing:.012em}
+.how .lead{margin-top:25.1px}
+.steps{position:absolute;top:204.25px;left:0;display:flex;gap:20px}
+.card{width:387px;height:300px;border-radius:16px;background:var(--card);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;transition:transform .45s var(--ease),border-color .4s,box-shadow .45s var(--ease)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(108,142,255,.09),transparent 45%)}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.12);box-shadow:0 22px 40px -24px rgba(0,0,0,.8)}
+.card:hover::after{opacity:1}
+.step{padding:31px 31px 29.9px;display:flex;flex-direction:column;justify-content:space-between}
+.step .sl{font-size:12px;line-height:16px;color:var(--t4)}
+.step .si{width:38px;height:38px;margin-left:-1px;border-radius:9px;border:1px solid rgba(255,255,255,.06);background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:transform .4s var(--ease),border-color .4s}
+.card:hover .si{transform:translateY(-2px) rotate(-4deg);border-color:rgba(61,126,255,.35)}
+.step h3{margin-top:13.9px;font-size:18px;line-height:24px;font-weight:500;letter-spacing:-.002em;color:var(--t1)}
+.step p{margin-top:16.9px;font-size:14px;line-height:22.45px;color:var(--t3);letter-spacing:-.022em}
+/* ---------- FEATURES ---------- */
+.ftxt{width:560px}
+.ftxt .h2{margin-top:17.15px}
+.ftxt .lead{margin-top:41.9px}
+.bul{list-style:none;margin-top:37.7px;display:flex;flex-direction:column;gap:9.4px;color:var(--c1)}
+.bul li{display:flex;align-items:center;gap:6.7px;line-height:20px;letter-spacing:-.002em;cursor:default}
+.bul li svg{color:var(--accent);margin-left:0;transition:transform .35s var(--ease)}
+.bul li:hover svg{transform:translateX(4px)}
+.mock{width:592px;border-radius:21px;--gb1:.21;--gb2:.22;--gb3:.24;--gba:200deg}
+.mock-in{position:absolute;inset:1px;border-radius:20px;overflow:hidden}
+/* F1 mock */
+.f1m{top:1528px;left:729px;height:442px}
+.f1-left{position:absolute;left:0;top:0;width:310px;bottom:0;background:rgba(255,255,255,.02)}
+.f1-canvas{position:absolute;left:25px;top:0;right:0;height:416px;background:rgba(255,255,255,.02)}
+.tb{position:absolute;left:25px;top:25px;display:flex;gap:6px}
+.tb span{height:21px;padding:0 7px;border-radius:4px;background:rgba(255,255,255,.04);display:flex;align-items:center;font-size:10px;line-height:12px;color:var(--c2);transition:background .25s,color .25s;cursor:default}
+.tb span:hover{background:rgba(255,255,255,.09);color:var(--c1)}
+.f1-aura{position:absolute;left:261px;top:29px;font-size:10px;line-height:12px;color:var(--link)}
+.f1-lbl{position:absolute;left:62px;top:63px;font-size:10px;line-height:12px;color:var(--link)}
+.dash{position:absolute;left:54px;top:74px;width:254px;height:294px}
+.dash rect{animation:ants 1.2s linear infinite}
+@keyframes ants{to{stroke-dashoffset:-14}}
+.frame{position:absolute;left:60px;top:80px;width:242px;height:282px;border-radius:9px;border:1px solid rgba(108,142,255,.35);background:radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.035),rgba(255,255,255,.02) 60%,rgba(255,255,255,.015))}
+.bar{position:absolute;left:78px;border-radius:3px;background:rgba(255,255,255,.07)}
+.bar.sk::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);background-size:200% 100%;animation:shimmer 2.6s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:150% 0}100%{background-position:-50% 0}}
+.fbtn{position:absolute;left:78px;top:224px;width:80px;height:24px;border-radius:3px;background:var(--link);box-shadow:0 0 0 0 rgba(108,142,255,.5);animation:fpulse 3s ease-out infinite}
+@keyframes fpulse{0%{box-shadow:0 0 0 0 rgba(108,142,255,.45)}60%,100%{box-shadow:0 0 0 8px rgba(108,142,255,0)}}
+.f1-right{position:absolute;left:330px;top:0;width:239px}
+.ctxh{position:absolute;top:21.3px;left:0;right:-1px;display:flex;justify-content:space-between;font-size:12px;line-height:16px;letter-spacing:.005em}
+.ctxh b{font-weight:500;color:var(--c1)}
+.ctxh span{color:var(--c2)}
+.ci{position:absolute;left:0;width:239px;font-size:12px;line-height:18px;color:var(--c2);letter-spacing:-.008em}
+.ci .ini{position:absolute;left:4px;font-size:10px;line-height:12px;color:#fff;font-weight:500;letter-spacing:0}
+.ci .body{margin-left:34px}
+.ci b{font-weight:500;color:var(--c1)}
+.ci .ago{display:block;margin-top:5.9px;font-size:10px;line-height:12px;color:var(--c3)}
+.hr{position:absolute;left:0;width:239px;height:1px;background:rgba(255,255,255,.05)}
+.tag{position:absolute;left:-1px;width:241px;border-radius:9px;display:flex;align-items:center;font-size:11px;line-height:16px;color:var(--c1);letter-spacing:0;transition:transform .35s var(--ease)}
+.tag:hover{transform:translateX(-3px)}
+.tag .k{width:39px;padding-left:11px;font-size:11px;flex:none}
+.tag.lin{height:36px;background:rgba(108,142,255,.08);border:1px solid rgba(108,142,255,.18)}
+.tag.lin .k{color:var(--link)}
+.tag.slk{height:53px;background:rgba(255,143,108,.08);border:1px solid rgba(255,143,108,.2)}
+.tag.slk .k{color:var(--orange)}
+/* F2 mock */
+.f2m{top:2088px;left:119px;height:475px}
+.bubble{position:absolute;left:159px;top:24px;width:407px;height:70px;border-radius:15px;background:rgba(108,142,255,.14);border:1px solid rgba(108,142,255,.25);padding:11.5px 16px 0;font-size:14px;line-height:21px;color:var(--c1);letter-spacing:-.002em}
+.ans{position:absolute;left:24px;top:106px;width:476px;height:311px;border-radius:15px;background:rgba(8,11,20,.6);border:1px solid rgba(255,255,255,.06);padding:17.5px 16px 0;font-size:16px;line-height:26.9px;color:var(--c2);letter-spacing:.004em}
+.ans p+p{margin-top:10.6px}
+.ans b{font-weight:500;color:var(--c1)}
+.ans .w{color:var(--c1)}
+.ans a{color:var(--link);transition:color .2s;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .35s var(--ease)}
+.ans a:hover{background-size:100% 1px}
+.chip{display:inline-flex;align-items:center;height:25px;padding:0 7px;border-radius:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:10px;line-height:12px;vertical-align:1px;margin:0 0 0 2px}
+.chip.n{color:var(--c1)} .chip.f{color:var(--orange)} .chip.l{color:var(--link)}
+.srch{position:absolute;left:25px;top:430px;display:flex;align-items:center;font-size:12px;line-height:16px;color:var(--c3)}
+.srch .d{width:5px;height:5px;border-radius:50%;background:rgba(136,145,180,.5);margin-right:6px;animation:bob 1.2s ease-in-out infinite}
+.srch .d:nth-child(2){animation-delay:.15s}.srch .d:nth-child(3){animation-delay:.3s;margin-right:8px}
+@keyframes bob{0%,60%,100%{transform:translateY(0);background:rgba(136,145,180,.5)}30%{transform:translateY(-3px);background:rgba(136,145,180,.95)}}
+/* F3 digest */
+.f3m{top:2680px;left:729px;height:436px}
+.dg{position:absolute;left:25px;right:25px;top:0}
+.dgh{position:absolute;top:27.5px;left:0;right:0;display:flex;align-items:center;font-size:13px;line-height:16px;color:var(--c2);letter-spacing:-.002em}
+.dgh svg{color:var(--link);margin-right:9px}
+.dgh .tm{margin-left:auto;font-size:11px;line-height:14px;color:var(--c3)}
+#clockHand{transform-origin:7.39px 8.03px;transform-box:view-box;animation:spin 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dl{position:absolute;left:0;right:0;height:1px}
+.gm{position:absolute;top:80.3px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:-.005em;color:var(--c1)}
+.gs{position:absolute;top:117.6px;font-size:13px;line-height:18px;color:var(--c2);letter-spacing:-.001em}
+.di{position:absolute;left:0;right:0;display:flex;align-items:flex-start;border-radius:8px;transition:background .3s}
+.di .bd{height:21px;padding:0 7px;border-radius:4px;display:flex;align-items:center;font-size:10px;line-height:12px;letter-spacing:.06em;flex:none;margin-right:14px}
+.di .bd.hi{background:rgba(255,143,108,.12);color:var(--orange)}
+.di .bd.me{background:rgba(108,142,255,.12);color:var(--link)}
+.di .bd.fy{background:rgba(56,229,196,.1);color:var(--teal)}
+.di .tt{font-size:13px;line-height:18px;color:var(--c1);letter-spacing:-.004em;margin-top:-.7px}
+.di .ts{font-size:12px;line-height:16px;color:var(--c2);letter-spacing:-.005em;margin-top:4.2px}
+.dgf{position:absolute;right:0;top:394px;font-size:11px;line-height:14px;color:var(--c3);display:flex;align-items:center;gap:4px;cursor:pointer}
+.dgf svg{transition:transform .3s var(--ease)}
+.dgf:hover svg{transform:translateX(3px)}
+/* ---------- NUMBERS ---------- */
+.nums{top:3237px;left:120px;width:1200px}
+.nums .h2{margin-top:17.1px}
+.stats{position:absolute;top:122.8px;left:0;width:1200px;display:flex;justify-content:space-between}
+.stat .n{font-size:48px;line-height:56px;font-weight:500;letter-spacing:-.022em;color:var(--t1);font-variant-numeric:normal}
+.stat .l{margin-top:7px;color:var(--t3);letter-spacing:-.025em}
+.vr{width:1.5px;height:84px;background:rgba(255,255,255,.06);margin-top:-1px}
+/* ---------- TESTIMONIALS ---------- */
+.love{top:3563.25px;left:120px;width:1200px}
+.love .eyebrow{letter-spacing:.085em}
+.love .h2{margin-top:16.65px}
+.tst{position:absolute;top:120.75px;left:0;display:flex;gap:20px}
+.tc{padding:34px 31px 32px;display:flex;flex-direction:column}
+.tc .stars{color:var(--t1);display:flex}
+.tc q{display:block;margin-top:38.3px;font-size:16px;line-height:25.6px;color:var(--t1);letter-spacing:-.006em;quotes:none}
+.tc .au{margin-top:auto;display:flex;align-items:center;gap:12px}
+.tc .ava{width:36px;height:36px;border-radius:50%;background:#1a1e2a;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:16px;color:var(--t3);font-weight:500;transition:transform .4s var(--ease)}
+.tc:hover .ava{transform:scale(1.08)}
+.tc .nm{font-weight:500;letter-spacing:-.006em}
+.tc .rl{font-size:12px;line-height:16px;color:var(--t3);letter-spacing:-.006em;margin-top:2.5px}
+/* ---------- PRICING ---------- */
+.price{top:4104.75px;left:0;width:1440px;text-align:center}
+.price .eyebrow{letter-spacing:.085em}
+.price .h2{margin-top:23.15px}
+.tog{position:absolute;top:113.25px;left:599px;width:243px;height:42px;border-radius:21px;background:rgba(10,12,18,.55);display:flex;align-items:center;padding-left:4px;--gb1:.22;--gb2:.14;--gb3:.15;--gba:180deg}
+.tog .knob{position:absolute;left:4px;top:4px;width:85px;height:34px;border-radius:17px;background:#fff;transition:transform .55s var(--ease),width .55s var(--ease)}
+.tog .knob::before{content:"";position:absolute;left:-16px;top:-16px;width:117px;height:66px;background:url({{B}}aura-knob.webp) center/117px 66px no-repeat;z-index:-1}
+.tog button{position:relative;z-index:1;height:34px;font-size:14px;line-height:20px;transition:color .4s}
+.tog .m{width:85px;color:var(--btn);font-weight:500;letter-spacing:-.016em}
+.tog .a{margin-left:16px;color:var(--t3);display:flex;align-items:center;gap:12px;letter-spacing:-.016em}
+.tog .sv{height:17px;padding:0 7px;border-radius:8.5px;background:rgba(61,126,255,.18);color:var(--accent);font-size:10px;line-height:12px;font-weight:600;letter-spacing:-.005em;display:flex;align-items:center}
+.tog.annual .knob{transform:translateX(97px);width:69px}
+.tog.annual .m{color:var(--t3);font-weight:400}
+.tog.annual .a{color:var(--btn)}
+.plans{position:absolute;top:195.25px;left:120px;display:flex;gap:21px;align-items:flex-start;text-align:left}
+.plan{width:386px;border-radius:16px;position:relative;padding:0 32px;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.plan:hover{transform:translateY(-4px)}
+.plan.dark{background:linear-gradient(180deg,#0b0c11 0%,#0d0e13 50%,#0f1015 100%);--gbi:-1px;--gb1:.22;--gb2:.19;--gb3:.2;--gba:200deg}
+.plan.pro{background:linear-gradient(180deg,#041958 0%,#051443 23%,#050e29 50%,#050811 76%,#060709 100%);--gbi:-1px;--gb1:.2;--gb2:.06;--gb3:.06;--gba:90deg;box-shadow:0 30px 60px -30px rgba(10,40,140,.5)}
+.plan.pro:hover{box-shadow:0 36px 70px -28px rgba(30,80,220,.55)}
+.plan .pn{font-size:14px;line-height:20px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;justify-content:space-between}
+.plan .pd{color:var(--t3);letter-spacing:-.016em}
+.plan .pp{display:flex;align-items:baseline;gap:4px}
+.plan .pp .v{font-size:42px;line-height:50px;font-weight:500;letter-spacing:0;display:inline-block}
+.plan .pp .u{font-size:12px;line-height:16px;color:var(--t3);letter-spacing:-.01em}
+.plan .pb{font-size:12px;line-height:16px;color:var(--t4);letter-spacing:-.012em}
+.pbtn{display:flex;align-items:center;justify-content:center;width:324px;margin-left:-1px;height:44px;border-radius:8px;border:1px solid rgba(255,255,255,.1);font-weight:500;letter-spacing:-.01em;transition:background .3s,border-color .3s,transform .3s var(--ease)}
+.pbtn:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
+.plan .pro-b.btn-w{width:322px;margin-left:0;height:42px;padding:0;border:0}
+.plan .sep{height:1.5px;background:rgba(255,255,255,.06)}
+.fl{list-style:none}
+.fl li{display:flex;align-items:center;line-height:20px;letter-spacing:-.016em}
+.fl li svg{color:var(--check);margin-left:1px;margin-right:14.3px}
+.fl li.off{color:var(--t4)}
+.fl.team li svg{margin-right:11.8px}
+.fl.pro li svg{margin-right:14.8px}
+.fl li.off .ds{width:8px;height:1.5px;background:#2a3144;margin-right:13px;flex:none}
+.mp{height:26px;padding:0 9px;border-radius:13px;background:rgba(61,126,255,.14);border:1px solid rgba(61,126,255,.3);font-size:12px;line-height:16px;font-weight:500;color:var(--accent);display:flex;align-items:center;letter-spacing:-.01em;position:relative;overflow:hidden}
+.mp::after{content:"";position:absolute;top:0;bottom:0;width:30px;left:-40px;background:linear-gradient(90deg,transparent,rgba(160,195,255,.35),transparent);transform:skewX(-20deg);animation:mpshine 4.5s ease-in-out infinite 1.5s}
+@keyframes mpshine{0%{left:-40px}35%,100%{left:120px}}
+/* ---------- CTA ---------- */
+.cta{top:4915.25px;left:0;width:1440px;text-align:center}
+.cta h2{display:inline-block;font-size:64px;line-height:70px;font-weight:500;letter-spacing:-.006em;word-spacing:-.05em}
+.cta h2 .serif{line-height:0}
+.cta h2 .serif{font-size:64px;font-weight:530;letter-spacing:-.01em}
+.cta .lead{width:540px;margin:18.9px auto 0;line-height:28px;letter-spacing:-.005em}
+.cta .btn-w{margin-top:38.9px;width:152px;padding:0}
+.ok{margin-top:25.2px;display:flex;justify-content:center;gap:25.2px;color:var(--t2);letter-spacing:-.016em}
+.ok span{display:flex;align-items:center;gap:10px}
+.ok svg{color:var(--check)}
+/* ---------- FOOTER ---------- */
+.foot{top:5377px;left:120px;width:1200px;height:290px}
+.foot .logo{position:absolute;top:1px;left:0}
+.foot .tagl{position:absolute;top:49.5px;left:0;width:250px;line-height:18px;color:var(--t2);letter-spacing:-.016em}
+.fc{position:absolute;top:.5px}
+.fc h4{font-size:14px;line-height:20px;font-weight:500;letter-spacing:-.014em}
+.fc a{display:block;margin-top:26.3px;line-height:20px;color:var(--t2);letter-spacing:-.016em;transition:color .25s,transform .25s var(--ease)}
+.fc a+a{margin-top:18px}
+.fc a:hover{color:var(--t1);transform:translateX(3px)}
+.fbar{position:absolute;top:230px;left:0;width:1200px;height:1.5px;background:rgba(255,255,255,.06)}
+.fb{position:absolute;top:255px;left:0;width:1200px;height:32px;display:flex;align-items:center;color:var(--t2);letter-spacing:-.016em}
+.fb .lg2{position:absolute;left:507px;display:flex;gap:24px}
+.fb .lg2 a{transition:color .25s}.fb .lg2 a:hover{color:var(--t1)}
+.soc{position:absolute;right:0;display:flex;gap:12px}
+.soc a{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);--gb1:.45;--gb2:.18;--gb3:.35;transition:transform .35s var(--ease),background .3s}
+.soc a:hover{transform:translateY(-3px);background:rgba(255,255,255,.14)}
+/* ---------- motion: reveal ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.rv.done,.rv-s.done{transition:none}
+.card.done,.plan.done{transition:transform .45s var(--ease),border-color .4s,box-shadow .45s var(--ease)}
+.card.done:hover,.plan.done:hover{transform:translateY(-4px)}
+.rv-s{opacity:0;transform:translateY(14px) scale(.985);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv-s.in{opacity:1;transform:none}
+.gl-a{animation:drift1 16s ease-in-out infinite alternate}
+.gl-b{animation:drift2 20s ease-in-out infinite alternate}
+.gl-c{animation:drift3 18s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate3d(0,0,0) scale(1);opacity:1}100%{transform:translate3d(-18px,10px,0) scale(1.03);opacity:.86}}
+@keyframes drift2{0%{transform:translate3d(0,0,0) scale(1);opacity:1}100%{transform:translate3d(16px,-14px,0) scale(1.04);opacity:.85}}
+@keyframes drift3{0%{transform:translate3d(0,0,0) scale(1);opacity:1}100%{transform:translate3d(-14px,-12px,0) scale(1.035);opacity:.88}}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+.rv,.rv-s{opacity:1;transform:none}
+}
+/* canvas mock: one panel, frame centred with equal side and bottom gaps */
+.f1-left{background:rgba(255,255,255,.03)}
+.f1-canvas{display:none}
+.tb{left:28px;top:24px}
+.f1-aura{left:auto;right:308px;top:28.5px}
+.f1-lbl{left:30px;top:63px}
+.dash{left:28px;top:82px;height:330px}
+.frame{left:34px;top:88px;height:318px}
+.bar{left:52px}
+.fbtn{left:52px;top:232px}
+.ci .ini{top:3px!important;left:4px!important}
+/* source chips sit on the text line */
+.chip{height:20px;line-height:18px;padding:0 6px;border-radius:5px;vertical-align:middle;position:relative;top:-1px;margin:0 1px 0 5px}
+/* the annual knob wraps the label and the 20% badge */
+.tog .knob::before{width:calc(100% + 32px);background-size:100% 100%}
+.tog.annual .knob{transform:translateX(87px);width:142px}
+/* ===== motion layer for the case page (driven by scroll inside the frame) ===== */
+:host{display:block;contain:layout paint}
+.lp{width:1440px}
+.rv{opacity:0;transform:translate3d(0,30px,0);filter:blur(8px);transition:opacity .9s var(--ease),transform 1.15s var(--ease),filter .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none;filter:none}
+.rv-s{opacity:0;transform:perspective(1600px) translate3d(0,80px,0) rotateX(16deg) scale(.93);transform-origin:50% 0;filter:blur(10px);transition:opacity 1s var(--ease),transform 1.5s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+.rv-s.in{opacity:1;transform:none;filter:none}
+.rv.done,.rv-s.done{transition:none}
+/* headline lines rise out of a blur, letters settle */
+.h1 .ln.rv:not(.in){transform:translate3d(0,.55em,0);filter:blur(14px);letter-spacing:.05em}
+.h1 .ln.rv{transition:opacity .9s var(--ease),transform 1.2s var(--ease),filter 1s var(--ease),letter-spacing 1.4s var(--ease);transition-delay:var(--d,0s)}
+.cta h2.rv:not(.in){transform:scale(.88);filter:blur(16px);letter-spacing:.06em}
+.cta h2.rv{transition:opacity 1s var(--ease),transform 1.5s var(--ease),filter 1.1s var(--ease),letter-spacing 1.5s var(--ease)}
+/* glows drift with the scroll */
+.glow img{will-change:transform}
+/* palette: typed query and a soft pulse on the active row */
+.ph.typing{color:var(--t1)}
+.ph .caret{height:15px}
+.row.act .ic{border-color:rgba(61,126,255,.55);transform:scale(1.06)}
+/* step icons pop after their card */
+.step.rv:not(.in) .si{transform:scale(.4) rotate(-25deg);opacity:0}
+.step.rv:not(.done) .si{transition:transform .9s cubic-bezier(.34,1.56,.64,1) calc(var(--d,0s) + .35s),opacity .4s calc(var(--d,0s) + .35s)}
+/* context panel items slide in from the side, tags follow */
+.ci.rv:not(.in),.tag.rv:not(.in){transform:translate3d(36px,0,0)}
+/* chat: the question pops, the answer arrives paragraph by paragraph, sources pop in */
+.bubble.rv:not(.in){transform:translate3d(30px,10px,0) scale(.9);transform-origin:100% 100%}
+.bubble.rv{transition:opacity .6s var(--ease),transform .9s cubic-bezier(.34,1.56,.64,1),filter .6s var(--ease);transition-delay:var(--d,0s)}
+.ans.rv{filter:none;transform:none;opacity:1}
+.ans p{opacity:0;transform:translate3d(0,14px,0);filter:blur(6px);transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s var(--ease)}
+.ans.in p{opacity:1;transform:none;filter:none}
+.ans.in p:nth-child(1){transition-delay:.9s}.ans.in p:nth-child(2){transition-delay:1.5s}.ans.in p:nth-child(3){transition-delay:2.1s}
+.ans .chip{display:inline-block;transform:scale(0);transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.ans.in .chip{transform:none}.ans.in .chip.n{transition-delay:1.9s}.ans.in .chip.f{transition-delay:2.05s}.ans.in .chip.l{transition-delay:2.2s}
+.srch{transition:opacity .5s}.f2m.in .srch{animation:srchout .5s 2.6s both}
+@keyframes srchout{to{opacity:.35}}
+/* digest rows slide in, badges pop */
+.di.rv:not(.in){transform:translate3d(-30px,0,0)}
+.di .bd{transition:transform .7s cubic-bezier(.34,1.56,.64,1) calc(var(--d,0s) + .3s)}
+.di.rv:not(.in) .bd{transform:scale(0)}
+/* numbers: dividers grow */
+.vr.rv:not(.in){transform:scaleY(0);filter:none}
+/* testimonials fan in */
+.tc.rv:not(.in):nth-child(1){transform:translate3d(-40px,50px,0) rotate(-4deg)}
+.tc.rv:not(.in):nth-child(2){transform:translate3d(0,70px,0)}
+.tc.rv:not(.in):nth-child(3){transform:translate3d(40px,50px,0) rotate(4deg)}
+/* plans lift in, the popular one last and a little higher */
+.plan.rv:not(.in){transform:translate3d(0,70px,0) scale(.95)}
+.plan.pro.rv.in{box-shadow:0 0 0 1px rgba(61,126,255,.35),0 30px 90px -30px rgba(61,126,255,.55)}
+@media (prefers-reduced-motion:reduce){.ans p,.ans .chip,.di .bd,.step .si{opacity:1!important;transform:none!important;filter:none!important}}
+</style><div class="lp"><div class="page">
+<div class="glow gl-a" style="top:0;height:975px"><img src="{{B}}aura-glow-a.webp" alt=""></div>
+<div class="glow gl-b" style="top:2849px;height:1336px"><img src="{{B}}aura-glow-b.webp" alt=""></div>
+<div class="glow gl-c" style="top:4712px;height:976px"><img src="{{B}}aura-glow-c.webp" alt=""></div>
+<header class="nav abs rv" style="--d:.05s">
+<a class="logo" href="#"><span class="dot"></span>Aura</a>
+<nav class="nav-links"><a href="#how">Product</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="#">Company</a></nav>
+<a class="login" href="#">Log in</a>
+<a class="btn-w" href="#pricing">Get started</a>
+</header>
+<section class="hero-l abs">
+<div class="pill gb rv" style="--d:.1s"><span class="pd"></span>Now in public beta</div>
+<h1 class="h1">
+<span class="ln rv" style="--d:.18s">Your tools,</span>
+<span class="ln rv" style="--d:.26s">finally <span class="serif">thinking</span></span>
+<span class="ln rv" style="--d:.34s">together.</span>
+</h1>
+<p class="hero-p rv" style="--d:.44s">Aura connects your workspace and surfaces what matters — without switching tabs, breaking flow, or copy-pasting between five apps.</p>
+<div class="hero-cta rv" style="--d:.52s">
+<a class="btn-w" href="#pricing" style="width:123px;padding:0">Get started</a>
+<a class="btn-o" href="#"><svg width="12" height="14" viewBox="0 0 12 14"><path d="M2.00 1.60L10.00 6.60L2.00 11.60L2.00 1.60" fill="currentColor"/></svg>Watch demo</a>
+</div>
+<div class="trust rv" style="--d:.6s">
+<div class="avs">
+<span class="av" style="background:#1a1e2a;--i:0">JD</span><span class="av" style="background:#1e2230;--i:1">MK</span><span class="av" style="background:#222637;--i:2">SL</span><span class="av" style="background:#1a1e2a;--i:3">RA</span><span class="av" style="background:#252938;--i:4">EW</span>
+</div>
+<span class="t">Trusted by 4,200+ teams</span><span class="sep"></span>
+<span class="st"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M5.28 15.09L6.77 10.63L3.16 8.21L7.59 8.21L9.17 3.44L10.78 8.21L15.17 8.21L11.56 10.63L13.09 15.09L9.17 12.24L5.28 15.09Z" fill="currentColor"/></svg><span style="color:var(--t2)">4.9</span></span>
+</div>
+</section>
+<div class="pal abs gb glass rv-s" style="--d:.35s">
+<div class="pal-in">
+<div class="pal-search"><svg style="color:var(--t4)" width="16" height="16" viewBox="0 0 16 16"><path d="M11.43 7.48L10.73 7.48C10.73 9.62 9.00 11.35 6.86 11.35L6.86 12.05L6.86 12.75C9.77 12.75 12.13 10.39 12.13 7.48L11.43 7.48M6.86 12.05L6.86 11.35C4.72 11.35 2.99 9.62 2.99 7.48L2.29 7.48L1.59 7.48C1.59 10.39 3.95 12.75 6.86 12.75L6.86 12.05M2.29 7.48L2.99 7.48C2.99 5.34 4.72 3.61 6.86 3.61L6.86 2.91L6.86 2.21C3.95 2.21 1.59 4.57 1.59 7.48L2.29 7.48M6.86 2.91L6.86 3.61C9.00 3.61 10.73 5.34 10.73 7.48L11.43 7.48L12.13 7.48C12.13 4.57 9.77 2.21 6.86 2.21L6.86 2.91" fill="currentColor"/><path d="M10.29 10.91L9.79 11.40L14.36 15.98L14.86 15.48L15.35 14.99L10.78 10.41L10.29 10.91" fill="currentColor"/></svg><span class="ph" id="ph">Ask Aura anything…</span><span class="kbd mono"><svg width="18" height="10" viewBox="0 0 18 10"><path d="M3.84 9.00C3.38 9.00 3.00 8.86 2.72 8.59C2.45 8.32 2.31 7.95 2.31 7.49C2.31 7.00 2.46 6.63 2.74 6.36C3.04 6.09 3.47 5.95 4.03 5.95L4.62 5.95L4.62 4.85L4.03 4.85C3.47 4.85 3.04 4.72 2.74 4.45C2.46 4.18 2.31 3.80 2.31 3.31C2.31 2.85 2.45 2.48 2.72 2.21C3.00 1.94 3.38 1.80 3.84 1.80C4.22 1.80 4.51 1.87 4.72 2.01C4.94 2.15 5.10 2.34 5.18 2.57C5.28 2.80 5.32 3.06 5.32 3.34L5.32 4.17L6.42 4.17L6.42 3.34C6.42 3.06 6.47 2.80 6.55 2.57C6.65 2.34 6.80 2.15 7.01 2.01C7.23 1.87 7.53 1.80 7.90 1.80C8.37 1.80 8.74 1.94 9.01 2.21C9.29 2.48 9.43 2.85 9.43 3.31C9.43 3.80 9.29 4.18 9.00 4.45C8.72 4.72 8.29 4.85 7.71 4.85L7.12 4.85L7.12 5.95L7.71 5.95C8.29 5.95 8.72 6.09 9.00 6.36C9.29 6.63 9.43 7.00 9.43 7.49C9.43 7.95 9.29 8.32 9.01 8.59C8.74 8.86 8.37 9.00 7.90 9.00C7.53 9.00 7.23 8.93 7.01 8.79C6.80 8.65 6.65 8.46 6.55 8.23C6.47 8.00 6.42 7.74 6.42 7.46L6.42 6.63L5.32 6.63L5.32 7.46C5.32 7.74 5.28 8.00 5.18 8.23C5.10 8.46 4.94 8.65 4.72 8.79C4.51 8.93 4.22 9.00 3.84 9.00M7.12 3.32L7.12 4.17L7.71 4.17C8.07 4.17 8.32 4.10 8.48 3.96C8.64 3.81 8.72 3.60 8.72 3.31C8.72 3.02 8.64 2.81 8.48 2.68C8.33 2.55 8.14 2.49 7.90 2.49C7.64 2.49 7.45 2.57 7.31 2.72C7.19 2.87 7.12 3.07 7.12 3.32M4.03 4.17L4.62 4.17L4.62 3.32C4.62 3.07 4.56 2.87 4.42 2.72C4.30 2.57 4.10 2.49 3.84 2.49C3.61 2.49 3.41 2.55 3.25 2.68C3.10 2.81 3.02 3.02 3.02 3.31C3.02 3.60 3.10 3.81 3.26 3.96C3.42 4.10 3.68 4.17 4.03 4.17M5.32 5.95L6.42 5.95L6.42 4.85L5.32 4.85L5.32 5.95M3.84 8.31C4.10 8.31 4.30 8.24 4.42 8.09C4.56 7.94 4.62 7.73 4.62 7.48L4.62 6.63L4.03 6.63C3.68 6.63 3.42 6.70 3.26 6.85C3.10 6.99 3.02 7.20 3.02 7.49C3.02 7.78 3.10 7.99 3.25 8.12C3.41 8.25 3.61 8.31 3.84 8.31M7.12 7.48C7.12 7.73 7.19 7.94 7.31 8.09C7.45 8.24 7.64 8.31 7.90 8.31C8.14 8.31 8.33 8.25 8.48 8.12C8.64 7.99 8.72 7.78 8.72 7.49C8.72 7.20 8.64 6.99 8.48 6.85C8.32 6.70 8.07 6.63 7.71 6.63L7.12 6.63L7.12 7.48M11.31 6.74L11.31 5.58L14.39 1.90L15.45 1.90L11.31 6.74M10.55 9.00L10.55 1.90L11.41 1.90L11.41 9.00L10.55 9.00M14.49 9.00L12.01 5.40L12.61 4.78L15.55 9.00L14.49 9.00" fill="currentColor"/></svg></span></div>
+<div class="pal-tabs"><span class="on">All</span><span>Messages</span><span>Docs</span><span>Projects</span><span>People</span></div>
+<div class="pal-body">
+<div class="sug">SUGGESTED</div>
+<div class="rows" id="rows">
+<div class="hl" id="hl"></div>
+<div class="row"><span class="ic">#</span><span class="tx"><b>What did the team decide about onboarding?</b><i># product</i></span><span class="src mono">Slack</span></div>
+<div class="row"><span class="ic">F</span><span class="tx"><b>Show me the latest Figma designs</b><i>Mobile App / Home</i></span><span class="src mono">Figma</span></div>
+<div class="row"><span class="ic">L</span><span class="tx"><b>What's the status of the auth refactor?</b><i>ENG-128</i></span><span class="src mono">Linear</span></div>
+<div class="row"><span class="ic">D</span><span class="tx"><b>Summarize this doc</b><i>PRD — Q2 Plan</i></span><span class="src mono">Docs</span></div>
+<div class="row"><span class="ic">G</span><span class="tx"><b>Open pull request from yesterday</b><i>fix: edge case in payments</i></span><span class="src mono">GitHub</span></div>
+</div>
+</div>
+<div class="pal-foot"><span class="va">View all results <svg width="13" height="11.3" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg></span><span class="kbd mono">esc</span></div>
+</div>
+</div>
+<div class="logos abs rv" style="--d:.7s">
+<span class="lab">WORKS INSIDE</span>
+<div class="mq"><div class="mq-track" id="mq">
+<span class="lg"><svg width="19" height="21" viewBox="0 0 19 21"><path d="M3.06 2.44L3.06 1.74L2.36 1.74L2.36 2.44L3.06 2.44M13.06 2.44L13.56 1.94L13.35 1.74L13.06 1.74L13.06 2.44M17.06 6.44L17.76 6.44L17.76 6.15L17.56 5.94L17.06 6.44M17.06 18.44L17.06 19.14L17.76 19.14L17.76 18.44L17.06 18.44M3.06 18.44L2.36 18.44L2.36 19.14L3.06 19.14L3.06 18.44M3.06 2.44L3.06 3.14L13.06 3.14L13.06 2.44L13.06 1.74L3.06 1.74L3.06 2.44M13.06 2.44L12.57 2.93L16.57 6.93L17.06 6.44L17.56 5.94L13.56 1.94L13.06 2.44M17.06 6.44L16.36 6.44L16.36 18.44L17.06 18.44L17.76 18.44L17.76 6.44L17.06 6.44M17.06 18.44L17.06 17.74L3.06 17.74L3.06 18.44L3.06 19.14L17.06 19.14L17.06 18.44M3.06 18.44L3.76 18.44L3.76 2.44L3.06 2.44L2.36 2.44L2.36 18.44L3.06 18.44" fill="currentColor"/></svg>Notion</span><span class="lg"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10.16 8.44C11.82 8.44 13.16 7.10 13.16 5.44C13.16 3.78 11.82 2.44 10.16 2.44C8.50 2.44 7.16 3.78 7.16 5.44C7.16 7.10 8.50 8.44 10.16 8.44" fill="currentColor"/><path d="M5.16 13.44C6.82 13.44 8.16 12.09 8.16 10.44C8.16 8.78 6.82 7.44 5.16 7.44C3.50 7.44 2.16 8.78 2.16 10.44C2.16 12.09 3.50 13.44 5.16 13.44" fill="currentColor"/><path d="M15.16 18.44C16.82 18.44 18.16 17.10 18.16 15.44C18.16 13.78 16.82 12.44 15.16 12.44C13.50 12.44 12.16 13.78 12.16 15.44C12.16 17.10 13.50 18.44 15.16 18.44" fill="currentColor"/></svg>Figma</span><span class="lg"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M16.98 9.44L16.23 9.44C16.23 12.89 13.43 15.69 9.98 15.69L9.98 16.44L9.98 17.19C14.26 17.19 17.73 13.72 17.73 9.44L16.98 9.44M9.98 16.44L9.98 15.69C6.53 15.69 3.73 12.89 3.73 9.44L2.98 9.44L2.23 9.44C2.23 13.72 5.70 17.19 9.98 17.19L9.98 16.44M2.98 9.44L3.73 9.44C3.73 5.99 6.53 3.19 9.98 3.19L9.98 2.44L9.98 1.69C5.70 1.69 2.23 5.16 2.23 9.44L2.98 9.44M9.98 2.44L9.98 3.19C13.43 3.19 16.23 5.99 16.23 9.44L16.98 9.44L17.73 9.44C17.73 5.16 14.26 1.69 9.98 1.69L9.98 2.44" fill="currentColor"/><path d="M3.98 9.44L3.98 10.19L15.98 10.19L15.98 9.44L15.98 8.69L3.98 8.69L3.98 9.44" fill="currentColor"/></svg>Linear</span><span class="lg"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M15.41 8.44L3.81 8.44C3.15 8.44 2.61 8.98 2.61 9.64L2.61 9.74C2.61 10.40 3.15 10.94 3.81 10.94L15.41 10.94C16.07 10.94 16.61 10.40 16.61 9.74L16.61 9.64C16.61 8.98 16.07 8.44 15.41 8.44" fill="currentColor"/><path d="M9.66 2.44L9.56 2.44C8.90 2.44 8.36 2.98 8.36 3.64L8.36 15.24C8.36 15.90 8.90 16.44 9.56 16.44L9.66 16.44C10.32 16.44 10.86 15.90 10.86 15.24L10.86 3.64C10.86 2.98 10.32 2.44 9.66 2.44" fill="currentColor"/></svg>Slack</span><span class="lg"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M11.02 2.44C8.88 2.44 6.81 3.20 5.18 4.58C3.55 5.97 2.46 7.90 2.12 10.01C1.78 12.12 2.21 14.29 3.32 16.12C4.44 17.95 6.17 19.32 8.20 19.99C8.65 20.07 8.82 19.79 8.82 19.56L8.82 17.94C6.32 18.48 5.78 16.73 5.78 16.73C5.37 15.70 4.78 15.43 4.78 15.43C3.97 14.88 4.85 14.89 4.85 14.89C5.75 14.95 6.22 15.81 6.22 15.81C7.02 17.18 8.32 16.78 8.83 16.55C8.91 15.97 9.14 15.58 9.40 15.35C7.40 15.13 5.30 14.35 5.30 10.90C5.30 9.92 5.65 9.11 6.23 8.48C6.14 8.25 5.83 7.33 6.32 6.08C6.32 6.08 7.07 5.84 8.79 7.00C10.26 6.60 11.82 6.60 13.29 7.00C15.01 5.84 15.76 6.08 15.76 6.08C16.25 7.33 15.94 8.25 15.85 8.48C16.43 9.11 16.78 9.92 16.78 10.90C16.78 14.36 14.68 15.12 12.67 15.34C12.99 15.62 13.28 16.17 13.28 17.02L13.28 19.54C13.28 19.78 13.44 20.06 13.90 19.97C15.92 19.29 17.64 17.91 18.74 16.08C19.84 14.25 20.26 12.09 19.91 9.98C19.56 7.87 18.48 5.96 16.85 4.57C15.22 3.19 13.16 2.44 11.02 2.44" fill="currentColor"/></svg>GitHub</span><span class="lg"><svg width="16" height="21" viewBox="0 0 16 21"><path d="M2.98 2.44L2.98 1.74L2.28 1.74L2.28 2.44L2.98 2.44M9.98 2.44L10.47 1.94L10.27 1.74L9.98 1.74L9.98 2.44M13.98 6.44L14.68 6.44L14.68 6.15L14.47 5.94L13.98 6.44M13.98 18.44L13.98 19.14L14.68 19.14L14.68 18.44L13.98 18.44M2.98 18.44L2.28 18.44L2.28 19.14L2.98 19.14L2.98 18.44M9.98 6.44L9.28 6.44L9.28 7.14L9.98 7.14L9.98 6.44M2.98 2.44L2.98 3.14L9.98 3.14L9.98 2.44L9.98 1.74L2.98 1.74L2.98 2.44M9.98 2.44L9.48 2.93L13.48 6.93L13.98 6.44L14.47 5.94L10.47 1.94L9.98 2.44M13.98 6.44L13.28 6.44L13.28 18.44L13.98 18.44L14.68 18.44L14.68 6.44L13.98 6.44M13.98 18.44L13.98 17.74L2.98 17.74L2.98 18.44L2.98 19.14L13.98 19.14L13.98 18.44M2.98 18.44L3.68 18.44L3.68 2.44L2.98 2.44L2.28 2.44L2.28 18.44L2.98 18.44M9.98 2.44L9.28 2.44L9.28 6.44L9.98 6.44L10.68 6.44L10.68 2.44L9.98 2.44M9.98 6.44L9.98 7.14L13.98 7.14L13.98 6.44L13.98 5.74L9.98 5.74L9.98 6.44" fill="currentColor"/><path d="M4.98 10.44L4.98 11.14L11.98 11.14L11.98 10.44L11.98 9.74L4.98 9.74L4.98 10.44" fill="currentColor"/><path d="M4.98 13.44L4.98 14.14L11.98 14.14L11.98 13.44L11.98 12.74L4.98 12.74L4.98 13.44" fill="currentColor"/></svg>Google Docs</span><span class="lg"><svg width="19" height="19" viewBox="0 0 19 19"><path d="M16.67 9.44L15.97 9.44C15.97 12.92 13.15 15.74 9.67 15.74L9.67 16.44L9.67 17.14C13.92 17.14 17.37 13.69 17.37 9.44L16.67 9.44M9.67 16.44L9.67 15.74C6.19 15.74 3.37 12.92 3.37 9.44L2.67 9.44L1.97 9.44C1.97 13.69 5.42 17.14 9.67 17.14L9.67 16.44M2.67 9.44L3.37 9.44C3.37 5.96 6.19 3.14 9.67 3.14L9.67 2.44L9.67 1.74C5.42 1.74 1.97 5.19 1.97 9.44L2.67 9.44M9.67 2.44L9.67 3.14C13.15 3.14 15.97 5.96 15.97 9.44L16.67 9.44L17.37 9.44C17.37 5.19 13.92 1.74 9.67 1.74L9.67 2.44" fill="currentColor"/><path d="M12.67 9.44L11.97 9.44C11.97 10.71 10.94 11.74 9.67 11.74L9.67 12.44L9.67 13.14C11.71 13.14 13.37 11.48 13.37 9.44L12.67 9.44M9.67 12.44L9.67 11.74C8.40 11.74 7.37 10.71 7.37 9.44L6.67 9.44L5.97 9.44C5.97 11.48 7.63 13.14 9.67 13.14L9.67 12.44M6.67 9.44L7.37 9.44C7.37 8.17 8.40 7.14 9.67 7.14L9.67 6.44L9.67 5.74C7.63 5.74 5.97 7.39 5.97 9.44L6.67 9.44M9.67 6.44L9.67 7.14C10.94 7.14 11.97 8.17 11.97 9.44L12.67 9.44L13.37 9.44C13.37 7.39 11.71 5.74 9.67 5.74L9.67 6.44" fill="currentColor"/></svg>Asana</span>
+</div></div>
+</div>
+<section class="how abs" id="how">
+<div class="eyebrow rv" style="letter-spacing:-.03em">HOW IT WORKS</div>
+<h2 class="h2 gt rv" style="--d:.08s">Set up in <span class="serif">two</span> minutes.</h2>
+<p class="lead rv" style="--d:.16s">No engineer required, no migration, no new tab to babysit.<br>Connect once and Aura works in the background.</p>
+<div class="steps">
+<div class="card step rv" style="--d:.1s"><span class="sl mono">STEP 01</span><div><span class="si"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M8.00 5.84L7.20 5.84C7.20 6.51 6.66 7.04 6.00 7.04L6.00 7.84L6.00 8.64C7.55 8.64 8.80 7.39 8.80 5.84L8.00 5.84M6.00 7.84L6.00 7.04C5.34 7.04 4.80 6.51 4.80 5.84L4.00 5.84L3.20 5.84C3.20 7.39 4.45 8.64 6.00 8.64L6.00 7.84M4.00 5.84L4.80 5.84C4.80 5.18 5.34 4.64 6.00 4.64L6.00 3.84L6.00 3.04C4.45 3.04 3.20 4.30 3.20 5.84L4.00 5.84M6.00 3.84L6.00 4.64C6.66 4.64 7.20 5.18 7.20 5.84L8.00 5.84L8.80 5.84C8.80 4.30 7.55 3.04 6.00 3.04L6.00 3.84" fill="currentColor"/><path d="M16.00 5.84L15.20 5.84C15.20 6.51 14.66 7.04 14.00 7.04L14.00 7.84L14.00 8.64C15.55 8.64 16.80 7.39 16.80 5.84L16.00 5.84M14.00 7.84L14.00 7.04C13.34 7.04 12.80 6.51 12.80 5.84L12.00 5.84L11.20 5.84C11.20 7.39 12.45 8.64 14.00 8.64L14.00 7.84M12.00 5.84L12.80 5.84C12.80 5.18 13.34 4.64 14.00 4.64L14.00 3.84L14.00 3.04C12.45 3.04 11.20 4.30 11.20 5.84L12.00 5.84M14.00 3.84L14.00 4.64C14.66 4.64 15.20 5.18 15.20 5.84L16.00 5.84L16.80 5.84C16.80 4.30 15.55 3.04 14.00 3.04L14.00 3.84" fill="currentColor"/><path d="M8.00 5.84L8.00 6.64L12.00 6.64L12.00 5.84L12.00 5.04L8.00 5.04L8.00 5.84" fill="currentColor"/></svg></span><h3>Connect your tools</h3><p style="width:270px">One-click OAuth with Notion, Figma, Linear, Slack and 14 more. Read-only by default.</p></div></div>
+<div class="card step rv" style="--d:.2s"><span class="sl mono">STEP 02</span><div><span class="si"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M13.67 7.84L12.87 7.84C12.87 10.16 10.99 12.04 8.67 12.04L8.67 12.84L8.67 13.64C11.87 13.64 14.47 11.05 14.47 7.84L13.67 7.84M8.67 12.84L8.67 12.04C6.35 12.04 4.47 10.16 4.47 7.84L3.67 7.84L2.87 7.84C2.87 11.05 5.46 13.64 8.67 13.64L8.67 12.84M3.67 7.84L4.47 7.84C4.47 5.52 6.35 3.64 8.67 3.64L8.67 2.84L8.67 2.04C5.46 2.04 2.87 4.64 2.87 7.84L3.67 7.84M8.67 2.84L8.67 3.64C10.99 3.64 12.87 5.52 12.87 7.84L13.67 7.84L14.47 7.84C14.47 4.64 11.87 2.04 8.67 2.04L8.67 2.84" fill="currentColor"/><path d="M8.67 9.34C9.49 9.34 10.17 8.67 10.17 7.84C10.17 7.01 9.49 6.34 8.67 6.34C7.84 6.34 7.17 7.01 7.17 7.84C7.17 8.67 7.84 9.34 8.67 9.34" fill="currentColor"/><path d="M10.17 7.84L9.37 7.84C9.37 8.23 9.05 8.54 8.67 8.54L8.67 9.34L8.67 10.14C9.94 10.14 10.97 9.11 10.97 7.84L10.17 7.84M8.67 9.34L8.67 8.54C8.28 8.54 7.97 8.23 7.97 7.84L7.17 7.84L6.37 7.84C6.37 9.11 7.40 10.14 8.67 10.14L8.67 9.34M7.17 7.84L7.97 7.84C7.97 7.46 8.28 7.14 8.67 7.14L8.67 6.34L8.67 5.54C7.40 5.54 6.37 6.57 6.37 7.84L7.17 7.84M8.67 6.34L8.67 7.14C9.05 7.14 9.37 7.46 9.37 7.84L10.17 7.84L10.97 7.84C10.97 6.57 9.94 5.54 8.67 5.54L8.67 6.34" fill="currentColor"/></svg></span><h3>Aura learns your context</h3><p style="width:262px">It maps relationships — who works on what, which docs depend on which tickets, what shipped this week.</p></div></div>
+<div class="card step rv" style="--d:.3s"><span class="sl mono">STEP 03</span><div><span class="si"><svg width="18" height="15" viewBox="0 0 18 15"><path d="M4.90 7.77C4.59 7.46 4.08 7.46 3.77 7.77C3.46 8.09 3.46 8.59 3.77 8.91L4.33 8.34L4.90 7.77M7.83 11.84L7.27 12.41C7.43 12.56 7.64 12.65 7.86 12.64C8.08 12.63 8.29 12.53 8.44 12.36L7.83 11.84M14.94 4.86C15.23 4.53 15.19 4.02 14.86 3.74C14.52 3.45 14.02 3.48 13.73 3.82L14.33 4.34L14.94 4.86M4.33 8.34L3.77 8.91L7.27 12.41L7.83 11.84L8.40 11.27L4.90 7.77L4.33 8.34M7.83 11.84L8.44 12.36L14.94 4.86L14.33 4.34L13.73 3.82L7.23 11.32L7.83 11.84" fill="currentColor"/></svg></span><h3>Ask anything, get answers</h3><p style="width:320px;letter-spacing:-.016em">Cited sources, real timestamps, the right file — surfaced before you'd thought to search.</p></div></div>
+</div>
+</section>
+<section class="ftxt abs" style="top:1564.75px;left:120px">
+<div class="eyebrow rv">// Feature 01</div>
+<h2 class="h2 gt rv" style="--d:.08s">Instant context, right where<br>you're <span class="serif">working</span>.</h2>
+<p class="lead rv" style="--d:.16s;width:540px">Open any file in Figma — Aura surfaces the last edits, related tickets, and Slack threads in a side panel. Stop opening five tabs to remember why a button is blue.</p>
+<ul class="bul rv" style="--d:.24s"><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Linked tickets, decisions and PRs</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Last-touched-by and edit history</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Inline comment threads across tools</li></ul>
+</section>
+<div class="mock f1m abs gb glass rv-s" style="--d:.1s">
+<div class="mock-in">
+<div class="f1-left"><div class="f1-canvas"></div></div>
+<div class="tb mono"><span>Frame</span><span>Move</span><span>Pen</span><span>Text</span></div>
+<span class="f1-aura mono">Aura</span>
+<span class="f1-lbl mono">CTA / Primary</span>
+<svg class="dash" width="254" height="330" viewBox="0 0 254 330"><rect x=".5" y=".5" width="253" height="329" rx="13.5" fill="none" stroke="rgba(108,142,255,.5)" stroke-dasharray="4 3"/></svg>
+<div class="frame"></div>
+<div class="bar sk" style="top:124px;width:185px;height:32px"></div>
+<div class="bar sk" style="top:166px;width:144px;height:14px"></div>
+<div class="bar sk" style="top:190px;width:103px;height:14px"></div>
+<div class="fbtn"></div>
+<div class="f1-right">
+<div class="ctxh"><b>Context</b><span>CTA / Primary</span></div>
+<div class="ci rv" style="top:51.6px;--d:.35s"><span class="ini" style="top:7px">MK</span><div class="body"><b>Maya</b> updated padding and color token<span class="ago mono">2h ago</span></div></div>
+<div class="hr" style="top:121px"></div>
+<div class="ci rv" style="top:136px;--d:.5s"><span class="ini" style="top:4.5px;left:6px">SL</span><div class="body"><b>Sasha</b> left 3 comments — 1 unresolved<span class="ago mono" style="margin-top:4.8px">5h ago</span></div></div>
+<div class="hr" style="top:204px"></div>
+<div class="tag lin rv" style="top:218px;--d:.65s"><span class="k mono">LIN</span>ENG-1284 · Ship CTA refactor</div>
+<div class="tag slk rv" style="top:266px;--d:.8s"><span class="k mono">SLK</span><span style="width:190px">#design — "use the new token, not hex"</span></div>
+</div>
+</div>
+</div>
+<div class="mock f2m abs gb glass rv-s">
+<div class="mock-in">
+<div class="bubble rv" style="--d:.2s">What did we decide about the onboarding flow last week?</div>
+<div class="ans rv" style="--d:.45s">
+<p>You moved onboarding behind a feature flag and pushed full rollout to <b>Q1 2026</b>. The decision came out of three threads:</p>
+<p>Maya proposed simplifying step 2 down to a single email field<span class="chip n mono">notion</span>, the team agreed in design review<span class="chip f mono">figma</span>, and Jordan filed the migration ticket<span class="chip l mono">linear</span> the same afternoon.</p>
+<p class="w">Want me to <a href="#">summarize the action items</a> or <a href="#">draft a ship note</a>?</p>
+</div>
+<div class="srch mono"><span class="d"></span><span class="d"></span><span class="d"></span>Searching 3 sources…</div>
+</div>
+</div>
+<section class="ftxt abs" style="top:2144.75px;left:780px">
+<div class="eyebrow rv">// Feature 02</div>
+<h2 class="h2 gt rv" style="--d:.08s;line-height:42px;margin-top:19.15px">Ask across <span class="serif">every</span> tool<br>at once.</h2>
+<p class="lead rv" style="--d:.16s;width:560px;margin-top:40.85px">One question, one answer — synthesized from Notion docs, Figma comments, Linear tickets, and Slack threads. Every claim cites its source so you can trust it.</p>
+<ul class="bul rv" style="--d:.24s;margin-top:37.4px"><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Natural language, not search syntax</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Per-paragraph source citations</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Drafts replies, summaries and ship notes</li></ul>
+</section>
+<section class="ftxt abs" style="top:2715px;left:120px">
+<div class="eyebrow rv">// Feature 03</div>
+<h2 class="h2 gt rv" style="--d:.08s;line-height:45px;margin-top:17.6px">A morning digest that<br>actually respects <span class="serif">your time</span>.</h2>
+<p class="lead rv" style="--d:.16s;width:540px;margin-top:42.9px">Every morning at 8am, Aura sends a 60-second summary of what changed overnight, what's blocked on you, and what can wait. Three bullets, no fluff.</p>
+<ul class="bul rv" style="--d:.24s;margin-top:37.5px;gap:9.25px"><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Prioritized by what's blocked on you</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Skips noise: status pings, FYI threads</li><li><svg width="15" height="13" viewBox="0 0 15 13"><path d="M8.53 10.71L7.76 9.96L10.91 6.81L2.75 6.81L2.75 5.71L10.91 5.71L7.76 2.57L8.53 1.80L12.98 6.26L8.53 10.71Z" fill="currentColor"/></svg>Slack, email or in-app — your call</li></ul>
+</section>
+<div class="mock f3m abs gb glass rv-s" style="--d:.1s">
+<div class="mock-in">
+<div class="dg">
+<div class="dgh"><svg width="15" height="15" viewBox="0 0 15 15"><path d="M12.39 8.03L11.69 8.03C11.69 10.41 9.76 12.33 7.39 12.33L7.39 13.03L7.39 13.73C10.54 13.73 13.09 11.18 13.09 8.03L12.39 8.03M7.39 13.03L7.39 12.33C5.02 12.33 3.09 10.41 3.09 8.03L2.39 8.03L1.69 8.03C1.69 11.18 4.24 13.73 7.39 13.73L7.39 13.03M2.39 8.03L3.09 8.03C3.09 5.66 5.02 3.73 7.39 3.73L7.39 3.03L7.39 2.33C4.24 2.33 1.69 4.88 1.69 8.03L2.39 8.03M7.39 3.03L7.39 3.73C9.76 3.73 11.69 5.66 11.69 8.03L12.39 8.03L13.09 8.03C13.09 4.88 10.54 2.33 7.39 2.33L7.39 3.03" fill="currentColor"/><path id="clockHand" d="M7.39 8.03L6.69 8.03L6.69 8.38L6.97 8.59L7.39 8.03M7.39 5.03L6.69 5.03L6.69 8.03L7.39 8.03L8.09 8.03L8.09 5.03L7.39 5.03M7.39 8.03L6.97 8.59L8.97 10.09L9.39 9.53L9.81 8.97L7.81 7.47L7.39 8.03" fill="currentColor"/></svg>Daily digest<span class="tm mono">TUE · 8:02 AM</span></div>
+<div class="dl" style="top:61px;background:rgba(255,255,255,.06)"></div>
+<div class="gm">Good morning, Alex.</div>
+<div class="gs">3 things need your attention today. Nothing else is on fire.</div>
+<div class="dl" style="top:153px;background:rgba(255,255,255,.04)"></div>
+<div class="di rv" style="top:170px;--d:.3s"><span class="bd hi mono">HIGH</span><div><div class="tt">Review Maya's onboarding mocks before standup</div><div class="ts">She's blocked on your approval to ship — Figma · 14 frames</div></div></div>
+<div class="dl" style="top:222px;background:rgba(255,255,255,.04)"></div>
+<div class="di rv" style="top:239px;--d:.42s"><span class="bd me mono" style="margin-right:15px">MED</span><div><div class="tt">ENG-1284 still waiting on API spec</div><div class="ts">Jordan flagged 3 endpoints yesterday — Linear · 18h open</div></div></div>
+<div class="dl" style="top:290px;background:rgba(255,255,255,.04)"></div>
+<div class="di rv" style="top:307px;--d:.54s"><span class="bd fy mono" style="margin-right:15px">FYI</span><div><div class="tt">Q3 roadmap doc has 4 new comments</div><div class="ts">Mostly resolved — skim before Thursday's sync — Notion</div></div></div>
+<div class="dl" style="top:377px;background:rgba(255,255,255,.05)"></div>
+<div class="dgf mono">7 lower-priority items hidden · view all <svg width="11" height="14" viewBox="0 0 11 14"><path d="M5.27 11.65L7.06 9.39C7.13 9.30 7.21 9.20 7.31 9.12C7.41 9.02 7.49 8.95 7.55 8.90L7.55 8.80C7.46 8.80 7.34 8.81 7.19 8.83C7.04 8.84 6.91 8.84 6.78 8.84L3.15 8.84L3.15 7.96L6.78 7.96C6.91 7.96 7.04 7.97 7.19 7.98C7.34 7.99 7.46 8.00 7.55 8.02L7.55 7.92C7.50 7.87 7.43 7.80 7.33 7.71C7.24 7.61 7.15 7.51 7.06 7.40L5.27 5.16L6.43 5.16L8.98 8.40L6.44 11.65L5.27 11.65Z" fill="currentColor"/></svg></div>
+</div>
+</div>
+</div>
+<section class="nums abs">
+<div class="eyebrow rv" style="letter-spacing:.012em">By the numbers</div>
+<h2 class="h2 gt rv" style="--d:.08s"><span style="letter-spacing:-.012em">Quiet <span class="serif">wins</span>, every day.</span></h2>
+<div class="stats">
+<div class="stat rv" style="--d:.1s"><div class="n" data-count="4196" data-fmt="k+">4,196+</div><div class="l">Teams using Aura daily</div></div><span class="vr rv" style="--d:.15s"></span>
+<div class="stat rv" style="--d:.2s"><div class="n" data-count="18">18</div><div class="l">Integrations, growing weekly</div></div><span class="vr rv" style="--d:.25s"></span>
+<div class="stat rv" style="--d:.3s"><div class="n" data-count="3" data-fmt="hrs">~3 hrs</div><div class="l">Saved per person, per week</div></div><span class="vr rv" style="--d:.35s"></span>
+<div class="stat rv" style="--d:.4s"><div class="n" data-count="99.8" data-fmt="pct">99.8%</div><div class="l">Uptime since launch</div></div>
+</div>
+</section>
+<section class="love abs">
+<div class="eyebrow rv">Loved by teams</div>
+<h2 class="h2 gt rv" style="--d:.08s"><span style="letter-spacing:.012em">Real people. Real</span> <span class="serif">impact</span>.</h2>
+<div class="tst">
+<div class="card tc rv" style="--d:.1s"><div class="stars"><svg width="74" height="17" viewBox="0 0 74 17"><path d="M4.83 14.52L6.33 10.07L2.71 7.64L7.14 7.64L8.72 2.87L10.33 7.64L14.73 7.64L11.11 10.07L12.64 14.52L8.72 11.68L4.83 14.52ZM19.27 14.52L20.76 10.07L17.15 7.64L21.58 7.64L23.16 2.87L24.77 7.64L29.16 7.64L25.55 10.07L27.08 14.52L23.16 11.68L19.27 14.52ZM33.71 14.52L35.20 10.07L31.59 7.64L36.02 7.64L37.60 2.87L39.21 7.64L43.60 7.64L39.99 10.07L41.52 14.52L37.60 11.68L33.71 14.52ZM48.15 14.52L49.64 10.07L46.03 7.64L50.46 7.64L52.04 2.87L53.65 7.64L58.04 7.64L54.43 10.07L55.96 14.52L52.04 11.68L48.15 14.52ZM62.59 14.52L64.08 10.07L60.47 7.64L64.90 7.64L66.48 2.87L68.09 7.64L72.48 7.64L68.87 10.07L70.40 14.52L66.48 11.68L62.59 14.52Z" fill="currentColor"/></svg></div><q style="letter-spacing:-.015em">"I stopped using three separate<br>'search' tools the week we installed Aura.<br>Standups got 10 minutes shorter because<br>nobody has to re-explain context."</q><div class="au"><span class="ava">PR</span><div><div class="nm">Priya Ramanathan</div><div class="rl">Head of Product · Northwind</div></div></div></div>
+<div class="card tc rv" style="--d:.2s"><div class="stars"><svg width="74" height="17" viewBox="0 0 74 17"><path d="M4.83 14.52L6.33 10.07L2.71 7.64L7.14 7.64L8.72 2.87L10.33 7.64L14.73 7.64L11.11 10.07L12.64 14.52L8.72 11.68L4.83 14.52ZM19.27 14.52L20.76 10.07L17.15 7.64L21.58 7.64L23.16 2.87L24.77 7.64L29.16 7.64L25.55 10.07L27.08 14.52L23.16 11.68L19.27 14.52ZM33.71 14.52L35.20 10.07L31.59 7.64L36.02 7.64L37.60 2.87L39.21 7.64L43.60 7.64L39.99 10.07L41.52 14.52L37.60 11.68L33.71 14.52ZM48.15 14.52L49.64 10.07L46.03 7.64L50.46 7.64L52.04 2.87L53.65 7.64L58.04 7.64L54.43 10.07L55.96 14.52L52.04 11.68L48.15 14.52ZM62.59 14.52L64.08 10.07L60.47 7.64L64.90 7.64L66.48 2.87L68.09 7.64L72.48 7.64L68.87 10.07L70.40 14.52L66.48 11.68L62.59 14.52Z" fill="currentColor"/></svg></div><q style="white-space:nowrap;letter-spacing:-.011em">"The first AI tool I've seen that doesn't add a<br>new tab. It lives inside the apps I already<br>pay for and surfaces the thing I needed<br>before I'd typed the question."</q><div class="au"><span class="ava">DC</span><div><div class="nm">Daniel Cho</div><div class="rl">Staff Engineer · Loftbase</div></div></div></div>
+<div class="card tc rv" style="--d:.3s"><div class="stars"><svg width="74" height="17" viewBox="0 0 74 17"><path d="M4.83 14.52L6.33 10.07L2.71 7.64L7.14 7.64L8.72 2.87L10.33 7.64L14.73 7.64L11.11 10.07L12.64 14.52L8.72 11.68L4.83 14.52ZM19.27 14.52L20.76 10.07L17.15 7.64L21.58 7.64L23.16 2.87L24.77 7.64L29.16 7.64L25.55 10.07L27.08 14.52L23.16 11.68L19.27 14.52ZM33.71 14.52L35.20 10.07L31.59 7.64L36.02 7.64L37.60 2.87L39.21 7.64L43.60 7.64L39.99 10.07L41.52 14.52L37.60 11.68L33.71 14.52ZM48.15 14.52L49.64 10.07L46.03 7.64L50.46 7.64L52.04 2.87L53.65 7.64L58.04 7.64L54.43 10.07L55.96 14.52L52.04 11.68L48.15 14.52ZM62.59 14.52L64.08 10.07L60.47 7.64L64.90 7.64L66.48 2.87L68.09 7.64L72.48 7.64L68.87 10.07L70.40 14.52L66.48 11.68L62.59 14.52Z" fill="currentColor"/></svg></div><q style="white-space:nowrap;letter-spacing:-.012em">"The morning digest changed how I run<br>my week. Three bullets, zero noise.<br>I close it and I know exactly what to do<br>next."</q><div class="au"><span class="ava">EW</span><div><div class="nm">Elena Werner</div><div class="rl">Design Lead · Atlas Studio</div></div></div></div>
+</div>
+</section>
+<section class="price abs" id="pricing">
+<div class="eyebrow rv">Pricing</div>
+<h2 class="h2 gt rv" style="--d:.08s"><span style="letter-spacing:-.01em">Simple pricing. Cancel <span class="serif">anytime</span>.</span></h2>
+<div class="tog gb glass rv" style="--d:.14s" id="tog"><span class="knob"></span><button class="m" type="button">Monthly</button><button class="a" type="button">Annual<span class="sv">Save 20%</span></button></div>
+<div class="plans">
+<div class="plan dark gb rv" style="height:480px;--d:.1s;padding-top:31.7px;--lm:25px">
+<div class="pn">FREE</div>
+<div class="pd" style="margin-top:6px">For individuals trying Aura out.</div>
+<div class="pp" style="margin-top:11.9px"><span class="v">$0</span><span class="u">/ forever</span></div>
+<div class="pb" style="margin-top:9px">No card required</div>
+<a class="pbtn" href="#" style="margin-top:24.5px">Start free</a>
+<div class="sep" style="margin-top:21.5px"></div>
+<ul class="fl" style="margin-top:25px">
+<li><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Up to 3 integrations</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>50 queries / month</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Personal workspace</li>
+<li class="off" style="margin-top:16px"><span class="ds"></span>Daily digest</li><li class="off" style="margin-top:15.25px"><span class="ds"></span>Team workspaces</li>
+</ul>
+</div>
+<div class="plan pro gb rv" style="height:495px;margin-left:-1px;--d:.2s;padding-top:31.5px">
+<div class="pn" style="color:var(--accent);height:26px">PRO<span class="mp">Most popular</span></div>
+<div class="pd" style="margin-top:2.5px">For power users juggling many tools.</div>
+<div class="pp" style="margin-top:11.9px"><span class="v" data-m="12" data-a="10">$12</span><span class="u" data-m="/ month" data-a="/ month">/ month</span></div>
+<div class="pb" style="margin-top:8px" data-m="Billed monthly" data-a="Billed annually">Billed monthly</div>
+<a class="btn-w pro-b" href="#" style="margin-top:24.5px">Start 14-day trial</a>
+<div class="sep" style="margin-top:22.5px;width:254px"></div>
+<ul class="fl pro" style="margin-top:24.5px">
+<li><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Unlimited integrations</li><li style="margin-top:19.75px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Unlimited queries</li><li style="margin-top:20.5px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Daily digest + smart alerts</li><li style="margin-top:19.75px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Priority answer routing</li>
+<li class="off" style="margin-top:19.75px;padding-left:1px"><span class="ds" style="margin-right:12px"></span>Shared team memory</li>
+</ul>
+</div>
+<div class="plan dark gb rv" style="height:478px;margin-left:1px;--d:.3s;padding-top:31.5px">
+<div class="pn">TEAM</div>
+<div class="pd" style="margin-top:6.5px">For teams who want a shared brain.</div>
+<div class="pp" style="margin-top:11.9px"><span class="v" data-m="39" data-a="31">$39</span><span class="u">/ seat / mo</span></div>
+<div class="pb" style="margin-top:6px" data-m="Billed per active seat" data-a="Billed annually, per active seat">Billed per active seat</div>
+<a class="pbtn" href="#" style="margin-top:23.75px">Talk to sales</a>
+<div class="sep" style="margin-top:21.5px;width:322px"></div>
+<ul class="fl team" style="margin-top:24.4px">
+<li><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Everything in Pro</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Shared team memory</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>SSO + audit logs</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Admin roles + permissions</li><li style="margin-top:16px"><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Dedicated success manager</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="cta abs">
+<h2 class="gt rv"><span>Your second brain is</span><br><span class="serif">one tab</span> away.</h2>
+<p class="lead rv" style="--d:.1s">Join thousands of teams who get work done with less noise and more focus.</p>
+<a class="btn-w rv" href="#" style="--d:.18s">Get started free</a>
+<div class="ok rv" style="--d:.26s"><span><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>No credit card</span><span><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Cancel anytime</span><span><svg width="21" height="16" viewBox="0 0 21 16"><path d="M19.41 2.74C19.64 2.51 19.64 2.15 19.41 1.92C19.18 1.69 18.82 1.69 18.59 1.92L19.00 2.33L19.41 2.74M8.00 13.33L7.59 13.74C7.70 13.85 7.85 13.91 8.00 13.91C8.15 13.91 8.30 13.85 8.41 13.74L8.00 13.33M3.41 7.92C3.18 7.69 2.82 7.69 2.59 7.92C2.36 8.15 2.36 8.51 2.59 8.74L3.00 8.33L3.41 7.92M19.00 2.33L18.59 1.92L7.59 12.92L8.00 13.33L8.41 13.74L19.41 2.74L19.00 2.33M8.00 13.33L8.41 12.92L3.41 7.92L3.00 8.33L2.59 8.74L7.59 13.74L8.00 13.33" fill="currentColor"/></svg>Works in 2 minutes</span></div>
+</section>
+<footer class="foot abs">
+<a class="logo" href="#"><span class="dot"></span>Aura</a>
+<p class="tagl">The AI layer that lives inside the tools you already use. Connect once, think faster forever.</p>
+<div class="fc" style="left:399px"><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#">Pricing</a><a href="#">Changelog</a></div>
+<div class="fc" style="left:693px"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Security</a><a href="#">Contact</a></div>
+<div class="fc" style="left:986px"><h4>Connect</h4><a href="#">Twitter</a><a href="#">LinkedIn</a><a href="#">GitHub</a><a href="#">YouTube</a></div>
+<div class="fbar"></div>
+<div class="fb"><span>© 2026 Aura Inc.</span><span class="lg2"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></span>
+<span class="soc"><a class="gb" href="#" aria-label="X"><svg width="13" height="13" viewBox="0 0 13 13"><path d="M9.89 1.51L6.78 5.40L10.28 10.85L8.72 10.85L6.00 6.96L3.28 10.85L1.72 10.85L5.07 6.18L2.11 1.51L3.67 1.51L6.00 4.86L8.33 1.51L9.89 1.51" fill="currentColor"/></svg></a><a class="gb" href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M4.89 5.24L2.56 5.24L2.56 13.01L4.89 13.01L4.89 5.24" fill="currentColor"/><path d="M3.72 4.61C4.45 4.61 5.04 4.02 5.04 3.29C5.04 2.56 4.45 1.97 3.72 1.97C2.99 1.97 2.40 2.56 2.40 3.29C2.40 4.02 2.99 4.61 3.72 4.61" fill="currentColor"/><path d="M6.44 5.24L8.78 5.24L8.78 6.79C9.17 5.62 10.33 5.24 11.50 5.24C13.06 5.24 13.44 6.01 13.44 7.96L13.44 13.01L11.11 13.01L11.11 8.35C11.11 7.57 10.88 7.18 10.33 7.18C9.56 7.18 8.78 7.57 8.78 8.74L8.78 13.01L6.44 13.01L6.44 5.24" fill="currentColor"/></svg></a><a class="gb" href="#" aria-label="GitHub"><svg width="17" height="17" viewBox="0 0 17 17"><path d="M8.00 2.35C6.52 2.34 5.09 2.87 3.96 3.83C2.84 4.79 2.09 6.12 1.85 7.58C1.62 9.04 1.91 10.54 2.68 11.80C3.45 13.07 4.65 14.02 6.05 14.48C6.37 14.53 6.48 14.35 6.48 14.18L6.48 13.09C4.76 13.47 4.38 12.26 4.38 12.26C4.10 11.55 3.70 11.37 3.70 11.37C3.14 10.98 3.74 10.99 3.74 10.99C4.37 11.04 4.69 11.63 4.69 11.63C5.25 12.58 6.15 12.31 6.50 12.15C6.55 11.74 6.72 11.47 6.89 11.31C5.50 11.16 4.06 10.62 4.06 8.24C4.06 7.56 4.30 7.00 4.69 6.57C4.63 6.41 4.41 5.78 4.76 4.91C4.76 4.91 5.28 4.75 6.47 5.55C7.49 5.27 8.56 5.27 9.58 5.55C10.77 4.75 11.29 4.91 11.29 4.91C11.63 5.78 11.41 6.41 11.35 6.57C11.75 7.00 11.99 7.56 11.99 8.24C11.99 10.63 10.53 11.16 9.15 11.31C9.38 11.51 9.57 11.89 9.57 12.47L9.57 14.19C9.57 14.35 9.69 14.55 10.00 14.49C11.41 14.03 12.62 13.08 13.39 11.80C14.17 10.53 14.46 9.03 14.22 7.56C13.98 6.09 13.22 4.75 12.08 3.80C10.93 2.84 9.49 2.33 8.00 2.35" fill="currentColor"/></svg></a></span></div>
+</footer>
+</div></div>
