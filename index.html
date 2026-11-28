@@ -489,13 +489,16 @@ h1,h2,h3,p{margin:0}
 .cv-g .ft{position:relative;overflow:hidden;isolation:isolate;background:#0C0C0D}
 .cv-g .ft .cts a:not(:first-child),.cv-g .ft .cts button{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .cv-g .ft .cts a:not(:first-child):hover,.cv-g .ft .cts button:hover{background:rgba(255,255,255,.14)}
-.cv-g .side,.cv-g .hd{background:#0C0C0D}
-.cv-g .side{isolation:isolate}
+.cv-g .side{background:#0B0B0C var(--wv) no-repeat 50% 50%/cover}
+.cv-g .hd{background:#0B0B0C var(--wh) no-repeat 30% 45%/cover}
+.cv-g .dt{background:#0B0B0C var(--wh) no-repeat var(--wx,50%) var(--wy,50%)/var(--ws,cover)}
+.cv-g .dt.dt-w{--wx:22%;--wy:40%}
+.cv-g .ft{background:linear-gradient(90deg,rgba(11,11,12,.82),rgba(11,11,12,.45) 48%,rgba(11,11,12,0) 78%),#0B0B0C var(--wh) no-repeat 50% 62%/cover}
 .cv-g .sd-row a,.cv-g .sd-mail{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .cv-g .sd-row a:hover,.cv-g .sd-mail:hover{background:rgba(255,255,255,.12)}
 .cv-g .sd-nav button[aria-current="true"]{background:rgba(255,255,255,.09)}
 .cv-g .sd-nav button:hover{background:rgba(255,255,255,.06)}
-:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90% 160% at 28% -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
 /* preview-only switch between the two looks */
 .cvs{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:4px 4px 4px 14px;border-radius:14px;background:#121211;color:#fff;font:500 13px/1 var(--sans);box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
 .cvs span{margin-right:6px;color:#9D9D95;white-space:nowrap}
@@ -549,16 +552,6 @@ h1,h2,h3,p{margin:0}
 @keyframes icn{0%{transform:none;opacity:1}45%{transform:translateY(14px);opacity:0}46%{transform:translateY(-14px);opacity:0}100%{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){a:hover *,button:hover *,.work.soon:hover *{animation:none!important}}
 
-/* beam: appears under the cursor on dark surfaces, follows it and stretches with the motion (see beam() below) */
-.gx{position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .6s cubic-bezier(.2,.8,.2,1)}
-.gx.on{opacity:1}
-.gx b{position:absolute;left:0;top:0;width:var(--s,300px);height:var(--s,300px);margin:calc(var(--s,300px) / -2) 0 0 calc(var(--s,300px) / -2);border-radius:50%;will-change:transform;
-  background:radial-gradient(closest-side,rgba(255,255,255,.5),rgba(214,214,222,.22) 45%,rgba(160,160,170,.08) 68%,transparent);filter:blur(var(--b,18px))}
-.gx b+b{--b:30px;opacity:.6;background:radial-gradient(closest-side,rgba(235,235,240,.34),rgba(170,170,180,.14) 55%,transparent)}
-.btn:not(.g){position:relative;overflow:hidden;isolation:isolate}
-.btn .gx b{--b:8px;background:radial-gradient(closest-side,rgba(255,255,255,.34),rgba(220,220,226,.12) 55%,transparent)}
-.btn .gx b+b{--b:12px}
-:root[data-mode="dark"] .btn:not(.g) .gx b{background:radial-gradient(closest-side,rgba(0,0,0,.16),transparent)}
 :root.cv-g[data-mode="dark"] .dt{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 /* skills: one plain list in two columns */
 .skl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(20px,3vw,48px);margin:0;padding:0;list-style:none}
@@ -799,7 +792,7 @@ h1,h2,h3,p{margin:0}
    </section>
    <section class="sec" id="approach">
      <div class="split rv"><span class="lab">Approach</span><h2><span class="w" style="transition-delay:0ms">Three</span> <span class="w" style="transition-delay:55ms">things</span> <span class="w" style="transition-delay:110ms">I&nbsp;bring</span> <span class="w" style="transition-delay:165ms">to&nbsp;a&nbsp;product</span> <span class="w" style="transition-delay:220ms">team</span></h2></div>
-     <div class="cards"><div class="cardx rv" style="transition-delay:0ms"><div class="dt" data-anim="dfind" aria-hidden="true"><div class="dt-in"><span class="df-h dt-c">Purchase flow <em class="dt-m">4 steps</em></span><div class="df-tr"><i class="df-pr"></i></div><div class="df-n up l" style="left:12%"><span class="dt-c"><i>1</i>Request</span></div><div class="df-n dn l" style="left:37%"><span class="dt-c"><i>2</i>Budget check</span></div><div class="df-n up r deep" style="left:63%"><span class="dt-c"><i>3</i>Approval</span></div><div class="df-n dn r deep" style="left:88%"><span class="dt-c"><i>4</i>Sign-off</span></div></div></div><div class="dcap"><h3>Complex processes</h3><p>I&nbsp;dig into complex processes and&nbsp;turn them into interfaces where everything is&nbsp;found on&nbsp;the&nbsp;first try</p></div></div><div class="cardx rv" style="transition-delay:100ms"><div class="dt" data-anim="dstates" aria-hidden="true"><div class="dt-in dt-col"><div class="dt-p ds"><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ">Save</span><b>Default</b><span class="dt-c dt-m">radius 12</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b hv">Save</span><b>Hover</b><span class="dt-c dt-m">height 44</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ld"><i class="ds-sp"></i></span><b>Loading</b><span class="dt-c dt-m">space 16</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ok"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><b>Done</b><span class="dt-c dt-m">color/accent</span></div></div><div class="dt-bar"><span class="dt-c dt-m ds-n">0 / 4</span><span class="dt-c">Tokens</span><span class="dt-c dt-go">To library</span></div></div></div><div class="dcap"><h3>Systems thinking</h3><p>I&nbsp;think in&nbsp;systems: one component, every state, and&nbsp;tokens instead of&nbsp;random spacing</p></div></div><div class="cardx rv" style="transition-delay:200ms"><div class="dt" data-anim="dlive" aria-hidden="true"><div class="dt-in dt-col"><div class="dt-p dl"><div class="dl-u"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.6 9.4l2.8-2.8M7.2 4.6l.9-.9a2.6 2.6 0 013.7 3.7l-.9.9M8.8 11.4l-.9.9a2.6 2.6 0 01-3.7-3.7l.9-.9"></path></svg><span class="dl-t"></span><span class="dt-c dl-cp">Copy</span></div><div class="dl-pg"><span>Building the prototype</span><b class="dt-m">0%</b><i><u></u></i></div><div class="dl-s"><span>Onboarding</span><span class="dt-c">queued</span></div><div class="dl-s"><span>Payment</span><span class="dt-c">queued</span></div><div class="dl-s"><span>Network error</span><span class="dt-c">queued</span></div></div><div class="dt-bar"><span class="dt-c dt-m dl-n">0 / 3</span><span class="dt-c dt-go">Open by link</span></div></div></div><div class="dcap"><h3>Coded prototypes</h3><p>I&nbsp;take a&nbsp;mockup all the&nbsp;way to&nbsp;a&nbsp;coded prototype you can open by&nbsp;link and&nbsp;test</p></div></div></div>
+     <div class="cards"><div class="cardx rv" style="transition-delay:0ms"><div class="dt" data-anim="dfind" aria-hidden="true" style="--ws: 1018px auto; --wx: 0px; --wy: -48.472355769230774px;"><div class="dt-in"><span class="df-h dt-c">Purchase flow <em class="dt-m">4 steps</em></span><div class="df-tr"><i class="df-pr"></i></div><div class="df-n up l" style="left:12%"><span class="dt-c"><i>1</i>Request</span></div><div class="df-n dn l" style="left:37%"><span class="dt-c"><i>2</i>Budget check</span></div><div class="df-n up r deep" style="left:63%"><span class="dt-c"><i>3</i>Approval</span></div><div class="df-n dn r deep" style="left:88%"><span class="dt-c"><i>4</i>Sign-off</span></div></div></div><div class="dcap"><h3>Complex processes</h3><p>I&nbsp;dig into complex processes and&nbsp;turn them into interfaces where everything is&nbsp;found on&nbsp;the&nbsp;first try</p></div></div><div class="cardx rv" style="transition-delay:100ms"><div class="dt" data-anim="dstates" aria-hidden="true" style="--ws: 1018px auto; --wx: -345.328125px; --wy: -48.472355769230774px;"><div class="dt-in dt-col"><div class="dt-p ds"><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ">Save</span><b>Default</b><span class="dt-c dt-m">radius 12</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b hv">Save</span><b>Hover</b><span class="dt-c dt-m">height 44</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ld"><i class="ds-sp"></i></span><b>Loading</b><span class="dt-c dt-m">space 16</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ok"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><b>Done</b><span class="dt-c dt-m">color/accent</span></div></div><div class="dt-bar"><span class="dt-c dt-m ds-n">0 / 4</span><span class="dt-c">Tokens</span><span class="dt-c dt-go">To library</span></div></div></div><div class="dcap"><h3>Systems thinking</h3><p>I&nbsp;think in&nbsp;systems: one component, every state, and&nbsp;tokens instead of&nbsp;random spacing</p></div></div><div class="cardx rv" style="transition-delay:200ms"><div class="dt" data-anim="dlive" aria-hidden="true" style="--ws: 1018px auto; --wx: -690.65625px; --wy: -48.464543269230774px;"><div class="dt-in dt-col"><div class="dt-p dl"><div class="dl-u"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.6 9.4l2.8-2.8M7.2 4.6l.9-.9a2.6 2.6 0 013.7 3.7l-.9.9M8.8 11.4l-.9.9a2.6 2.6 0 01-3.7-3.7l.9-.9"></path></svg><span class="dl-t"></span><span class="dt-c dl-cp">Copy</span></div><div class="dl-pg"><span>Building the prototype</span><b class="dt-m">0%</b><i><u></u></i></div><div class="dl-s"><span>Onboarding</span><span class="dt-c">queued</span></div><div class="dl-s"><span>Payment</span><span class="dt-c">queued</span></div><div class="dl-s"><span>Network error</span><span class="dt-c">queued</span></div></div><div class="dt-bar"><span class="dt-c dt-m dl-n">0 / 3</span><span class="dt-c dt-go">Open by link</span></div></div></div><div class="dcap"><h3>Coded prototypes</h3><p>I&nbsp;take a&nbsp;mockup all the&nbsp;way to&nbsp;a&nbsp;coded prototype you can open by&nbsp;link and&nbsp;test</p></div></div></div>
    </section>
    <section class="sec" id="ai">
      <div class="split rv"><span class="lab">AI in&nbsp;my&nbsp;work</span><h2><span class="w" style="transition-delay:0ms">AI</span> <span class="w" style="transition-delay:55ms">speeds</span> <span class="w" style="transition-delay:110ms">up</span> <span class="w" style="transition-delay:165ms">the&nbsp;routine.</span> <span class="w" style="transition-delay:220ms">Decisions</span> <span class="w" style="transition-delay:275ms">and&nbsp;review</span> <span class="w" style="transition-delay:330ms">stay</span> <span class="w" style="transition-delay:385ms">with</span> <span class="w" style="transition-delay:440ms">me</span></h2></div>
@@ -1729,42 +1722,16 @@ function live(root, goY, vh){
   };
 }
 
-/* beam: a soft light born where the cursor enters a dark surface. The head follows the pointer, the tail lags behind it,
-   both stretch along the motion and slowly breathe, so the shape keeps changing; it fades out when the pointer leaves. */
-(() => {
-  if(RM || !matchMedia('(hover:hover)').matches) return;
-  const SEL = '.dt,.side,.ft,.btn:not(.g)', st = new Map(); let raf = 0, last = 0;
-  const base = (el, r) => el.classList.contains('btn') ? r.height * 1.7 : el.classList.contains('side') ? r.width * .75 : el.classList.contains('ft') ? Math.min(460, r.height * 1.1) : r.width * .58;
-  const tick = ts => { raf = 0; const f = Math.min(3, last ? (ts - last) / 16.7 : 1); last = ts; let busy = false;
-    st.forEach((s, el) => {
-      if(!el.isConnected){ st.delete(el); return; }
-      const k1 = 1 - Math.pow(.8, f), k2 = 1 - Math.pow(.93, f);
-      const hx = s.hx + (s.tx - s.hx) * k1, hy = s.hy + (s.ty - s.hy) * k1, vx = (hx - s.hx) / f, vy = (hy - s.hy) / f;
-      s.hx = hx; s.hy = hy; s.vx += (vx - s.vx) * .25; s.vy += (vy - s.vy) * .25;
-      s.ux += (hx - s.ux) * k2; s.uy += (hy - s.uy) * k2;
-      const sp = Math.hypot(s.vx, s.vy), t = ts / 1000;
-      if(sp > .2){ const a = Math.atan2(s.vy, s.vx) * 57.296; s.a += ((a - s.a + 540) % 360 - 180) * .18; }
-      const br = 1 + .09 * Math.sin(t * 1.6 + s.ph), br2 = 1 + .07 * Math.sin(t * 1.1 + s.ph * 2);
-      const k = Math.min(2.6, 1 + sp * .07), d = Math.hypot(hx - s.ux, hy - s.uy), k3 = Math.min(3.4, 1 + d / (s.s * .45));
-      s.H.style.transform = `translate3d(${hx.toFixed(1)}px,${hy.toFixed(1)}px,0) rotate(${s.a.toFixed(1)}deg) scale(${(k * br).toFixed(3)},${(br2 / Math.sqrt(k)).toFixed(3)})`;
-      const ta = d > 1 ? Math.atan2(hy - s.uy, hx - s.ux) * 57.296 : s.a;
-      s.T.style.transform = `translate3d(${((hx + s.ux) / 2).toFixed(1)}px,${((hy + s.uy) / 2).toFixed(1)}px,0) rotate(${ta.toFixed(1)}deg) scale(${(k3 * br2).toFixed(3)},${(br / Math.sqrt(k3)).toFixed(3)})`;
-      if(s.on || ts - s.off < 700) busy = true; });
-    if(busy) raf = requestAnimationFrame(tick); else last = 0; };
-  const go = () => { if(!raf) raf = requestAnimationFrame(tick); };
-  document.addEventListener('pointermove', e => {
-    const el = e.target.closest ? e.target.closest(SEL) : null, now = performance.now();
-    st.forEach((s, k) => { if(k !== el && s.on){ s.on = false; s.off = now; s.g.classList.remove('on'); } });
-    if(el){ const r = el.getBoundingClientRect(), x = e.clientX - r.left + (el.scrollLeft || 0), y = e.clientY - r.top + (el.scrollTop || 0);
-      let s = st.get(el);
-      if(!s){ const g = document.createElement('i'); g.className = 'gx'; g.setAttribute('aria-hidden', 'true'); g.innerHTML = '<b></b><b></b>'; el.prepend(g);
-        s = {g, H: g.children[0], T: g.children[1], a: -20, vx: 0, vy: 0, ph: Math.random() * 6, off: 0}; st.set(el, s); }
-      if(!s.on){ Object.assign(s, {hx: x, hy: y, ux: x, uy: y, on: true}); requestAnimationFrame(() => s.g.classList.add('on')); }
-      s.tx = x; s.ty = y; s.s = base(el, r); s.g.style.setProperty('--s', s.s.toFixed(0) + 'px'); }
-    go();
-  }, {passive: true});
-  document.documentElement.addEventListener('pointerleave', () => { const now = performance.now(); st.forEach(s => { if(s.on){ s.on = false; s.off = now; s.g.classList.remove('on'); } }); go(); });
-})();
+/* light folds: the textures load from the site's own img folder; tiles in one row share a single fold, so the light runs on from tile to tile */
+document.documentElement.style.setProperty('--wh', `url(${img('wave-h')})`);
+document.documentElement.style.setProperty('--wv', `url(${img('wave-v')})`);
+function waveRow(){
+  $$('.cards').forEach(c => { const ts = $$('.dt', c); if(!ts.length) return; const cr = c.getBoundingClientRect(), rs = ts.map(t => t.getBoundingClientRect());
+    const row = rs.every(r => Math.abs(r.top - rs[0].top) < 2);
+    ts.forEach((t, i) => { if(row){ const ih = cr.width / 2.6, r = rs[i]; t.style.setProperty('--ws', `${cr.width}px auto`); t.style.setProperty('--wx', `${-(r.left - cr.left)}px`); t.style.setProperty('--wy', `${-(ih - r.height) / 2}px`); }
+      else { t.style.setProperty('--ws', 'cover'); t.style.setProperty('--wx', ['8%', '50%', '92%'][i % 3]); t.style.setProperty('--wy', '45%'); } }); });
+}
+addEventListener('resize', () => requestAnimationFrame(waveRow));
 let io = null, spy = null;
 function mount(){
   if(io) io.disconnect();
@@ -1796,7 +1763,7 @@ let pending = null;
 function route(scroll){
   const c = cur();
   c ? renderCase(c) : renderHome();
-  mount(); mountSpy();
+  mount(); mountSpy(); waveRow();
   if(pending){ const el = document.getElementById(pending); pending = null; if(el){ el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}); return; } }
   if(scroll !== false) window.scrollTo(0, 0);
 }
