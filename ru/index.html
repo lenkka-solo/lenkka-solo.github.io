@@ -402,7 +402,7 @@ h1,h2,h3,p{margin:0}
 .dt{--bg:#F2F2F4;--fg:#1C1C1E;--fg2:#8E8E93;--pn:#FFFFFF;--pl:transparent;--ch:rgba(0,0,0,.055);--hi:#1C1C1E;--hf:#FFFFFF;--ln:rgba(0,0,0,.16);--gl:rgba(0,0,0,.18);
   position:relative;container-type:inline-size;aspect-ratio:1/.9;max-width:100%;border-radius:var(--R);overflow:hidden;isolation:isolate;background:var(--bg);color:var(--fg)}
 :root[data-mode="dark"] .dt{--bg:#19191A;--fg:#F2F2EF;--fg2:#8E8E93;--pn:#262628;--ch:rgba(255,255,255,.07);--hi:#F2F2EF;--hf:#121211;--ln:rgba(255,255,255,.18);--gl:rgba(255,255,255,.3)}
-.cv-g .dt,.cv-g :root[data-mode="dark"] .dt{--bg:#0C0C0D;--fg:#F4F4F2;--fg2:rgba(244,244,242,.56);--pn:rgba(255,255,255,.07);--pl:rgba(255,255,255,.12);--ch:rgba(255,255,255,.085);--hi:#F4F4F2;--hf:#111112;--ln:rgba(255,255,255,.22);--gl:rgba(255,255,255,.75)}
+.cv-g .dt,.cv-g :root[data-mode="dark"] .dt{--bg:#0C0C0D;--fg:#F4F4F2;--fg2:rgba(244,244,242,.56);--pn:rgba(20,20,22,.8);--pl:rgba(255,255,255,.1);--ch:rgba(255,255,255,.085);--hi:#F4F4F2;--hf:#111112;--ln:rgba(255,255,255,.22);--gl:rgba(255,255,255,.75)}
 @keyframes dtg{to{transform:rotate(calc(var(--ga,-20deg) + 9deg)) translate3d(5%,-4%,0) scale(1.08)}}
 /* the streak leans toward the pointer and the scene drifts a little the other way */
 .dt-in{position:absolute;inset:0;font:400 clamp(11px,3.5cqw,16px)/1.25 var(--sans);letter-spacing:-.005em}
@@ -487,15 +487,15 @@ h1,h2,h3,p{margin:0}
 @media(max-width:700px){.cardx .dt{width:auto}.cardx .dcap{margin-top:16px;padding:0 6px}}
 /* footer with the light streak (gradient look) */
 .cv-g .ft{position:relative;overflow:hidden;isolation:isolate;background:#0C0C0D}
-.cv-g .ft .cts a:not(:first-child),.cv-g .ft .cts button{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.cv-g .ft .cts a:not(:first-child):hover,.cv-g .ft .cts button:hover{background:rgba(255,255,255,.14)}
+.cv-g .ft .cts a:not(:first-child),.cv-g .ft .cts button{background:rgba(26,26,28,.88);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.cv-g .ft .cts a:not(:first-child):hover,.cv-g .ft .cts button:hover{background:rgba(44,44,46,.92)}
 .cv-g .side{background:#0B0B0C var(--wv) no-repeat 50% 50%/cover}
 .cv-g .hd{background:#0B0B0C var(--wh) no-repeat 30% 45%/cover}
 .cv-g .dt{background:#0B0B0C var(--wh) no-repeat var(--wx,50%) var(--wy,50%)/var(--ws,cover)}
-.cv-g .dt.dt-w{--wx:22%;--wy:40%}
-.cv-g .ft{background:linear-gradient(90deg,rgba(11,11,12,.82),rgba(11,11,12,.45) 48%,rgba(11,11,12,0) 78%),#0B0B0C var(--wh) no-repeat 50% 62%/cover}
-.cv-g .sd-row a,.cv-g .sd-mail{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.cv-g .sd-row a:hover,.cv-g .sd-mail:hover{background:rgba(255,255,255,.12)}
+.cv-g .dt.dt-w{--wx:40%;--wy:30%}
+.cv-g .ft{background:linear-gradient(90deg,rgba(11,11,12,.7),rgba(11,11,12,.2) 50%,rgba(11,11,12,0) 80%),#0B0B0C var(--wh) no-repeat 50% 30%/cover}
+.cv-g .sd-row a,.cv-g .sd-mail{background:rgba(26,26,28,.88);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.cv-g .sd-row a:hover,.cv-g .sd-mail:hover{background:rgba(44,44,46,.92)}
 .cv-g .sd-nav button[aria-current="true"]{background:rgba(255,255,255,.09)}
 .cv-g .sd-nav button:hover{background:rgba(255,255,255,.06)}
 :root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90% 160% at 28% -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
