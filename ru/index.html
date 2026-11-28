@@ -62,8 +62,12 @@ h1,h2,h3,p{margin:0}
 
 .frame{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .page{max-width:2200px;margin:0 auto;display:grid;grid-template-columns:clamp(316px,21vw,400px) minmax(0,1fr);gap:0 14px;align-items:start}
-.col{min-width:0;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.col{min-width:0}
 .sec{padding:clamp(54px,7vw,96px) clamp(16px,2.6vw,30px);border-top:1px solid var(--line)}
+/* home sections are slides: no lines, each holds still while the next one slides over it (see deck() below) */
+.slide{position:relative;border-top:0;background:var(--bg);border-radius:var(--R);will-change:transform,opacity}
+.slide+.slide{box-shadow:0 -28px 60px -40px rgba(0,0,0,.28)}
+:root[data-mode="dark"] .slide+.slide{box-shadow:0 -28px 60px -36px rgba(0,0,0,.8)}
 
 /* header pill */
 .hd{position:sticky;top:calc(12px + env(safe-area-inset-top,0px));z-index:30;margin:12px 12px 0;height:66px;padding:0 12px 0 10px;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--card-line);color:#fff;display:flex;align-items:center;gap:14px}
@@ -409,11 +413,17 @@ h1,h2,h3,p{margin:0}
 .cv-g .dt:nth-child(3n+2)::before,.cv-g .cardx:nth-child(2) .dt::before{--ga:16deg}
 .cv-g .cardx:nth-child(3) .dt::before{--ga:-34deg}
 @keyframes dtg{to{transform:rotate(calc(var(--ga,-20deg) + 9deg)) translate3d(5%,-4%,0) scale(1.08)}}
-.cv-g .dt::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(var(--ms,260px) circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(var(--mo,.16) * var(--mi,0))),transparent 70%),radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+.cv-g .dt::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
 /* the streak leans toward the pointer and the scene drifts a little the other way */
-.cv-g .dt::before,.cv-g .ft::before{translate:calc(var(--px,0) * 14%) calc(var(--py,0) * 14%)}
-.cv-g .dt .dt-in{transform:translate3d(calc(var(--px,0) * -8px),calc(var(--py,0) * -8px),0)}
-.cv-g .ft::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;--ms:420px;--mo:.12;background:radial-gradient(var(--ms,260px) circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(var(--mo,.16) * var(--mi,0))),transparent 70%)}
+.cv-g .dt::before,.cv-g .ft::before{opacity:.42}
+/* the light that appears under the cursor and glides after it */
+.gx{position:absolute;left:0;top:0;z-index:-1;width:var(--gw,400px);height:var(--gh,200px);border-radius:50%;pointer-events:none;opacity:0;transition:opacity .55s cubic-bezier(.2,.8,.2,1);
+  background:radial-gradient(closest-side,rgba(255,255,255,.62),rgba(215,215,222,.3) 42%,rgba(160,160,170,.12) 66%,transparent);filter:blur(var(--gb,22px));will-change:transform}
+.gx.on{opacity:1}
+.side,.btn:not(.g){isolation:isolate}
+.btn:not(.g){position:relative;overflow:hidden}
+.btn:not(.g) .gx{--gb:10px;background:radial-gradient(closest-side,rgba(255,255,255,.42),rgba(220,220,226,.16) 55%,transparent)}
+:root[data-mode="dark"] .btn:not(.g) .gx{background:radial-gradient(closest-side,rgba(0,0,0,.18),transparent)}
 .dt-in{position:absolute;inset:0;font:400 clamp(11px,3.5cqw,16px)/1.25 var(--sans);letter-spacing:-.005em}
 .dt-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75em;padding:7%}
 .dt svg{display:block;width:1.1em;height:1.1em;flex:none}
@@ -499,13 +509,13 @@ h1,h2,h3,p{margin:0}
 .cv-g .ft::before{--ga:-12deg;inset:-60% -30%;filter:blur(34px);opacity:.75}
 .cv-g .ft .cts a:not(:first-child),.cv-g .ft .cts button{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .cv-g .ft .cts a:not(:first-child):hover,.cv-g .ft .cts button:hover{background:rgba(255,255,255,.14)}
-.cv-g .side,.cv-g .hd{background:radial-gradient(300px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,calc(.13 * var(--mi,0))),transparent 70%),radial-gradient(75% 20% at calc(78% + var(--px,0) * 22%) calc(32% + var(--py,0) * 16%),rgba(255,255,255,.15),transparent 70%),radial-gradient(90% 28% at 8% 88%,rgba(160,160,168,.13),transparent 70%),linear-gradient(158deg,transparent 28%,rgba(255,255,255,.055) 44%,transparent 60%),#0C0C0D}
+.cv-g .side,.cv-g .hd{background:radial-gradient(75% 20% at 78% 32%,rgba(255,255,255,.12),transparent 70%),radial-gradient(90% 28% at 8% 88%,rgba(160,160,168,.11),transparent 70%),linear-gradient(158deg,transparent 28%,rgba(255,255,255,.045) 44%,transparent 60%),#0C0C0D}
 .cv-g .hd{background:radial-gradient(40% 120% at 78% 0%,rgba(255,255,255,.16),transparent 70%),linear-gradient(100deg,transparent 30%,rgba(255,255,255,.05) 50%,transparent 70%),#0C0C0D}
 .cv-g .sd-row a,.cv-g .sd-mail{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .cv-g .sd-row a:hover,.cv-g .sd-mail:hover{background:rgba(255,255,255,.12)}
 .cv-g .sd-nav button[aria-current="true"]{background:rgba(255,255,255,.09)}
 .cv-g .sd-nav button:hover{background:rgba(255,255,255,.06)}
-:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(.22 * var(--mi,0))),transparent 70%),radial-gradient(90% 160% at calc(28% + var(--px,0) * 60%) -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90% 160% at 28% -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
 /* preview-only switch between the two looks */
 .cvs{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:4px 4px 4px 14px;border-radius:14px;background:#121211;color:#fff;font:500 13px/1 var(--sans);box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
 .cvs span{margin-right:6px;color:#9D9D95;white-space:nowrap}
@@ -558,6 +568,21 @@ h1,h2,h3,p{margin:0}
 @keyframes ics{0%,100%{transform:none}35%,60%{transform:translateY(-3px)}}
 @keyframes icn{0%{transform:none;opacity:1}45%{transform:translateY(14px);opacity:0}46%{transform:translateY(-14px);opacity:0}100%{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){a:hover *,button:hover *,.work.soon:hover *{animation:none!important}}
+
+:root.cv-g[data-mode="dark"] .dt{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+/* hard skills: two dark tiles with numbered lists */
+.skg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+.dt.sk{aspect-ratio:auto}
+.sk-in{position:relative;padding:clamp(18px,2vw,28px);font:400 15px/1.35 var(--sans)}
+.sk-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sk-h .dt-c{font-size:13px;height:30px;padding:0 12px;font-weight:500}
+.sk ol{margin:0;padding:0;list-style:none}
+.sk li{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-top:1px solid var(--ch);font-size:clamp(15px,1.15vw,17px)}
+.sk li em{font-style:normal;flex:none}
+@media(max-width:860px){.skg{grid-template-columns:minmax(0,1fr)}}
+@media (hover:hover){button:hover .k-pn{animation:icpn 1.3s cubic-bezier(.45,0,.25,1) infinite}}
+.k-pn{transform-box:fill-box;transform-origin:0 100%}
+@keyframes icpn{0%,100%{transform:none}30%{transform:rotate(-12deg)}60%{transform:rotate(6deg)}}
 
 /* live landing (Aura) */
 .lv{margin-top:8px}
@@ -697,8 +722,8 @@ h1,h2,h3,p{margin:0}
 .hbar{display:none}
 .tick.t2{margin-top:10px}
 .tick.t2 .tr{animation-direction:reverse;animation-duration:58s;animation-delay:-19s}
-.hst{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:clamp(26px,3vw,36px) calc(-1 * clamp(16px,2.6vw,30px)) 0;border-top:1px solid var(--line);text-align:left}
-.hst>*{min-width:0;padding:16px clamp(12px,2vw,26px) 2px;border-left:1px solid var(--line)}
+.hst{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:clamp(26px,3vw,36px) calc(-1 * clamp(16px,2.6vw,30px)) 0;text-align:left}
+.hst>*{min-width:0;padding:16px clamp(12px,2vw,26px) 2px}
 .hst>:first-child{border-left:0}
 .hst b{display:block;font:500 clamp(21px,1.9vw,28px)/1.1 var(--sans);letter-spacing:-.03em}
 .hst div span{display:block;margin-top:5px;font-size:13.5px;line-height:1.35;color:var(--muted)}
@@ -750,7 +775,7 @@ h1,h2,h3,p{margin:0}
    <span class="st"><i></i>Открыта к&nbsp;вакансиям</span>
    <p class="sd-bio">7&nbsp;лет в&nbsp;дизайне. Платформы с&nbsp;данными, мобильные приложения и&nbsp;собственные продукты.</p>
    <div class="sd-pl mono">Работаю удалённо</div>
-   <nav class="sd-nav" aria-label="Разделы"><button type="button" data-to="works" data-spy="works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect class="k-q" x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q2" x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q4" x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q3" x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></svg><span>Кейсы</span><em class="mono">01</em></button><button type="button" data-to="exp" data-spy="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"></rect><path class="k-hn" d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"></path><path d="M3 13h18"></path></svg><span>Опыт</span><em class="mono">02</em></button><button type="button" data-to="approach" data-spy="approach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="k-lt" d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path></svg><span>Подход</span><em class="mono">03</em></button><button type="button" data-to="ai" data-spy="ai"><svg viewBox="0 0 24 24" fill="currentColor"><path class="k-sk" d="M12 2.5l2 6.5 6.5 2-6.5 2-2 6.5-2-6.5-6.5-2 6.5-2z"></path></svg><span>AI в&nbsp;работе</span><em class="mono">04</em></button><button type="button" data-to="ft" data-spy="ft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path class="k-fl" d="m4 7 8 6 8-6"></path></svg><span>Контакты</span><em class="mono">05</em></button></nav>
+   <nav class="sd-nav" aria-label="Разделы"><button type="button" data-to="works" data-spy="works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect class="k-q" x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q2" x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q4" x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect class="k-q k-q3" x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></svg><span>Кейсы</span><em class="mono">01</em></button><button type="button" data-to="exp" data-spy="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"></rect><path class="k-hn" d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"></path><path d="M3 13h18"></path></svg><span>Опыт</span><em class="mono">02</em></button><button type="button" data-to="skills" data-spy="skills"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="k-pn" d="M4 20l4-1L19 8l-3-3L5 16z"></path></svg><span>Навыки</span><em class="mono">03</em></button><button type="button" data-to="approach" data-spy="approach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="k-lt" d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path></svg><span>Подход</span><em class="mono">04</em></button><button type="button" data-to="ai" data-spy="ai"><svg viewBox="0 0 24 24" fill="currentColor"><path class="k-sk" d="M12 2.5l2 6.5 6.5 2-6.5 2-2 6.5-2-6.5-6.5-2 6.5-2z"></path></svg><span>AI в&nbsp;работе</span><em class="mono">05</em></button><button type="button" data-to="ft" data-spy="ft"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path class="k-fl" d="m4 7 8 6 8-6"></path></svg><span>Контакты</span><em class="mono">06</em></button></nav>
    <div class="sd-ct">
      <a class="sd-cta" href="https://t.me/lenkka_solo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path class="k-pl" d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.1.1 1.4l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.4-2.3 4.7 3.5c.9.5 1.5.2 1.7-.8l3-14.4c.3-1.300-.5-1.9-1.5-1.4zM9 13.300l8.4-5.300c.4-.2.7 0 .4.2l-7 6.300-.3 3.300z"></path></svg> Написать в&nbsp;Telegram</a>
      <div class="sd-row"><a href="https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_RU.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path class="k-ln" d="M9 13h6"></path><path class="k-ln k-l2" d="M9 17h4"></path></svg> Резюме <span class="k-ar">↗</span></a><a href="https://www.linkedin.com/in/lenkka-solo" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path class="k-dt" d="M4.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path><path class="k-st" d="M3 9h3v12H3z"></path><path class="k-nn" d="M9 9h2.9v1.7h.1c.5-.9 1.7-2 3.5-2 3.700 0 4.5 2.4 4.5 5.600V21h-3v-5.900c0-1.4 0-3.200-2-3.200s-2.300 1.5-2.300 3.100V21H9z"></path></svg></a><a href="https://www.behance.net/lenkka_solo" target="_blank" rel="noopener" aria-label="Behance"><span class="k-be"><i>B</i><i>ē</i></span></a></div>
@@ -761,7 +786,7 @@ h1,h2,h3,p{margin:0}
    <button class="me" type="button" data-go=""><img src="/img/me.webp" alt="" width="44" height="44"><span><b>Елена Соловьева</b><small>Продуктовый дизайнер</small></span></button>
    <nav><div class="seg" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="ru" aria-pressed="true">RU</button></div><button class="icb" type="button" data-act="mode" aria-label="Сменить тему"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="k-mo" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button></nav></header>
     <main id="main">
-   <section class="hero">
+   <section class="hero slide" style="z-index: 1;">
      <div class="hbar mono"><span>Портфолио</span><span>2026</span></div>
      <div class="hmid">
      <div class="htop"><span class="badge"><i></i>Открыта к&nbsp;вакансиям</span><span class="mono">Работаю удалённо</span></div>
@@ -772,20 +797,25 @@ h1,h2,h3,p{margin:0}
      </div>
      <div class="hst"><div><b>7&nbsp;лет</b><span>в&nbsp;дизайне</span></div><div><b>2&nbsp;продукта</b><span>своих: Makefolk работает, SaveFlow в&nbsp;бете</span></div><button class="go" type="button" data-to="works"><span>Листайте дальше</span><i><span class="k-dn">↓</span></i></button></div>
    </section>
-   <section class="sec" id="works">
+   <section class="sec slide" id="works" style="z-index: 2;">
      <div class="split rv"><span class="lab">Кейсы · 6</span><h2><span class="w" style="transition-delay:0ms">Кейсы</span> <span class="w" style="transition-delay:55ms">с&nbsp;задачей,</span> <span class="w" style="transition-delay:110ms">решениями</span> <span class="w" style="transition-delay:165ms">и&nbsp;результатом</span></h2></div>
      <div class="works"><a class="work rv" href="#makefolk" style="transition-delay:0ms"><div class="im"><img src="/img/makefolk-ru-00-card-1200.webp" srcset="/img/makefolk-ru-00-card-1200.webp 1200w, /img/makefolk-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Главная Makefolk на&nbsp;компьютере и&nbsp;телефоне, на&nbsp;фирменном лаймовом фоне." loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>Makefolk</span><i class="dot"></i><span>Свой продукт</span><i class="dot"></i><span>2026</span><i class="dot"></i><span class="live">работает</span></div><h3>Одна платформа вместо десятка вкладок: спроектировала, собрала с&nbsp;AI и&nbsp;запустила сама</h3><div class="tgs"><span>Web и&nbsp;mobile</span><span>SaaS</span><span>AI в&nbsp;процессе</span></div></div></a><a class="work rv" href="#klaris" style="transition-delay:90ms"><div class="im"><img src="/img/klaris-ru-00-card-1200.webp" srcset="/img/klaris-ru-00-card-1200.webp 1200w, /img/klaris-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Экран аналитики Klaris на&nbsp;глубоком бирюзовом фоне." loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>Klaris</span><i class="dot"></i><span>Концепт</span><i class="dot"></i><span>2026</span><i class="dot"></i><span class="live">прототип в&nbsp;коде</span></div><h3>21&nbsp;модуль фармпроизводства в&nbsp;одном спокойном интерфейсе</h3><div class="tgs"><span>Web</span><span>Фарма</span><span>B2B</span><span>Дашборды</span></div></div></a><a class="work rv" href="#watchtogether" style="transition-delay:0ms"><div class="im"><img src="/img/watchtogether-ru-00-card-1200.webp" srcset="/img/watchtogether-ru-00-card-1200.webp 1200w, /img/watchtogether-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Два телефона показывают один фильм и&nbsp;одинаковый таймкод." loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>WatchTogether</span><i class="dot"></i><span>Концепт</span><i class="dot"></i><span>2026</span></div><h3>От&nbsp;«что&nbsp;посмотрим?» до&nbsp;совместного просмотра в&nbsp;одном сценарии</h3><div class="tgs"><span>Mobile App</span><span>Развлечения</span><span>B2C</span></div></div></a><a class="work rv" href="#trainers" style="transition-delay:90ms"><div class="im"><img src="/img/trainers-ru-00-card-1200.webp" srcset="/img/trainers-ru-00-card-1200.webp 1200w, /img/trainers-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Обложка кейса: «Тренажёры для&nbsp;ума» и&nbsp;главная ученика" loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>Тренажёры для&nbsp;ума</span><i class="dot"></i><span>Концепт</span><i class="dot"></i><span>2026</span></div><h3>От&nbsp;отдельных игр к&nbsp;плану тренировок для&nbsp;школьников 1–11&nbsp;классов</h3><div class="tgs"><span>Web и&nbsp;Mobile</span><span>EdTech</span><span>B2C</span></div></div></a><a class="work rv" href="#aura" style="transition-delay:0ms"><div class="im"><img src="/img/aura-ru-00-card-1200.webp" srcset="/img/aura-ru-00-card-1200.webp 1200w, /img/aura-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Первый экран лендинга Aura: заголовок и&nbsp;палитра команд с&nbsp;вопросами к&nbsp;ассистенту." loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>Aura AI</span><i class="dot"></i><span>Концепт</span><i class="dot"></i><span>2026</span></div><h3>Лендинг AI-ассистента, где&nbsp;продукт показан в&nbsp;работе, а&nbsp;не&nbsp;описан словами</h3><div class="tgs"><span>Лендинг</span><span>AI SaaS</span><span>B2B</span></div></div></a><a class="work rv" href="#unite" style="transition-delay:90ms"><div class="im"><img src="/img/unite-ru-00-card-1200.webp" srcset="/img/unite-ru-00-card-1200.webp 1200w, /img/unite-ru-00-card-1600.webp 1600w" sizes="(min-width:1500px) 27vw, (min-width:1080px) 38vw, 100vw" width="1600" height="1200" alt="Три экрана Unite: поездки, приветствие и&nbsp;чек-ин настроения на&nbsp;пастельном фоне." loading="lazy" decoding="async"><span class="go">→</span></div><div class="tx"><div class="meta mono"><span>Unite</span><i class="dot"></i><span>Свой продукт</span><i class="dot"></i><span>Приложение</span><i class="dot"></i><span class="live">в&nbsp;проектировании</span></div><h3>Пространство на&nbsp;двоих: общие задачи, цели, бюджет и&nbsp;настроение пары</h3><div class="tgs"><span>Mobile App</span><span>Пары</span><span>B2C</span></div></div></a><div class="work soon rv" style="transition-delay:0ms"><div class="im"><img src="/img/soon-saveflow.webp" alt="" loading="lazy"><span class="lock"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"></rect><path class="k-sh" d="M8 10.5V8a4 4 0 0 1 8 0v2.5"></path></svg></i><span><b>Скоро на&nbsp;сайте</b><small>Загляните позже</small></span></span></div><div class="tx"><div class="meta mono"><span>SaveFlow</span><i class="dot"></i><span>Свой продукт</span><i class="dot"></i><span>iOS и&nbsp;web</span></div><h3>AI-библиотека для&nbsp;скриншотов, картинок и&nbsp;ссылок</h3></div></div></div>
    </section>
-   <section class="sec" id="exp">
+   <section class="sec slide" id="exp" style="z-index: 3;">
      <div class="split rv"><span class="lab">Опыт</span><h2><span class="w" style="transition-delay:0ms">7&nbsp;лет</span> <span class="w" style="transition-delay:55ms">в&nbsp;дизайне:</span> <span class="w" style="transition-delay:110ms">от&nbsp;сайтов</span> <span class="w" style="transition-delay:165ms">и&nbsp;веб-интерфейсов</span> <span class="w" style="transition-delay:220ms">до&nbsp;платформ</span> <span class="w" style="transition-delay:275ms">с&nbsp;данными</span> <span class="w" style="transition-delay:330ms">и&nbsp;собственных</span> <span class="w" style="transition-delay:385ms">продуктов</span></h2></div>
      <div class="xt rv"><div class="xrow"><span class="k">Сейчас</span><span class="d mono">2026&nbsp;— сейчас</span><div><b>Makefolk</b><small>Свой продукт. Придумала, спроектировала и&nbsp;собрала с&nbsp;AI платформу для&nbsp;дизайнеров. Работает на&nbsp;makefolk.app.</small></div><i class="on"></i></div><div class="xrow"><span class="k">Раньше</span><span class="d mono">апр 2025&nbsp;— 2026</span><div><b>АгроПромЦифра</b><small>UX/UI-дизайнер. Государственные цифровые платформы с&nbsp;дашбордами и&nbsp;решения для&nbsp;агроотрасли. Проекты под&nbsp;NDA.</small></div><i></i></div><div class="xrow"><span class="k">Раньше</span><span class="d mono">янв 2024&nbsp;— фев 2025</span><div><b>Туристическое страхование</b><small>UX/UI-дизайнер. Информационная архитектура и&nbsp;CJM, вайрфреймы, финальные макеты, юзабилити-тесты, прототипы. NDA.</small></div><i></i></div><div class="xrow"><span class="k">Раньше</span><span class="d mono">сен 2021&nbsp;— мар 2025</span><div><b>Project Wave</b><small>Веб-дизайнер. Сайты и&nbsp;веб-интерфейсы, юзабилити-аудиты и&nbsp;контроль вёрстки, обучение младших дизайнеров.</small></div><i></i></div></div>
      <div class="xfoot rv"><span>Все места работы и&nbsp;образование есть в&nbsp;резюме</span><a class="btn g" href="https://lenkka-solo.github.io/cv/Elena_Soloveva_CV_RU.pdf" target="_blank" rel="noopener">Открыть резюме <span class="k-ar">↗</span></a></div>
    </section>
-   <section class="sec" id="approach">
+   <section class="sec slide" id="skills" style="z-index: 4;">
+     <div class="split rv"><span class="lab">Навыки</span><h2><span class="w" style="transition-delay:0ms">Хард-скиллы:</span> <span class="w" style="transition-delay:55ms">от</span> <span class="w" style="transition-delay:110ms">исследования</span> <span class="w" style="transition-delay:165ms">до</span> <span class="w" style="transition-delay:220ms">передачи</span> <span class="w" style="transition-delay:275ms">в</span> <span class="w" style="transition-delay:330ms">разработку</span></h2></div>
+     <div class="skg"><div class="dt sk rv" style="transition-delay:0ms"><div class="sk-in"><div class="sk-h"><span class="dt-c on">Продукт</span><span class="dt-m">06</span></div><ol><li><em class="dt-m">01</em>Исследования и&nbsp;синтез выводов</li><li><em class="dt-m">02</em>CJM и&nbsp;пользовательские сценарии</li><li><em class="dt-m">03</em>Информационная архитектура</li><li><em class="dt-m">04</em>Юзабилити-тесты и&nbsp;аудиты</li><li><em class="dt-m">05</em>Структура, приоритеты, постановка задач</li><li><em class="dt-m">06</em>Прототипы и&nbsp;MVP в&nbsp;коде</li></ol></div></div><div class="dt sk rv" style="transition-delay:100ms"><div class="sk-in"><div class="sk-h"><span class="dt-c on">UX/UI</span><span class="dt-m">06</span></div><ol><li><em class="dt-m">01</em>Вайрфреймы и&nbsp;финальные макеты</li><li><em class="dt-m">02</em>Дашборды и&nbsp;интерфейсы с&nbsp;данными</li><li><em class="dt-m">03</em>Дизайн-системы, компоненты, токены</li><li><em class="dt-m">04</em>Веб и&nbsp;мобильные приложения</li><li><em class="dt-m">05</em>Интерактивные прототипы</li><li><em class="dt-m">06</em>Передача в&nbsp;разработку и&nbsp;контроль вёрстки</li></ol></div></div></div>
+     <div class="ai-ft rv"><span class="chip">Figma</span><span class="chip">Framer</span><span class="chip">Tilda</span><span class="chip">Notion</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Supabase</span><span class="chip">Vercel</span></div>
+   </section>
+   <section class="sec slide" id="approach" style="z-index: 5;">
      <div class="split rv"><span class="lab">Подход</span><h2><span class="w" style="transition-delay:0ms">Три</span> <span class="w" style="transition-delay:55ms">вещи,</span> <span class="w" style="transition-delay:110ms">которые</span> <span class="w" style="transition-delay:165ms">я</span> <span class="w" style="transition-delay:220ms">приношу</span> <span class="w" style="transition-delay:275ms">в&nbsp;продуктовую</span> <span class="w" style="transition-delay:330ms">команду</span></h2></div>
      <div class="cards"><div class="cardx rv" style="transition-delay:0ms"><div class="dt" data-anim="dfind" aria-hidden="true"><div class="dt-in"><span class="df-h dt-c">Процесс закупки <em class="dt-m">4 шага</em></span><div class="df-tr"><i class="df-pr"></i></div><div class="df-n up l" style="left:12%"><span class="dt-c"><i>1</i>Заявка</span></div><div class="df-n dn l" style="left:37%"><span class="dt-c"><i>2</i>Проверка бюджета</span></div><div class="df-n up r deep" style="left:63%"><span class="dt-c"><i>3</i>Согласование</span></div><div class="df-n dn r deep" style="left:88%"><span class="dt-c"><i>4</i>Подпись</span></div></div></div><div class="dcap"><h3>Сложные процессы</h3><p>Разбираюсь в&nbsp;сложных процессах и&nbsp;превращаю их в&nbsp;интерфейс, где&nbsp;всё находится с&nbsp;первого раза</p></div></div><div class="cardx rv" style="transition-delay:100ms"><div class="dt" data-anim="dstates" aria-hidden="true"><div class="dt-in dt-col"><div class="dt-p ds"><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ">Сохранить</span><b>Обычная</b><span class="dt-c dt-m">радиус 12</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b hv">Сохранить</span><b>Наведение</b><span class="dt-c dt-m">высота 44</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ld"><i class="ds-sp"></i></span><b>Загрузка</b><span class="dt-c dt-m">отступ 16</span></div><div class="ds-r"><i class="dt-cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><span class="ds-b ok"><svg viewBox="0 0 16 16"><path d="M3.4 8.3l2.9 2.9 6.3-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><b>Готово</b><span class="dt-c dt-m">цвет/акцент</span></div></div><div class="dt-bar"><span class="dt-c dt-m ds-n">0 / 4</span><span class="dt-c">Токены</span><span class="dt-c dt-go">В библиотеку</span></div></div></div><div class="dcap"><h3>Системность</h3><p>Думаю системой: один компонент, все его состояния и&nbsp;токены вместо случайных отступов</p></div></div><div class="cardx rv" style="transition-delay:200ms"><div class="dt" data-anim="dlive" aria-hidden="true"><div class="dt-in dt-col"><div class="dt-p dl"><div class="dl-u"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.6 9.4l2.8-2.8M7.2 4.6l.9-.9a2.6 2.6 0 013.7 3.7l-.9.9M8.8 11.4l-.9.9a2.6 2.6 0 01-3.7-3.7l.9-.9"></path></svg><span class="dl-t"></span><span class="dt-c dl-cp">Копировать</span></div><div class="dl-pg"><span>Сборка прототипа</span><b class="dt-m">0%</b><i><u></u></i></div><div class="dl-s"><span>Онбординг</span><span class="dt-c">ждёт</span></div><div class="dl-s"><span>Оплата</span><span class="dt-c">ждёт</span></div><div class="dl-s"><span>Ошибка сети</span><span class="dt-c">ждёт</span></div></div><div class="dt-bar"><span class="dt-c dt-m dl-n">0 / 3</span><span class="dt-c dt-go">Открыть по ссылке</span></div></div></div><div class="dcap"><h3>Прототип в&nbsp;коде</h3><p>Довожу макет до&nbsp;прототипа в&nbsp;коде, который можно открыть по&nbsp;ссылке и&nbsp;протестировать</p></div></div></div>
    </section>
-   <section class="sec" id="ai">
+   <section class="sec slide" id="ai" style="z-index: 6;">
      <div class="split rv"><span class="lab">AI в&nbsp;работе</span><h2><span class="w" style="transition-delay:0ms">AI</span> <span class="w" style="transition-delay:55ms">ускоряет</span> <span class="w" style="transition-delay:110ms">рутину.</span> <span class="w" style="transition-delay:165ms">Решения</span> <span class="w" style="transition-delay:220ms">и&nbsp;проверка</span> <span class="w" style="transition-delay:275ms">остаются</span> <span class="w" style="transition-delay:330ms">за&nbsp;мной</span></h2></div>
      <div class="ai"><div class="rv"><div class="dt dt-w" data-anim="dreview" aria-hidden="true"><div class="dt-in"><div class="dt-p dr-q"><div class="dr-h dt-m">Черновик от AI<em class="dr-n">0 / 3</em></div><div class="dr-r"><span>Экран по макету</span><span class="dt-c">ждёт</span></div><div class="dr-r"><span>Состояние ошибки</span><span class="dt-c">ждёт</span></div><div class="dr-r"><span>Тексты кнопок</span><span class="dt-c">ждёт</span></div></div>
       <div class="dr-d"><div class="dt-p dr-c"><div class="dr-ch"><svg viewBox="0 0 16 16"><path d="M8 1.6l1.4 4.6 4.6 1.6-4.6 1.5L8 14.4 6.6 9.3 2 7.8l4.6-1.6z" fill="currentColor"></path></svg><span>AI предлагает ·</span><b class="dr-nm"></b></div><p class="dr-tx"><span class="dr-a"></span><mark class="dr-m"></mark><span class="dr-b"></span></p></div>
@@ -843,7 +873,7 @@ const ic = {
   layers:S('<path class="k-lt" d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>'),
   code:S('<path d="m8 7-5 5 5 5M16 7l5 5-5 5"/>'),
   search:S('<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>'),
-  pen:S('<path d="M4 20l4-1L19 8l-3-3L5 16z"/>'),
+  pen:S('<path class="k-pn" d="M4 20l4-1L19 8l-3-3L5 16z"/>'),
   spark:'<svg viewBox="0 0 24 24" fill="currentColor"><path class="k-sk" d="M12 2.5l2 6.5 6.5 2-6.5 2-2 6.5-2-6.5-6.5-2 6.5-2z"/></svg>',
   brief:S('<rect x="3" y="7" width="18" height="13" rx="2.5"/><path class="k-hn" d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M3 13h18"/>'),
   lock:S('<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path class="k-sh" d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>'),
@@ -857,7 +887,7 @@ const UI = {
   ru:{ name:'Елена Соловьева', role:'Продуктовый дизайнер', open:'Открыта к вакансиям', place:'Работаю удалённо',
        bio:'7 лет в дизайне. Платформы с данными, мобильные приложения и собственные продукты.',
        h1a:'Продуктовый дизайнер', h1b:'платформ с данными и AI-продуктов', sub:'От сценариев и структуры до макетов, дизайн-системы и прототипа.',
-       nWork:'Кейсы', nExp:'Опыт', nAp:'Подход', nAi:'AI в работе', nCt:'Контакты', theme:'Сменить тему', menu:'Разделы',
+       nWork:'Кейсы', nExp:'Опыт', nSk:'Навыки', nAp:'Подход', nAi:'AI в работе', nCt:'Контакты', theme:'Сменить тему', menu:'Разделы',
        wP:'Кейсы', wH:'Кейсы с задачей, решениями и результатом',
        xP:'Опыт', xH:'7 лет в дизайне: от сайтов и веб-интерфейсов до платформ с данными и собственных продуктов', now:'Сейчас', past:'Раньше', xMore:'Все места работы и образование есть в резюме',
        cv:'Открыть резюме', cvS:'Резюме', write:'Написать', tgBtn:'Написать в Telegram',
@@ -872,7 +902,7 @@ const UI = {
   en:{ name:'Elena Soloveva', role:'Product Designer', open:'Open to roles', place:'Remote',
        bio:'Seven years in design. Data-heavy platforms, mobile apps and products of my own.',
        h1a:'Product designer', h1b:'for data-heavy platforms and AI products', sub:'From user flows and structure to mockups, a design system and a prototype.',
-       nWork:'Work', nExp:'Experience', nAp:'Approach', nAi:'AI in my work', nCt:'Contact', theme:'Switch theme', menu:'Sections',
+       nWork:'Work', nExp:'Experience', nSk:'Skills', nAp:'Approach', nAi:'AI in my work', nCt:'Contact', theme:'Switch theme', menu:'Sections',
        wP:'Work', wH:'Cases with the problem, the decisions and the outcome',
        xP:'Experience', xH:'Seven years in design: from websites and web interfaces to data platforms and products of my own', now:'Current', past:'Past', xMore:'Every role and my education are in the CV',
        cv:'Open the CV', cvS:'CV', write:'Message me', tgBtn:'Message me on Telegram',
@@ -887,7 +917,7 @@ const UI = {
 };
 const t = k => ty(UI[lang][k]);
 
-const NAV = [['works','nWork','grid'],['exp','nExp','brief'],['approach','nAp','layers'],['ai','nAi','spark'],['ft','nCt','mail']];
+const NAV = [['works','nWork','grid'],['exp','nExp','brief'],['skills','nSk','pen'],['approach','nAp','layers'],['ai','nAi','spark'],['ft','nCt','mail']];
 const EXP = [
   [1,{ru:'Makefolk',en:'Makefolk'},{ru:'2026 — сейчас',en:'2026 — now'},{ru:'Свой продукт',en:'Own product'},{ru:'Придумала, спроектировала и собрала с AI платформу для дизайнеров. Работает на makefolk.app.',en:'Conceived, designed and built with AI a workspace for designers. Live at makefolk.app.'}],
   [0,{ru:'АгроПромЦифра',en:'AgroPromCifra'},{ru:'апр 2025 — 2026',en:'Apr 2025 — 2026'},{ru:'UX/UI-дизайнер',en:'UX/UI designer'},{ru:'Государственные цифровые платформы с дашбордами и решения для агроотрасли. Проекты под NDA.',en:'Government digital platforms with dashboards and solutions for agriculture. Projects under NDA.'}],
@@ -907,6 +937,23 @@ const AI = [
   [{ru:'Что не отдаю AI',en:'What I keep'},{ru:'Продуктовые решения, структуру, приоритеты и приёмку результата.',en:'Product decisions, structure, priorities and sign-off on the result.'}]
 ];
 const AITOOLS = ['Claude','ChatGPT','Codex','Lovable','Figma Make'];
+const SKILLS = [
+  [{ru:'Продукт',en:'Product'}, [
+    {ru:'Исследования и синтез выводов',en:'Research and synthesis'},
+    {ru:'CJM и пользовательские сценарии',en:'CJM and user flows'},
+    {ru:'Информационная архитектура',en:'Information architecture'},
+    {ru:'Юзабилити-тесты и аудиты',en:'Usability testing and audits'},
+    {ru:'Структура, приоритеты, постановка задач',en:'Structure, priorities and task briefs'},
+    {ru:'Прототипы и MVP в коде',en:'Prototypes and MVPs in code'}]],
+  [{ru:'UX/UI',en:'UX/UI'}, [
+    {ru:'Вайрфреймы и финальные макеты',en:'Wireframes and hi-fi UI'},
+    {ru:'Дашборды и интерфейсы с данными',en:'Dashboards and data-heavy interfaces'},
+    {ru:'Дизайн-системы, компоненты, токены',en:'Design systems, components, tokens'},
+    {ru:'Веб и мобильные приложения',en:'Web and mobile apps'},
+    {ru:'Интерактивные прототипы',en:'Interactive prototypes'},
+    {ru:'Передача в разработку и контроль вёрстки',en:'Developer handoff and build QA'}]]
+];
+const SKTOOLS = ['Figma', 'Framer', 'Tilda', 'Notion', 'Photoshop', 'Illustrator', 'Supabase', 'Vercel'];
 const APT = {find:{ru:'Сложные процессы',en:'Complex processes'}, states:{ru:'Системность',en:'Systems thinking'}, live:{ru:'Прототип в коде',en:'Coded prototypes'}};
 const AIT = [{ru:'Проверка черновиков',en:'Reviewing drafts'},{ru:'AI готовит черновик, а я принимаю, правлю или отклоняю каждый пункт.',en:'AI prepares a draft, and I accept, edit or reject every item.'}];
 
@@ -1200,7 +1247,7 @@ function renderHome(){
   const tiles = [['makefolk','card','50% 100%'],['klaris','card','30% 30%'],['watchtogether','card','22% 45%'],['makefolk','mobile','50% 50%'],['klaris','dark','72% 40%'],['watchtogether','mood','30% 50%'],['makefolk','business','20% 60%'],['klaris','profile','70% 45%'],['trainers','account','20% 30%']].map(([id, k, pos]) => [id, ca(id, k).src, pos]);
   const strip = tiles.map(([id, src, pos]) => `<a${LOCK ? '' : ` href="#${id}"`} tabindex="-1" aria-hidden="true"><img src="${src}" alt="" style="object-position:${pos}"></a>`).join('');
   $('#main').innerHTML = `
-   <section class="hero">
+   <section class="hero slide">
      <div class="hbar mono"><span>${esc(t('pf'))}</span><span>2026</span></div>
      <div class="hmid">
      <div class="htop"><span class="badge"><i></i>${esc(t('open'))}</span><span class="mono">${esc(t('place'))}</span></div>
@@ -1211,20 +1258,25 @@ function renderHome(){
      </div>
      <div class="hst">${[1, 2].map(k => `<div><b>${esc(t('s' + k + 'n'))}</b><span>${esc(t('s' + k + 'l'))}</span></div>`).join('')}<button class="go" type="button" data-to="works"><span>${esc(t('toWork'))}</span><i><span class="k-dn">↓</span></i></button></div>
    </section>
-   <section class="sec" id="works">
+   <section class="sec slide" id="works">
      ${split(t('wP') + ' · ' + CASES.length, t('wH'))}
      <div class="works">${CASES.map(workCard).join('')}${SOON.map(soonCard).join('')}</div>
    </section>
-   <section class="sec" id="exp">
+   <section class="sec slide" id="exp">
      ${split(t('xP'), t('xH'))}
      <div class="xt rv">${EXP.map(([now, n, d, r, p]) => `<div class="xrow"><span class="k">${esc(t(now ? 'now' : 'past'))}</span><span class="d mono">${esc(T(d))}</span><div><b>${esc(T(n))}</b><small>${esc(T(r))}. ${esc(T(p))}</small></div><i${now ? ' class="on"' : ''}></i></div>`).join('')}</div>
      <div class="xfoot rv"><span>${esc(t('xMore'))}</span><a class="btn g" href="${CV()}" target="_blank" rel="noopener">${esc(t('cv'))} <span class="k-ar">↗</span></a></div>
    </section>
-   <section class="sec" id="approach">
+   <section class="sec slide" id="skills">
+     ${split(t('nSk'), lang === 'ru' ? 'Хард-скиллы: от исследования до передачи в разработку' : 'Hard skills: from research to developer handoff')}
+     <div class="skg">${SKILLS.map(([g, xs], gi) => `<div class="dt sk rv" style="transition-delay:${gi * 100}ms"><div class="sk-in"><div class="sk-h"><span class="dt-c on">${esc(T(g))}</span><span class="dt-m">${String(xs.length).padStart(2, '0')}</span></div><ol>${xs.map((x, i) => `<li><em class="dt-m">${String(i + 1).padStart(2, '0')}</em>${esc(T(x))}</li>`).join('')}</ol></div></div>`).join('')}</div>
+     <div class="ai-ft rv">${SKTOOLS.map(x => `<span class="chip">${x}</span>`).join('')}</div>
+   </section>
+   <section class="sec slide" id="approach">
      ${split(t('aP'), t('aH'))}
      <div class="cards">${APPROACH.map(([a, h], i) => `<div class="cardx rv" style="transition-delay:${i * 100}ms"><div class="dt" data-anim="d${a}" aria-hidden="true"></div><div class="dcap"><h3>${esc(T(APT[a]))}</h3><p>${esc(T(h))}</p></div></div>`).join('')}</div>
    </section>
-   <section class="sec" id="ai">
+   <section class="sec slide" id="ai">
      ${split(t('iP'), t('iH'))}
      <div class="ai"><div class="rv"><div class="dt dt-w" data-anim="dreview" aria-hidden="true"></div><div class="dcap"><h3>${esc(T(AIT[0]))}</h3><p>${esc(T(AIT[1]))}</p></div></div><ul class="lst rv">${AI.map(([a, d]) => `<li><b>${esc(T(a))}</b><span>${esc(T(d))}</span></li>`).join('')}</ul></div>
      <div class="ai-ft rv">${AITOOLS.map(x => `<span class="chip">${x}</span>`).join('')}<a href="#makefolk">${esc(t('iL'))} →</a></div>
@@ -1692,26 +1744,54 @@ function live(root, goY, vh){
   };
 }
 
-/* gradient surfaces follow the pointer: a soft light lags behind the cursor and the streak leans toward it */
+/* pointer light: entering a dark surface lights a soft gradient right under the cursor; it glides after the pointer and fades out on leave */
 (() => {
   if(RM || !matchMedia('(hover:hover)').matches) return;
-  const SEL = '.dt,.side,.ft,.btn:not(.g),.hst .go';
-  const st = new Map(); let raf = 0;
-  const put = (el, s) => { const t = el.matches('.hst .go') ? el.querySelector('i') : el; if(!t) return;
-    t.style.setProperty('--mx', s.x.toFixed(1) + 'px'); t.style.setProperty('--my', s.y.toFixed(1) + 'px'); t.style.setProperty('--mi', s.i.toFixed(3));
-    t.style.setProperty('--px', (s.x / s.w - .5).toFixed(3)); t.style.setProperty('--py', (s.y / s.h - .5).toFixed(3)); };
+  const SEL = '.dt,.side,.ft,.btn:not(.g)', st = new Map(); let raf = 0;
+  const size = el => { const r = el.getBoundingClientRect();
+    if(el.classList.contains('btn')) return [r.width * 1.3, r.height * 2.6, 0, r];
+    if(el.classList.contains('side')) return [r.width * 1.5, r.width * .75, -24, r];
+    if(el.classList.contains('ft')) return [Math.min(900, r.width * .7), r.height * .9, -14, r];
+    return [r.width * 1.15, r.width * .52, -20, r]; };
   const tick = () => { raf = 0; let busy = false;
-    st.forEach((s, el) => { s.x += (s.tx - s.x) * .1; s.y += (s.ty - s.y) * .1; s.i += (s.ti - s.i) * .08; put(el, s);
-      if(!s.ti && s.i < .005){ s.i = 0; s.x = s.tx = s.w / 2; s.y = s.ty = s.h / 2; put(el, s); st.delete(el); } else busy = true; });
+    st.forEach((s, el) => { if(!el.isConnected){ st.delete(el); return; }
+      s.x += (s.tx - s.x) * .085; s.y += (s.ty - s.y) * .085;
+      s.g.style.transform = `translate3d(${(s.x - s.w / 2).toFixed(1)}px,${(s.y - s.h / 2).toFixed(1)}px,0) rotate(${s.a}deg)`;
+      if(s.on || Math.abs(s.tx - s.x) + Math.abs(s.ty - s.y) > .5) busy = true; });
     if(busy) raf = requestAnimationFrame(tick); };
   document.addEventListener('pointermove', e => {
     const el = e.target.closest ? e.target.closest(SEL) : null;
-    st.forEach((s, k) => { if(k !== el){ s.ti = 0; s.tx = s.w / 2; s.ty = s.h / 2; } });
-    if(el){ const t = el.matches('.hst .go') ? el.querySelector('i') : el, r = t.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-      let s = st.get(el); if(!s){ s = {x, y, i: 0}; st.set(el, s); } Object.assign(s, {tx: x, ty: y, ti: 1, w: r.width, h: r.height}); }
+    st.forEach((s, k) => { if(k !== el && s.on){ s.on = false; s.g.classList.remove('on'); } });
+    if(el){ let s = st.get(el); const [w, hh, a, r] = size(el), x = e.clientX - r.left, y = e.clientY - (el.classList.contains('side') ? r.top - el.scrollTop : r.top);
+      if(!s){ const g = document.createElement('i'); g.className = 'gx'; g.setAttribute('aria-hidden', 'true'); el.prepend(g); s = {g, x, y}; st.set(el, s); }
+      if(!s.on){ s.x = x; s.y = y; s.on = true; requestAnimationFrame(() => s.g.classList.add('on')); }
+      Object.assign(s, {tx: x, ty: y, w, h: hh, a}); s.g.style.setProperty('--gw', w + 'px'); s.g.style.setProperty('--gh', hh + 'px'); }
     if(!raf) raf = requestAnimationFrame(tick);
   }, {passive: true});
-  document.addEventListener('pointerleave', () => { st.forEach(s => { s.ti = 0; }); if(!raf) raf = requestAnimationFrame(tick); });
+  document.documentElement.addEventListener('pointerleave', () => st.forEach(s => { s.on = false; s.g.classList.remove('on'); }));
+})();
+/* deck: while the next slide comes up, the current one stays put, shrinks a little and fades, like flipping slides */
+const deck = (() => {
+  let S = [], raf = 0;
+  const abs = el => { let y = 0; for(let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
+  const lead = () => { const hd = $('.hd'); return hd && getComputedStyle(hd).display !== 'none' ? Math.round(hd.getBoundingClientRect().height + 24) : 12; };
+  function frame(){ raf = 0; const V = innerHeight, sy = scrollY, t = lead();
+    S.forEach((s, i) => { const n = S[i + 1], el = s.el;
+      if(!n || RM){ el.style.transform = el.style.opacity = el.style.visibility = ''; return; }
+      const stick = Math.min(t, V - s.h), nat = s.y - sy, p = Math.min(1, Math.max(0, (V - (n.y - sy)) / Math.max(1, V - t)));
+      const hold = Math.min(Math.max(0, stick - nat), Math.max(0, stick - t + s.h));
+      if(hold <= 0 && p <= 0){ el.style.transform = el.style.opacity = el.style.visibility = ''; return; }
+      const top = nat + hold, oy = Math.max(0, Math.min(s.h, V / 2 - top));
+      el.style.transformOrigin = `50% ${oy.toFixed(0)}px`;
+      el.style.transform = `translate3d(0,${hold.toFixed(1)}px,0) scale(${(1 - .06 * p).toFixed(4)})`;
+      el.style.opacity = (1 - p * .92).toFixed(3); el.style.visibility = p >= 1 ? 'hidden' : ''; });
+  }
+  const req = () => { if(!raf) raf = requestAnimationFrame(frame); };
+  function measure(){ S.forEach(s => { s.el.style.transform = ''; }); S = $$('#main > .slide').map((el, i) => (el.style.zIndex = i + 1, {el, y: abs(el), h: el.offsetHeight})); frame(); }
+  addEventListener('scroll', req, {passive: true});
+  addEventListener('resize', () => requestAnimationFrame(measure));
+  const ro = new ResizeObserver(() => requestAnimationFrame(measure));
+  return { mount(){ ro.disconnect(); const m = $('#main'); if(m) ro.observe(m); measure(); }, top: el => abs(el) - lead() };
 })();
 let io = null, spy = null;
 function mount(){
@@ -1744,8 +1824,8 @@ let pending = null;
 function route(scroll){
   const c = cur();
   c ? renderCase(c) : renderHome();
-  mount(); mountSpy();
-  if(pending){ const el = document.getElementById(pending); pending = null; if(el){ el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}); return; } }
+  mount(); mountSpy(); deck.mount();
+  if(pending){ const el = document.getElementById(pending); pending = null; if(el){ scrollTo({top: Math.max(0, deck.top(el)), behavior: RM ? 'auto' : 'smooth'}); return; } }
   if(scroll !== false) window.scrollTo(0, 0);
 }
 function go(id){
@@ -1759,7 +1839,7 @@ document.addEventListener('click', e => {
   const x = e.target;
   const lg = x.closest('[data-lang]'); if(lg){ lang = lg.dataset.lang; store.set('v2lang', lang); document.documentElement.lang = lang; if(SITE){ try { history.replaceState(null, '', (lang === 'ru' ? '/ru/' : '/') + location.hash); } catch(err){} if(window.__TITLE) document.title = window.__TITLE[lang]; } all(false); return; }
   if(x.closest('[data-act="mode"]')){ mode = mode === 'dark' ? 'light' : 'dark'; store.set('v2mode', mode); applyMode(); renderHeader(); renderSide(); $$('.ios').forEach(e => { e.classList.toggle('dk', mode === 'dark'); e.dispatchEvent(new Event('themesync')); }); return; }
-  const to = x.closest('[data-to]'); if(to){ const id = to.dataset.to, el = document.getElementById(id); if(el && (id === 'ft' || !cur())) el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}); else { pending = id; go(''); } return; }
+  const to = x.closest('[data-to]'); if(to){ const id = to.dataset.to, el = document.getElementById(id); if(el && (id === 'ft' || !cur())) scrollTo({top: Math.max(0, deck.top(el)), behavior: RM ? 'auto' : 'smooth'}); else { pending = id; go(''); } return; }
   const g = x.closest('[data-go]'); if(g){ go(g.dataset.go); return; }
   const cp = x.closest('[data-act="copy"]'); if(cp){ const l = $('.copyLbl', cp), done = () => { if(l){ l.textContent = t('copied'); setTimeout(() => { l.textContent = ''; }, 1600); } };
     try { navigator.clipboard.writeText(EMAIL).then(done, () => { const r = document.createRange(); r.selectNodeContents($('.mailTxt', cp)); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }); } catch(err){} return; }
