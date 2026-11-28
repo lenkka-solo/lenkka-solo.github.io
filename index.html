@@ -409,7 +409,11 @@ h1,h2,h3,p{margin:0}
 .cv-g .dt:nth-child(3n+2)::before,.cv-g .cardx:nth-child(2) .dt::before{--ga:16deg}
 .cv-g .cardx:nth-child(3) .dt::before{--ga:-34deg}
 @keyframes dtg{to{transform:rotate(calc(var(--ga,-20deg) + 9deg)) translate3d(5%,-4%,0) scale(1.08)}}
-.cv-g .dt::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+.cv-g .dt::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(var(--ms,260px) circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(var(--mo,.16) * var(--mi,0))),transparent 70%),radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+/* the streak leans toward the pointer and the scene drifts a little the other way */
+.cv-g .dt::before,.cv-g .ft::before{translate:calc(var(--px,0) * 14%) calc(var(--py,0) * 14%)}
+.cv-g .dt .dt-in{transform:translate3d(calc(var(--px,0) * -8px),calc(var(--py,0) * -8px),0)}
+.cv-g .ft::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;--ms:420px;--mo:.12;background:radial-gradient(var(--ms,260px) circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(var(--mo,.16) * var(--mi,0))),transparent 70%)}
 .dt-in{position:absolute;inset:0;font:400 clamp(11px,3.5cqw,16px)/1.25 var(--sans);letter-spacing:-.005em}
 .dt-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75em;padding:7%}
 .dt svg{display:block;width:1.1em;height:1.1em;flex:none}
@@ -495,13 +499,13 @@ h1,h2,h3,p{margin:0}
 .cv-g .ft::before{--ga:-12deg;inset:-60% -30%;filter:blur(34px);opacity:.75}
 .cv-g .ft .cts a:not(:first-child),.cv-g .ft .cts button{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .cv-g .ft .cts a:not(:first-child):hover,.cv-g .ft .cts button:hover{background:rgba(255,255,255,.14)}
-.cv-g .side,.cv-g .hd{background:radial-gradient(75% 20% at 78% 32%,rgba(255,255,255,.15),transparent 70%),radial-gradient(90% 28% at 8% 88%,rgba(160,160,168,.13),transparent 70%),linear-gradient(158deg,transparent 28%,rgba(255,255,255,.055) 44%,transparent 60%),#0C0C0D}
+.cv-g .side,.cv-g .hd{background:radial-gradient(300px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,calc(.13 * var(--mi,0))),transparent 70%),radial-gradient(75% 20% at calc(78% + var(--px,0) * 22%) calc(32% + var(--py,0) * 16%),rgba(255,255,255,.15),transparent 70%),radial-gradient(90% 28% at 8% 88%,rgba(160,160,168,.13),transparent 70%),linear-gradient(158deg,transparent 28%,rgba(255,255,255,.055) 44%,transparent 60%),#0C0C0D}
 .cv-g .hd{background:radial-gradient(40% 120% at 78% 0%,rgba(255,255,255,.16),transparent 70%),linear-gradient(100deg,transparent 30%,rgba(255,255,255,.05) 50%,transparent 70%),#0C0C0D}
 .cv-g .sd-row a,.cv-g .sd-mail{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .cv-g .sd-row a:hover,.cv-g .sd-mail:hover{background:rgba(255,255,255,.12)}
 .cv-g .sd-nav button[aria-current="true"]{background:rgba(255,255,255,.09)}
 .cv-g .sd-nav button:hover{background:rgba(255,255,255,.06)}
-:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90% 160% at 28% -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+:root.cv-g:not([data-mode="dark"]) .btn:not(.g),:root.cv-g:not([data-mode="dark"]) .hst .go i{background:radial-gradient(90px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,calc(.22 * var(--mi,0))),transparent 70%),radial-gradient(90% 160% at calc(28% + var(--px,0) * 60%) -30%,rgba(255,255,255,.3),transparent 62%),radial-gradient(70% 120% at 95% 130%,rgba(255,255,255,.12),transparent 60%),#121211;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
 /* preview-only switch between the two looks */
 .cvs{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:4px 4px 4px 14px;border-radius:14px;background:#121211;color:#fff;font:500 13px/1 var(--sans);box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
 .cvs span{margin-right:6px;color:#9D9D95;white-space:nowrap}
@@ -1688,6 +1692,27 @@ function live(root, goY, vh){
   };
 }
 
+/* gradient surfaces follow the pointer: a soft light lags behind the cursor and the streak leans toward it */
+(() => {
+  if(RM || !matchMedia('(hover:hover)').matches) return;
+  const SEL = '.dt,.side,.ft,.btn:not(.g),.hst .go';
+  const st = new Map(); let raf = 0;
+  const put = (el, s) => { const t = el.matches('.hst .go') ? el.querySelector('i') : el; if(!t) return;
+    t.style.setProperty('--mx', s.x.toFixed(1) + 'px'); t.style.setProperty('--my', s.y.toFixed(1) + 'px'); t.style.setProperty('--mi', s.i.toFixed(3));
+    t.style.setProperty('--px', (s.x / s.w - .5).toFixed(3)); t.style.setProperty('--py', (s.y / s.h - .5).toFixed(3)); };
+  const tick = () => { raf = 0; let busy = false;
+    st.forEach((s, el) => { s.x += (s.tx - s.x) * .1; s.y += (s.ty - s.y) * .1; s.i += (s.ti - s.i) * .08; put(el, s);
+      if(!s.ti && s.i < .005){ s.i = 0; s.x = s.tx = s.w / 2; s.y = s.ty = s.h / 2; put(el, s); st.delete(el); } else busy = true; });
+    if(busy) raf = requestAnimationFrame(tick); };
+  document.addEventListener('pointermove', e => {
+    const el = e.target.closest ? e.target.closest(SEL) : null;
+    st.forEach((s, k) => { if(k !== el){ s.ti = 0; s.tx = s.w / 2; s.ty = s.h / 2; } });
+    if(el){ const t = el.matches('.hst .go') ? el.querySelector('i') : el, r = t.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      let s = st.get(el); if(!s){ s = {x, y, i: 0}; st.set(el, s); } Object.assign(s, {tx: x, ty: y, ti: 1, w: r.width, h: r.height}); }
+    if(!raf) raf = requestAnimationFrame(tick);
+  }, {passive: true});
+  document.addEventListener('pointerleave', () => { st.forEach(s => { s.ti = 0; }); if(!raf) raf = requestAnimationFrame(tick); });
+})();
 let io = null, spy = null;
 function mount(){
   if(io) io.disconnect();
